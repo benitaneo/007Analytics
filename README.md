@@ -1,5 +1,7 @@
 Welcome to 007Analytics!
 
+This project provides real-time analytics for CodeCombat stakeholders.
+
 # Installation 
 
 1. Clone github repository into local folder
