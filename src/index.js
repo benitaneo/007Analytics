@@ -15,6 +15,7 @@ import '../scss/core/_dropdown-menu-right.scss'
 // Containers
 import Full from './containers/Full/'
 import StudentFull from './containers/Full/student_Full'
+import AdministratorFull from './containers/Full/administrator_Full'
 
 // Views
 import Login from './views/Pages/Login/'
@@ -35,6 +36,7 @@ ReactDOM.render((
       <Route exact path="/500" name="Page 500" component={Page500}/>
       <Route path="/original" name="Home" component={Full} sample={local_data}/>
       <Route path="/student" name="StudentHome" component={StudentFull} sample={local_data}/>
+      <Route path="/administrator" name="AdministratorHome" component={AdministratorFull} sample={local_data}/>
       // <Route path="/" name="Home" component={Full} sample={local_data}/>
       <Route path="/" name="Home" render={props => <Full local_data={local_data} {...props} />} />
     //  <Route path="/" name="Home" render={props => <Full local_data= {local_data} />} />
