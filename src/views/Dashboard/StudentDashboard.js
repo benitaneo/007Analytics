@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+
+// react charts2 components
 import {Bar, Line} from 'react-chartjs-2';
 import {
   Badge,
@@ -31,184 +33,15 @@ import {
   TabPane
 } from 'reactstrap';
 
-// wanted components
-import Sidebar from '../../components/Sidebar/';
+// victory charts components
+import * as V from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryCandlestick, VictoryLine } from 'victory';
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';
 const brandInfo = '#63c2de';
 const brandWarning = '#f8cb00';
 const brandDanger = '#f86c6b';
-
-// Card Chart 1
-const cardChartData1 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: brandPrimary,
-      borderColor: 'rgba(255,255,255,.55)',
-      data: [65, 59, 84, 84, 51, 55, 40]
-    }
-  ],
-};
-
-const cardChartOpts1 = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      gridLines: {
-        color: 'transparent',
-        zeroLineColor: 'transparent'
-      },
-      ticks: {
-        fontSize: 2,
-        fontColor: 'transparent',
-      }
-
-    }],
-    yAxes: [{
-      display: false,
-      ticks: {
-        display: false,
-        min: Math.min.apply(Math, cardChartData1.datasets[0].data) - 5,
-        max: Math.max.apply(Math, cardChartData1.datasets[0].data) + 5,
-      }
-    }],
-  },
-  elements: {
-    line: {
-      borderWidth: 1
-    },
-    point: {
-      radius: 4,
-      hitRadius: 10,
-      hoverRadius: 4,
-    },
-  }
-}
-
-// Card Chart 2
-const cardChartData2 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: brandInfo,
-      borderColor: 'rgba(255,255,255,.55)',
-      data: [1, 18, 9, 17, 34, 22, 11]
-    }
-  ],
-};
-
-const cardChartOpts2 = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      gridLines: {
-        color: 'transparent',
-        zeroLineColor: 'transparent'
-      },
-      ticks: {
-        fontSize: 2,
-        fontColor: 'transparent',
-      }
-
-    }],
-    yAxes: [{
-      display: false,
-      ticks: {
-        display: false,
-        min: Math.min.apply(Math, cardChartData2.datasets[0].data) - 5,
-        max: Math.max.apply(Math, cardChartData2.datasets[0].data) + 5,
-      }
-    }],
-  },
-  elements: {
-    line: {
-      tension: 0.00001,
-      borderWidth: 1
-    },
-    point: {
-      radius: 4,
-      hitRadius: 10,
-      hoverRadius: 4,
-    },
-  }
-}
-
-// Card Chart 3
-const cardChartData3 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: 'rgba(255,255,255,.2)',
-      borderColor: 'rgba(255,255,255,.55)',
-      data: [78, 81, 80, 45, 34, 12, 40]
-    }
-  ],
-};
-
-const cardChartOpts3 = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      display: false
-    }],
-    yAxes: [{
-      display: false
-    }],
-  },
-  elements: {
-    line: {
-      borderWidth: 2
-    },
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-    },
-  }
-}
-
-// Card Chart 4
-const cardChartData4 = {
-  labels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: 'rgba(255,255,255,.3)',
-      borderColor: 'transparent',
-      data: [78, 81, 80, 45, 34, 12, 40, 75, 34, 89, 32, 68, 54, 72, 18, 98]
-    }
-  ],
-};
-
-const cardChartOpts4 = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      display: false,
-      barPercentage: 0.6,
-    }],
-    yAxes: [{
-      display: false,
-    }]
-  }
-}
 
 // Main Chart
 
@@ -228,6 +61,40 @@ function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+const daysLeft = getDaysLeft();
+
+function getDaysLeft() {
+  var today = new Date();
+  var comps = new Date(2018, 2, 24);
+  var one_day = 1000*60*60*24;
+
+  var difference = Math.abs(comps.getTime() - today.getTime());
+  return Math.round(difference / one_day);
+}
+
+const data = [
+  {quarter: 1, earnings: 13000},
+  {quarter: 2, earnings: 16500},
+  {quarter: 3, earnings: 14250},
+  {quarter: 4, earnings: 19000}
+];
+
+const candleStickData = [
+  {x: new Date(2016, 1, 1), open: 5, close: 10, high: 15, low: 0},
+  {x: new Date(2016, 2, 1), open: 10, close: 15, high: 20, low: 5},
+  {x: new Date(2016, 3, 1), open: 15, close: 20, high: 22, low: 10},
+  {x: new Date(2016, 4, 1), open: 20, close: 10, high: 25, low: 7},
+  {x: new Date(2016, 5, 1), open: 10, close: 8, high: 15, low: 5}
+]
+
+const lineData =[
+  { x: 1, y: 2 },
+  { x: 10, y: 3 },
+  { x: 20, y: 5 },
+  { x: 40, y: 4 },
+  { x: 42, y: 7 }
+]
+
 var elements = 27;
 var data1 = [];
 var data2 = [];
@@ -238,28 +105,6 @@ for (var i = 0; i <= elements; i++) {
   data2.push(random(80, 100));
   data3.push(65);
 }
-
-var participationData = {
-  labels: ["Anglo-Chinese", "Wellington", "Others"],
-  datasets: [{
-  label: "Primary Participation Rate",
-  backgroundColor: 'rgb(255, 99, 132)',
-  borderColor: 'rgb(255, 99, 132)',
-  data: [20, 40, 30],
-  }]
-}
-
-var activeData = {
-  labels: ["Week 1", "Week 2", "Week 3"],
-  datasets: [{
-  label: "Primary Category Activity Rate",
-  fill: false,
-  min: 0,
-  borderColor: 'rgb(255, 99, 132)',
-  data: [20, 40, 30, 2, 20, 30, 45],
-  }]
-}
-
 
 const options = {
   responsive: true,
@@ -315,20 +160,6 @@ const options = {
     ]
   }
 };
-
-const participationChart = {
-  datasets: [
-    {
-      label: 'Participation Rate',
-      backgroundColor: convertHex(brandInfo, 10),
-      borderColor: brandInfo,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: participationData,
-      options: options
-    }
-  ]
-}
 
 const mainChart = {
   labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -429,7 +260,8 @@ class StudentDashboard extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false,
-      activeTab: '1'
+      activeTab: '1',
+      day: 0
     };
   }
 
@@ -441,307 +273,93 @@ class StudentDashboard extends Component {
     }
   }
 
+  componentDidMount() {
+    console.log(this.state.day);
+    console.log(daysLeft);
+    this.setState({
+      day: daysLeft
+    });
+  }
 
   render() {
 
     return (
       <div className="animated fadeIn">
         <Row>
-
-          <Col xs="12" sm="6" lg="4">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Primary Category
-              </CardHeader>
-              <CardBody>
-                <Table>
-                  <table className="responsive table-sm">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>School Name</th>
-                        <th>No. of Participants</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Anglo-Chinese Primary</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Wellington Primary</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>All Others</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="4">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Junior Category
-              </CardHeader>
-              <CardBody>
-                <Table>
-                  <table className="responsive table-sm">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>School Name</th>
-                        <th>No. of Participants</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Anglo-Chinese Primary</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Wellington Primary</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>All Others</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="4">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Senior Category
-              </CardHeader>
-              <CardBody>
-                <Table>
-                  <table className="responsive table-sm">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>School Name</th>
-                        <th>No. of Participants</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Anglo-Chinese Primary</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Wellington Primary</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>All Others</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row>
-        <Col xs="12" md="6" className="mb-4">
-            <Nav tabs>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '1' })}
-                  onClick={() => { this.toggle('1'); }}
-                >
-                  <i className="icon-calculator"></i> <span className={ this.state.activeTab === '1' ? "" : "d-none"}> Calculator</span>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '2' })}
-                  onClick={() => { this.toggle('2'); }}
-                >
-                  <i className="icon-basket-loaded"></i> <span
-                  className={ this.state.activeTab === '2' ? "" : "d-none"}> Shopping cart</span>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '3' })}
-                  onClick={() => { this.toggle('3'); }}
-                >
-                  <i className="icon-pie-chart"></i> <span className={ this.state.activeTab === '3' ? "" : "d-none"}> Charts</span>
-                </NavLink>
-              </NavItem>
-            </Nav>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="1">
-                1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
-              </TabPane>
-              <TabPane tabId="2">
-                2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
-              </TabPane>
-              <TabPane tabId="3">
-                2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
-              </TabPane>
-            </TabContent>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col lg="6">
-            <Card>
-              <CardBody>
-                <Row>
-                  <Col sm="5">
-                    <CardTitle className="mb-0">Participation Rate</CardTitle>
-                    <div className="small text-muted">March 2018</div>
-                  </Col>
-                  <Col sm="7" className="d-none d-sm-inline-block">
-                    <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
-                      <ButtonGroup className="mr-3" data-toggle="buttons" aria-label="First group">
-                        <Label htmlFor="option1" className="btn btn-outline-secondary active">
-                          <Input type="radio" name="options" id="option1" defaultChecked/> Primary
-                        </Label>
-                        <Label htmlFor="option2" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option2"/> Junior
-                        </Label>
-                        <Label htmlFor="option3" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option3"/> Senior
-                        </Label>
-                      </ButtonGroup>
-                    </ButtonToolbar>
-                  </Col>
-                </Row>
-                <Bar data={participationData} width={100} height={50} />
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col lg="6">
-            <Card>
-              <CardBody>
-                <Row>
-                  <Col sm="5">
-                    <CardTitle className="mb-0">Activity Rate</CardTitle>
-                    <div className="small text-muted">March 2018</div>
-                  </Col>
-                  <Col sm="7" className="d-none d-sm-inline-block">
-                    <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
-                      <ButtonGroup className="mr-3" data-toggle="buttons" aria-label="First group">
-                        <Label htmlFor="option1" className="btn btn-outline-secondary active">
-                          <Input type="radio" name="options" id="option1" defaultChecked/> Primary
-                        </Label>
-                        <Label htmlFor="option2" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option2"/> Junior
-                        </Label>
-                        <Label htmlFor="option3" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option3"/> Senior
-                        </Label>
-                      </ButtonGroup>
-                    </ButtonToolbar>
-                  </Col>
-                </Row>
-                <Line data={activeData} width={100} height={50} />
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row>
           <Col>
             <Card>
               <CardBody>
                 <Row>
                   <Col sm="5">
-                    <CardTitle className="mb-0">Traffic</CardTitle>
-                    <div className="small text-muted">November 2015</div>
-                  </Col>
-                  <Col sm="7" className="d-none d-sm-inline-block">
-                    <Button color="primary" className="float-right"><i className="icon-cloud-download"></i></Button>
-                    <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
-                      <ButtonGroup className="mr-3" data-toggle="buttons" aria-label="First group">
-                        <Label htmlFor="option1" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option1"/> Day
-                        </Label>
-                        <Label htmlFor="option2" className="btn btn-outline-secondary active">
-                          <Input type="radio" name="options" id="option2" defaultChecked/> Month
-                        </Label>
-                        <Label htmlFor="option3" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option3"/> Year
-                        </Label>
-                      </ButtonGroup>
-                    </ButtonToolbar>
+                    <CardTitle className="mb-0">Statistics</CardTitle>
+                    <div className="small text-muted">March 2018</div>
                   </Col>
                 </Row>
-                <div className="chart-wrapper" style={{height: 300 + 'px', marginTop: 40 + 'px'}}>
-                  <Line data={mainChart} options={mainChartOpts} height={300}/>
-                </div>
               </CardBody>
               <CardFooter>
                 <ul>
                   <li>
-                    <div className="text-muted">Visits</div>
-                    <strong>29.703 Users (40%)</strong>
-                    <Progress className="progress-xs mt-2" color="success" value="40"/>
+                    <div className="text-muted">Completed</div>
+                    <strong>29 Levels (14%)</strong>
+                    <Progress className="progress-xs mt-2" color="success" value="14"/>
                   </li>
                   <li className="d-none d-md-table-cell">
-                    <div className="text-muted">Unique</div>
-                    <strong>24.093 Users (20%)</strong>
-                    <Progress className="progress-xs mt-2" color="info" value="20"/>
+                    <div className="text-muted">Total Time Spent</div>
+                    <strong>357 Mins</strong>
                   </li>
                   <li>
-                    <div className="text-muted">Pageviews</div>
-                    <strong>78.706 Views (60%)</strong>
-                    <Progress className="progress-xs mt-2" color="warning" value="60"/>
+                    <div className="text-muted">Favourite Language</div>
+                    <strong>Python</strong>
                   </li>
                   <li className="d-none d-md-table-cell">
-                    <div className="text-muted">New Users</div>
-                    <strong>22.123 Users (80%)</strong>
-                    <Progress className="progress-xs mt-2" color="danger" value="80"/>
-                  </li>
-                  <li className="d-none d-md-table-cell">
-                    <div className="text-muted">Bounce Rate</div>
-                    <strong>Average 40.15%</strong>
-                    <Progress className="progress-xs mt-2" color="primary" value="40"/>
+                    <div className="text-muted">Countdown to Competition</div>
+                    <strong>{this.state.day} Days Left (99%)</strong>
+                    <Progress className="progress-xs mt-2" color="danger" value="99"/>
                   </li>
                 </ul>
               </CardFooter>
             </Card>
           </Col>
         </Row>
+
+        <Row>
+          <Col sm="6">
+            <Card>
+              <CardHeader>
+                <i className="fa fa-align-justify"></i> Percentile Ranking
+              </CardHeader>
+              <CardBody>
+              <VictoryChart domainPadding={20} scale={{ x: "time" }} theme={VictoryTheme.material}>
+                <VictoryAxis label="Levels" tickFormat={(t) => `${(t.getMonth() * 10) - 9}-${t.getMonth() * 10}`} 
+                  style={{axisLabel: {fontSize: 15, padding: 30}}} />
+                <VictoryAxis label="Five-Number Summary" dependentAxis 
+                  style={{axisLabel: {fontSize: 15, padding: 30}}}  />
+                <VictoryCandlestick candleColors={{ positive: "#00FA9A", negative: "#c43a31" }} data={candleStickData} />
+              </VictoryChart>
+              </CardBody>
+            </Card>
+          </Col>
+            
+          <Col sm="6">
+            <Card>
+              <CardHeader>
+                <i className="fa fa-align-justify"></i> Time Prediction for each CodeCombat level
+              </CardHeader>
+              <CardBody>
+              <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
+                <VictoryAxis label="Levels" tickValues={[10, 20, 30, 40]} 
+                  style={{axisLabel: {fontSize: 15, padding: 30}}} />
+                <VictoryAxis label="Duration(minutes)" dependentAxis 
+                  style={{axisLabel: {fontSize: 15, padding: 30}}} />
+                <VictoryLine data={lineData} />
+              </VictoryChart>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
         
         <Row>
+          <Col>
           <Card>
           <CardHeader>
             <i className="fa fa-align-justify"></i> Top Selected Tech Articles for the Week
@@ -828,6 +446,7 @@ class StudentDashboard extends Component {
             </Row>
             </CardBody>
           </Card>
+          </Col>
         </Row>
       </div>
     )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import {Bar, Line} from 'react-chartjs-2';
 import {
   Badge,
@@ -19,8 +20,13 @@ import {
   ButtonGroup,
   ButtonDropdown,
   Label,
+  Nav,
+  NavItem,
+  NavLink,
   Input,
-  Table
+  Table,
+  TabContent,
+  TabPane
 } from 'reactstrap';
 
 const brandPrimary = '#20a8d8';
@@ -480,14 +486,17 @@ class Dashboard extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      activeTab: '1'
     };
   }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
   }
 
 
@@ -495,15 +504,37 @@ class Dashboard extends Component {
 
     return (
       <div className="animated fadeIn">
-        <Row>
-
-          <Col xs="12" sm="6" lg="4">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Primary Category
-              </CardHeader>
-              <CardBody>
-                <Table>
+      <Row>
+        <Col xs="12" sm="6" lg="4" className="mb-4">
+            <Nav tabs>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '1' })}
+                  onClick={() => { this.toggle('1'); }}
+                >
+                  Primary
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '2' })}
+                  onClick={() => { this.toggle('2'); }}
+                >
+                  Junior
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '3' })}
+                  onClick={() => { this.toggle('3'); }}
+                >
+                  Senior
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="1">
+              <Table>
                   <table className="responsive table-sm">
                     <thead>
                       <tr>
@@ -515,33 +546,25 @@ class Dashboard extends Component {
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
-                        <td>Anglo-Chinese Sch Primary</td>
+                        <td>Anglo-Chinese Primary</td>
                         <td>3</td>
                       </tr>
                       <tr>
                         <th scope="row">2</th>
-                        <td>Wellington Primary School</td>
+                        <td>Wellington Primary</td>
                         <td>0</td>
                       </tr>
                       <tr>
                         <th scope="row">3</th>
-                        <td>All Other Primary Schools</td>
+                        <td>All Others</td>
                         <td>1</td>
                       </tr>
                     </tbody>
                   </table>
                 </Table>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="4">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Junior Category
-              </CardHeader>
-              <CardBody>
-                <Table>
+              </TabPane>
+              <TabPane tabId="2">
+              <Table>
                   <table className="responsive table-sm">
                     <thead>
                       <tr>
@@ -553,33 +576,25 @@ class Dashboard extends Component {
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
-                        <td>Anglo-Chinese Sch Primary</td>
-                        <td>3</td>
+                        <td>School of Science and Technology</td>
+                        <td>181</td>
                       </tr>
                       <tr>
                         <th scope="row">2</th>
-                        <td>Wellington Primary School</td>
-                        <td>0</td>
+                        <td>Dunman HS</td>
+                        <td>163</td>
                       </tr>
                       <tr>
                         <th scope="row">3</th>
-                        <td>All Other Primary Schools</td>
-                        <td>1</td>
+                        <td>Junyuan Secondary</td>
+                        <td>52</td>
                       </tr>
                     </tbody>
                   </table>
                 </Table>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="4">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Senior Category
-              </CardHeader>
-              <CardBody>
-                <Table>
+              </TabPane>
+              <TabPane tabId="3">
+              <Table>
                   <table className="responsive table-sm">
                     <thead>
                       <tr>
@@ -591,24 +606,24 @@ class Dashboard extends Component {
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
-                        <td>Anglo-Chinese Sch Primary</td>
-                        <td>3</td>
+                        <td>Pioneer JC</td>
+                        <td>134</td>
                       </tr>
                       <tr>
                         <th scope="row">2</th>
-                        <td>Wellington Primary School</td>
-                        <td>0</td>
+                        <td>Dunman HS</td>
+                        <td>103</td>
                       </tr>
                       <tr>
                         <th scope="row">3</th>
-                        <td>All Other Primary Schools</td>
-                        <td>1</td>
+                        <td>Jurong JC</td>
+                        <td>22</td>
                       </tr>
                     </tbody>
                   </table>
                 </Table>
-              </CardBody>
-            </Card>
+              </TabPane>
+            </TabContent>
           </Col>
         </Row>
 
