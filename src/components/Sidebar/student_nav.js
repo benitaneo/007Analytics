@@ -19,18 +19,6 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Completed Levels',
-      url: '/components',
-      icon: 'icon-star',
-      children: [
-        {
-          name: 'Tabs',
-          url: '/components/tabs',
-          icon: 'icon-puzzle'
-        }
-      ]
-    },
-    {
       name: 'Language Selection',
       url: '/icons',
       icon: 'icon-calculator',
@@ -65,24 +53,19 @@ export default {
       icon: 'icon-star',
       children: [
         {
-          name: 'Login',
-          url: '/login',
-          icon: 'icon-star'
+          name: 'Medium',
+          url: 'https://medium.com/',
+          icon: 'icon-feed'
         },
         {
-          name: 'Register',
-          url: '/register',
-          icon: 'icon-star'
+          name: 'TechCrunch',
+          url: 'https://techcrunch.com/',
+          icon: 'icon-feed'
         },
         {
-          name: 'Error 404',
-          url: '/404',
-          icon: 'icon-star'
-        },
-        {
-          name: 'Error 500',
-          url: '/500',
-          icon: 'icon-star'
+          name: 'BBC News',
+          url: 'http://www.bbc.com/news/technology',
+          icon: 'icon-feed'
         }
       ]
     }
