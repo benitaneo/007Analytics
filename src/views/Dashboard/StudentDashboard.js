@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import store from '../../store';
 
 // react charts2 components
-import {Bar, Line} from 'react-chartjs-2';
 import {
   Badge,
   Row,
@@ -33,9 +33,26 @@ import {
   TabPane
 } from 'reactstrap';
 
+// recharts components
+import {
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from "recharts";
+
 // victory charts components
 import * as V from 'victory';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryCandlestick, VictoryLine } from 'victory';
+
+import * as firebase from 'firebase';
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';
@@ -261,7 +278,8 @@ class StudentDashboard extends Component {
     this.state = {
       dropdownOpen: false,
       activeTab: '1',
-      day: 0
+      day: 0,
+      data: {}
     };
   }
 
@@ -281,8 +299,23 @@ class StudentDashboard extends Component {
     });
   }
 
-  render() {
+  componentWillMount(){
+    /* Create reference to messages in Firebase Database */
+    let db = firebase.database().ref('/');    
+    db.off();
+    db.on('value', snapshot => {
+      /* Update React state when message is added at Firebase Database */
+      
+      let locData = snapshot.val();
+      this.setState({data: locData});
+      console.log(locData);
+      this.forceUpdate();
+      //this.state = locData;
+    })
+  }
 
+  render() {
+    console.log(store.getState());
     return (
       <div className="animated fadeIn">
         <Row>

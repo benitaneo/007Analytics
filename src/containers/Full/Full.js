@@ -30,36 +30,10 @@ import * as firebase from 'firebase';
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet
 
-var config = {
-    apiKey: "AIzaSyDqg0j1TJPVwjEZQgTgz92vzzsrvkLgmFw",
-    authDomain: "dashboard-235a6.firebaseapp.com",
-    databaseURL: "https://dashboard-235a6.firebaseio.com",
-    projectId: "dashboard-235a6",
-    storageBucket: "dashboard-235a6.appspot.com",
-    messagingSenderId: "82982572137"
-  };
-firebase.initializeApp(config);
-
-
 class Full extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-
-  componentWillMount(){
-    /* Create reference to messages in Firebase Database */
-    let db = firebase.database().ref('/');    
-    db.off();
-    db.on('value', snapshot => {
-      /* Update React state when message is added at Firebase Database */
-      
-      let locData = snapshot.val();
-      this.setState(locData);
-      console.log(locData);
-      this.forceUpdate();
-      //this.state = locData;
-    })
   }
 
   render() {

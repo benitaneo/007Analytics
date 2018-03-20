@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import {Bar, Line} from 'react-chartjs-2';
 import {
   Badge,
   Row,
@@ -28,6 +27,24 @@ import {
   TabContent,
   TabPane
 } from 'reactstrap';
+
+// recharts components
+import {
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from "recharts";
+
+import * as firebase from 'firebase';
+import store from '../../store';
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';
@@ -62,70 +79,6 @@ for (var i = 0; i <= elements; i++) {
   data3.push(65);
 }
 
-var participationData = {
-  labels: ["Anglo-Chinese Primary School", "Wellington Primary School", "Other Primary School"],
-  datasets: [{
-  label: "Primary Participation Rate",
-  backgroundColor: 'rgb(255, 99, 132)',
-  borderColor: 'rgb(255, 99, 132)',
-  data: [20, 40, 30],
-  }]
-}
-
-var activeData = {
-  labels: ["Week 1", "Week 2", "Week 3"],
-  datasets: [{
-  label: "Primary Category Activity Rate",
-  backgroundColor: 'rgb(255, 99, 132)',
-  borderColor: 'rgb(255, 99, 132)',
-  data: [20, 40, 30, 2, 20, 30, 45],
-  }]
-}
-
-const participationChart = {
-  datasets: [
-    {
-      label: 'Participation Rate',
-      backgroundColor: convertHex(brandInfo, 10),
-      borderColor: brandInfo,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: participationData
-    }
-  ]
-}
-
-const participationChartOpts = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      gridLines: {
-        drawOnChartArea: false,
-      }
-    }],
-    yAxes: [{
-      ticks: {
-        beginAtZero: true,
-        maxTicksLimit: 5,
-        stepSize: Math.ceil(100 / 5),
-        max: 100
-      }
-    }]
-  },
-  elements: {
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3,
-    }
-  }
-}
-
-
 class AdministratorDashboard extends Component {
   constructor(props) {
     super(props);
@@ -133,7 +86,8 @@ class AdministratorDashboard extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false,
-      activeTab: '1'
+      activeTab: '1',
+      chartsArr: []
     };
   }
 
@@ -145,9 +99,9 @@ class AdministratorDashboard extends Component {
     }
   }
 
-
   render() {
-
+    console.log(store.getState());
+    console.log(store.getState().val);
     return (
       <div className="animated fadeIn">
 
@@ -176,7 +130,7 @@ class AdministratorDashboard extends Component {
                     </ButtonToolbar>
                   </Col>
                 </Row>
-                <Bar data={participationData} width={100} height={50} />
+
               </CardBody>
             </Card>
           </Col>
@@ -205,7 +159,7 @@ class AdministratorDashboard extends Component {
                     </ButtonToolbar>
                   </Col>
                 </Row>
-                <Line data={activeData} width={100} height={50} />
+
               </CardBody>
             </Card>
           </Col>
@@ -275,6 +229,10 @@ class AdministratorDashboard extends Component {
       </div>
     )
   }
+}
+
+const mapStateToProps = state => {
+  return { newCharts: state.val }
 }
 
 export default AdministratorDashboard;
