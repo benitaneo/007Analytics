@@ -42,6 +42,8 @@
     "react-router-dom": "4.2.2",
     "react-transition-group": "2.2.1",
     "reactstrap": "5.0.0-alpha.4",
+    "recharts": "^1.0.0-beta.10",
+    "redux": "^3.7.2",
     "simple-line-icons": "2.4.1",
     "victory": "^0.25.6"
   },
