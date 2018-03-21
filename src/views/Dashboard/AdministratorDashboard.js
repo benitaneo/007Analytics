@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+
+// react charts2 components
 import {
   Badge,
   Row,
@@ -45,8 +47,6 @@ import {
 } from "recharts";
 
 import firebase from '../../firebase';
-import store from '../../store';
-import RechartsComp from './RechartsChart';
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';

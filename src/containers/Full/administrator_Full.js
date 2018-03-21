@@ -25,9 +25,6 @@ import FontAwesome from '../../views/Icons/FontAwesome/';
 import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/';
 import * as firebase from 'firebase';
 
-// Initialize Firebase
-// TODO: Replace with your project's customized code snippet
-
 class AdministratorFull extends Component {
   constructor(props) {
     super(props);

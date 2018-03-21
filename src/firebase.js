@@ -1,5 +1,7 @@
 import firebase from 'firebase';
 
+// Initialize Firebase
+// TODO: Replace with your project's customized code snippet
 const config = {
     apiKey: "AIzaSyDqg0j1TJPVwjEZQgTgz92vzzsrvkLgmFw",
     authDomain: "dashboard-235a6.firebaseapp.com",
