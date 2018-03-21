@@ -1,7 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
-import AppFrame from "./AppFrame";
-import Dashboard from "react-dazzle";
 import {
   PieChart,
   Pie,
@@ -16,7 +14,6 @@ import {
 import { BarChart, Bar } from "recharts";
 //import Victory from './Victory';
 import { compose } from "redux";
-import { connect } from "react-redux";
 
 const AxisLabel = ({
   axisType,
@@ -50,7 +47,7 @@ class RechartsComp extends React.Component {
     console.log(this.props);
     if (this.props.charts.chartType == "line") {
       return (
-        <AppFrame>
+        <div>
           <h3>{this.props.charts.title}</h3>
           <LineChart width={400} height={400} data={this.props.charts.data}>
             <Line type="monotone" dataKey="y" stroke="#8884d8" />
@@ -73,12 +70,12 @@ class RechartsComp extends React.Component {
             <Tooltip />
             <Legend />
           </LineChart>
-        </AppFrame>
+          </div>
       );
     }
     if (this.props.charts.chartType == "pie") {
       return (
-        <AppFrame>
+        <div>
           <h3>{this.props.charts.title}</h3>
           <PieChart width={800} height={400}>
             <Pie
@@ -91,13 +88,13 @@ class RechartsComp extends React.Component {
               label
             />
           </PieChart>
-        </AppFrame>
+        </div>
       );
     }
 
     if (this.props.charts.chartType == "bar") {
       return (
-        <AppFrame>
+        <div>
           <h3>{this.props.charts.title}</h3>
           <BarChart
             width={600}
@@ -126,7 +123,7 @@ class RechartsComp extends React.Component {
             <Legend />
             <Bar dataKey="y" fill="#8884d8" />
           </BarChart>
-        </AppFrame>
+        </div>
       );
     }
     // return(
