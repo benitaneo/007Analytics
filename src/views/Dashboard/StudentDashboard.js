@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import store from '../../store';
 
 // react charts2 components
 import {
@@ -52,7 +51,33 @@ import {
 import * as V from 'victory';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryCandlestick, VictoryLine } from 'victory';
 
-import * as firebase from 'firebase';
+import firebase from '../../firebase';
+
+const AxisLabel = ({
+  axisType,
+  x = 0,
+  y = 0,
+  width,
+  height,
+  stroke,
+  children
+}) => {
+  const isVert = axisType === "yAxis";
+  const cx = isVert ? x + 20 : x + width / 2;
+  const cy = isVert ? height / 2 + y : y + height;
+  const rot = isVert ? `270 ${cx} ${cy}` : 0;
+  return (
+    <text
+      x={cx}
+      y={cy}
+      transform={`rotate(${rot})`}
+      textAnchor="middle"
+      stroke={stroke}
+    >
+      {children}
+    </text>
+  );
+};
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';
@@ -112,174 +137,17 @@ const lineData =[
   { x: 42, y: 7 }
 ]
 
-var elements = 27;
-var data1 = [];
-var data2 = [];
-var data3 = [];
-
-for (var i = 0; i <= elements; i++) {
-  data1.push(random(50, 200));
-  data2.push(random(80, 100));
-  data3.push(65);
-}
-
-const options = {
-  responsive: true,
-  tooltips: {
-    mode: 'label'
-  },
-  elements: {
-    line: {
-      fill: false
-    }
-  },
-  scales: {
-    xAxes: [
-      {
-        display: true,
-        gridLines: {
-          display: false
-        },
-        labels: {
-          show: true
-        }
-      }
-    ],
-    yAxes: [
-      {
-        type: 'linear',
-        display: true,
-        position: 'left',
-        id: 'y-axis-1',
-        gridLines: {
-          display: false
-        },
-        labels: {
-          show: true
-        },
-        ticks: {
-          beginAtZero: true,
-          min: 0
-        }
-      },
-      {
-        type: 'linear',
-        display: true,
-        position: 'right',
-        id: 'y-axis-2',
-        gridLines: {
-          display: false
-        },
-        labels: {
-          show: true
-        }
-      }
-    ]
-  }
-};
-
-const mainChart = {
-  labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: convertHex(brandInfo, 10),
-      borderColor: brandInfo,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: data1
-    },
-    {
-      label: 'My Second dataset',
-      backgroundColor: 'transparent',
-      borderColor: brandSuccess,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: data2
-    },
-    {
-      label: 'My Third dataset',
-      backgroundColor: 'transparent',
-      borderColor: brandDanger,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 1,
-      borderDash: [8, 5],
-      data: data3
-    }
-  ]
-}
-
-const participationChartOpts = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      gridLines: {
-        drawOnChartArea: false,
-      }
-    }],
-    yAxes: [{
-      ticks: {
-        beginAtZero: true,
-        maxTicksLimit: 5,
-        stepSize: Math.ceil(100 / 5),
-        max: 100
-      }
-    }]
-  },
-  elements: {
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3,
-    }
-  }
-}
-
-const mainChartOpts = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      gridLines: {
-        drawOnChartArea: false,
-      }
-    }],
-    yAxes: [{
-      ticks: {
-        beginAtZero: true,
-        maxTicksLimit: 5,
-        stepSize: Math.ceil(250 / 5),
-        max: 250
-      }
-    }]
-  },
-  elements: {
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3,
-    }
-  }
-}
-
-
 class StudentDashboard extends Component {
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false,
       activeTab: '1',
+      chartsArr: [],
       day: 0,
-      data: {}
+      dropdownOpen: false,
+      mount: false
     };
   }
 
@@ -292,30 +160,36 @@ class StudentDashboard extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.day);
-    console.log(daysLeft);
-    this.setState({
-      day: daysLeft
+    const db = firebase.database()
+    db.ref('/newCharts').on('value', (snapshot) => {
+      //console.log(snapshot.val());
+      var charts = snapshot.val();
+      var newCharts = [];
+      console.log(charts);
+      for (var chart in charts) {
+        newCharts.push({
+          id: chart,
+          chartType: charts[chart].chartType,
+          data: charts[chart].data,
+          style: charts[chart].style,
+          title: charts[chart].title,
+          xaxis: charts[chart].xaxisLabel,
+          yaxis: charts[chart].yaxisLabel
+        });
+      }
+      this.setState({
+        chartsArr: newCharts,
+        day: daysLeft,
+        mount: true
+      });
     });
   }
 
-  componentWillMount(){
-    /* Create reference to messages in Firebase Database */
-    let db = firebase.database().ref('/');    
-    db.off();
-    db.on('value', snapshot => {
-      /* Update React state when message is added at Firebase Database */
-      
-      let locData = snapshot.val();
-      this.setState({data: locData});
-      console.log(locData);
-      this.forceUpdate();
-      //this.state = locData;
-    })
+  getCharts(i) {
+    return this.state.chartsArr[i].data;
   }
 
   render() {
-    console.log(store.getState());
     return (
       <div className="animated fadeIn">
         <Row>
