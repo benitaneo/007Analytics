@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import * as firebase from 'firebase';
-import store from '../../../store';
+import firebase from '../../../firebase';
 
 class Login extends Component {
   constructor(props) {
@@ -57,7 +56,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log(store.getState());
     return (
       <div className="app flex-row align-items-center">
         <Container>
