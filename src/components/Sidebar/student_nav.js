@@ -37,7 +37,12 @@ export default {
     },
     {
       name: 'CodeCombat Progress',
-      url: '/charts',
+      url: '/icons/simple-line-icons',
+      icon: 'icon-pie-chart'
+    },
+    {
+      name: 'Forum',
+      url: '/forum',
       icon: 'icon-pie-chart'
     },
     {

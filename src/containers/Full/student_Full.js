@@ -7,6 +7,8 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import StudentDashboard from '../../views/Dashboard/StudentDashboard';
+import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
+import Forum from '../../views/Dashboard/Forum';
 import Charts from '../../views/Charts/';
 import Widgets from '../../views/Widgets/';
 
@@ -46,9 +48,9 @@ class StudentFull extends Component {
               <Switch>
                 <Route path="/charts" name="Charts" children={props => <Charts local_data={this.state} {...props} />} />
                 <Route path="/student" name="StudentDashboard" component={StudentDashboard}/>
-                // <Route path="/dashboard" name="Dashboard" render={props => <Charts local_data={this.state} {...props} />} />
                 <Route path="/components/buttons" name="Buttons" component={Buttons}/>
                 <Route path="/components/cards" name="Cards" component={Cards}/>
+                <Route path="/forum" name="Forum" component={Forum}/>
                 <Route path="/components/forms" name="Forms" component={Forms}/>
                 <Route path="/components/modals" name="Modals" component={Modals}/>
                 <Route path="/components/social-buttons" name="Social Buttons" component={SocialButtons}/>

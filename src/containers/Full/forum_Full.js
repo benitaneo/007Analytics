@@ -2,13 +2,12 @@ import React, {Component} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {Container} from 'reactstrap';
 import Header from '../../components/Header/';
-import Sidebar from '../../components/Sidebar/';
+import StudentSidebar from '../../components/Sidebar/student_Sidebar';
 import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
-import Dashboard from '../../views/Dashboard/';
 import StudentDashboard from '../../views/Dashboard/StudentDashboard';
-import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
+import Forum from '../../views/Dashboard/Forum';
 import Charts from '../../views/Charts/';
 import Widgets from '../../views/Widgets/';
 
@@ -30,7 +29,7 @@ import * as firebase from 'firebase';
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet
 
-class Full extends Component {
+class ForumFull extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -41,14 +40,14 @@ class Full extends Component {
       <div className="app">
         <Header />
         <div className="app-body">
-          <Sidebar {...this.props}/>
+          <StudentSidebar {...this.props}/>
           <main className="main">
             <Breadcrumb />
             <Container fluid>
               <Switch>
                 <Route path="/charts" name="Charts" children={props => <Charts local_data={this.state} {...props} />} />
-                <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-                // <Route path="/dashboard" name="Dashboard" render={props => <Charts local_data={this.state} {...props} />} />
+                <Route path="/student" name="StudentDashboard" component={StudentDashboard}/>
+                <Route path="/forum" name="Forum" component={Forum}/>
                 <Route path="/components/buttons" name="Buttons" component={Buttons}/>
                 <Route path="/components/cards" name="Cards" component={Cards}/>
                 <Route path="/components/forms" name="Forms" component={Forms}/>
@@ -62,6 +61,8 @@ class Full extends Component {
                 <Route path="/widgets" name="Widgets" component={Widgets}/>
                 <Route path="/charts_original" name="Charts" component={Charts} />
                 
+                
+                <Redirect from="/" to="/forum"/>
               </Switch>
             </Container>
           </main>
@@ -73,4 +74,4 @@ class Full extends Component {
   }
 }
 
-export default Full;
+export default ForumFull;
