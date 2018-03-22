@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {Container, Row, Col, CardGroup, Card, CardBody, CardImg, Button, Input, InputGroup, InputGroupAddon, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import firebase from '../../../firebase';
 
 class Login extends Component {
@@ -59,6 +59,11 @@ class Login extends Component {
     return (
       <div className="app flex-row align-items-center">
         <Container>
+          <Row className="justify-content-center">
+            <Card>
+              <CardImg src="../img/avatars/codecombat.jpg" alt="Card image cap" />
+            </Card>
+          </Row>
           <Row className="justify-content-center">
             <Col md="8">
               <CardGroup>
