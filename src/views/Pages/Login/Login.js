@@ -1,6 +1,43 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, CardGroup, Card, CardBody, CardImg, Button, Input, InputGroup, InputGroupAddon, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import firebase from '../../../firebase';
+import Footer from '../../../components/Footer';
+
+// import slider dependencies
+import Slider from 'react-animated-slider';
+import 'react-animated-slider/build/horizontal.css';
+import '../../../../scss/css/slider-animations.css';
+import '../../../../scss/css/styles.css';
+
+const content = [
+	{
+		title: 'CodeCombat Analytics, Your Best Companion in Learning Progress',
+		description:
+		'Get your real-time analysis done right here, all you have to do is register an account at CodeCombat!',
+		button: 'Login',
+		image: 'https://i.imgur.com/ZXBtVw7.jpg',
+		user: '007Analytics',
+		userProfile: '../../../img/flags/Singapore.png'
+  },
+  {
+		title: 'Learn Programming in a Fun manner',
+		description:
+		'With CodeCombat, getting started on programming is no longer difficult!',
+		button: 'Sign Up!',
+		image: 'https://i.imgur.com/DvmN8Hx.jpg',
+		user: 'CodeCombat CEO',
+		userProfile: '../../../img/avatars/4.jpg'
+	},
+	{
+		title: 'Clean and Sleek layout, perfectly user-friendly for all',
+		description:
+		'An amazing tool for anyone who is getting started on Programming!',
+		button: 'Discover',
+		image: 'https://i.imgur.com/DCdBXcq.jpg',
+		user: 'Chris Boesch',
+		userProfile: '../../../img/avatars/3.jpg'
+	}
+];
 
 class Login extends Component {
   constructor(props) {
@@ -59,11 +96,29 @@ class Login extends Component {
     return (
       <div className="app flex-row align-items-center">
         <Container>
-          <Row className="justify-content-center">
-            <Card>
-              <CardImg src="../img/avatars/codecombat.jpg" alt="Card image cap" />
-            </Card>
-          </Row>
+          <Slider className="slider-wrapper" autoplay="1500">
+            {content.map((item, index) => (
+              <div
+                key={index}
+                className="slider-content"
+                style={{ background: `url('${item.image}') no-repeat center center` }}
+              >
+                <div className="inner">
+                  <h1>{item.title}</h1>
+                  <p>{item.description}</p>
+                  <button>{item.button}</button>
+                </div>
+                <section>
+                  <img src={item.userProfile} alt={item.user} />
+                  <span>
+                    Posted by <strong>{item.user}</strong>
+                  </span>
+                </section>
+              </div>
+            ))}
+          </Slider>
+          <br />
+          <br />
           <Row className="justify-content-center">
             <Col md="8">
               <CardGroup>
@@ -111,6 +166,8 @@ class Login extends Component {
               </CardGroup>
             </Col>
           </Row>
+          <br />
+          <Footer />
         </Container>
       </div>
     );
