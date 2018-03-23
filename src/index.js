@@ -42,7 +42,7 @@ ReactDOM.render((
       <Route path="/dashboard" name="Home" component={Full} />
       
       // <Route path="/home" name="Home" component={Full} sample={local_data}/>
-      <Route path="/login" name="Home" component={Login} sample={local_data}/>
+      <Route path="/" name="Home" component={Login} sample={local_data}/>
       <Route path="/" name="Home" render={props => <Full local_data={local_data} {...props} />} />
     </Switch>
   </HashRouter>
