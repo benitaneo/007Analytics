@@ -267,7 +267,7 @@ class AdministratorDashboard extends Component {
                       <TabPane tabId="1">
                         <Row>
                           <Col sm="6">
-                          <BarChart width={400} height={200} data={this.getCharts(1)}>
+                          <BarChart width={400} height={200} data={this.getCharts(1)} offset="10">
                             <XAxis
                               dataKey="x"
                               label={
@@ -295,7 +295,7 @@ class AdministratorDashboard extends Component {
                       <TabPane tabId="2">
                         <Row>
                           <Col sm="6">
-                          <BarChart width={400} height={200} data={this.getCharts(0)}>
+                          <BarChart width={400} height={200} data={this.getCharts(0)} position="center">
                             <XAxis
                               dataKey="x"
                               label={
