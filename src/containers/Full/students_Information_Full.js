@@ -27,7 +27,10 @@ import FontAwesome from '../../views/Icons/FontAwesome/';
 import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/';
 import * as firebase from 'firebase';
 
-class InstructorFull extends Component {
+// Initialize Firebase
+// TODO: Replace with your project's customized code snippet
+
+class StudentsInformationFull extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -45,7 +48,6 @@ class InstructorFull extends Component {
               <Switch>
                 <Route path="/charts" name="Charts" children={props => <Charts local_data={this.state} {...props} />} />
                 <Route path="/instructor" name="InstructorDashboard" component={InstructorDashboard}/>
-                <Route path="/admincontact" name="AdminContact" component={ContactDashboard}/>
                 <Route path="/studentinfo" name="StudentInfoDashboard" component={StudentInfoDashboard}/>
                 <Route path="/components/buttons" name="Buttons" component={Buttons}/>
                 <Route path="/components/cards" name="Cards" component={Cards}/>
@@ -61,7 +63,7 @@ class InstructorFull extends Component {
                 <Route path="/charts_original" name="Charts" component={Charts} />
                 
                 
-                <Redirect from="/" to="/instructor"/>
+                <Redirect from="/" to="/studentinfo"/>
               </Switch>
             </Container>
           </main>
@@ -73,4 +75,4 @@ class InstructorFull extends Component {
   }
 }
 
-export default InstructorFull;
+export default StudentsInformationFull;

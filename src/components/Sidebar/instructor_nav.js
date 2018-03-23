@@ -2,7 +2,7 @@ export default {
   items: [
     {
       name: 'Dashboard',
-      url: '/instructordashboard',
+      url: '/instructor',
       icon: 'icon-speedometer',
       badge: {
         variant: 'info',
@@ -20,7 +20,7 @@ export default {
     },
     {
       name: 'Students Information',
-      url: '/icons',
+      url: '/studentinfo',
       icon: 'icon-calculator'
     },
     {
