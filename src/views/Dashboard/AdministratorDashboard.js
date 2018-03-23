@@ -65,6 +65,19 @@ function convertHex(hex, opacity) {
   return result;
 }
 
+// Dynamically update month label
+const month_names = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+const currentMonth = getMonth();
+
+function getMonth() {
+  var today = new Date();
+  return month_names[today.getMonth()];
+}
+
+// Dynamically update countdown to next Singapore Coding Competition
 const daysLeft = getDaysLeft();
 
 function getDaysLeft() {
@@ -112,15 +125,16 @@ class AdministratorDashboard extends Component {
       chartsArr: [],
       day: 0,
       dropdownOpen: false,
+      month: 0,
       mount: false
     };
   }
 
   componentDidMount() {
     const db = firebase.database()
-    db.ref('/newCharts').on('value', (snapshot) => {
-      //console.log(snapshot.val());
+    db.ref('/adminCharts').on('value', (snapshot) => {
       var charts = snapshot.val();
+      console.log(charts);
       var newCharts = [];
       console.log(charts);
       for (var chart in charts) {
@@ -137,6 +151,7 @@ class AdministratorDashboard extends Component {
       this.setState({
         chartsArr: newCharts,
         day: daysLeft,
+        month: currentMonth,
         mount: true
       });
     });
@@ -152,6 +167,14 @@ class AdministratorDashboard extends Component {
   
   getCharts(i) {
     return this.state.chartsArr[i].data;
+  }
+
+  getTotalSchoolsCount(i) {
+    var count = 0;
+    for (var chart in this.state.chartsArr[i].data) {
+      count += this.state.chartsArr[i].data[chart].y
+    }
+    return count;
   }
 
   render() {
@@ -172,7 +195,7 @@ class AdministratorDashboard extends Component {
                   <Row>
                     <Col sm="5">
                       <CardTitle className="mb-0">Statistics</CardTitle>
-                      <div className="small text-muted">March 2018</div>
+                      <div className="small text-muted">{this.state.month} 2018</div>
                     </Col>
                   </Row>
                 </CardBody>
@@ -180,7 +203,7 @@ class AdministratorDashboard extends Component {
                   <ul>
                     <li className="d-none d-md-table-cell">
                       <div className="text-muted">Total Number of Participating Schools</div>
-                      <strong>39</strong>
+                      <strong>{this.getTotalSchoolsCount(3)}</strong>
                     </li>
                     <li>
                       <div className="text-muted">Number of Schools currently in Talks with</div>
@@ -202,7 +225,7 @@ class AdministratorDashboard extends Component {
               <Card>
                 <CardHeader>
                   <i className="fa fa-align-justify"></i> Participation Rate
-                  <div className="small text-muted">March 2018</div>
+                  <div className="small text-muted">{this.state.month} 2018</div>
                 </CardHeader>
                 <CardBody>
                   <Row>
@@ -231,9 +254,45 @@ class AdministratorDashboard extends Component {
                           Senior
                         </NavLink>
                       </NavItem>
+                      <NavItem>
+                        <NavLink
+                          className={classnames({ active: this.state.activeTab === '4' })}
+                          onClick={() => { this.toggle('4'); }}
+                        >
+                          Total
+                        </NavLink>
+                      </NavItem>
                     </Nav>
                     <TabContent activeTab={this.state.activeTab}>
                       <TabPane tabId="1">
+                        <Row>
+                          <Col sm="6">
+                          <BarChart width={400} height={200} data={this.getCharts(1)}>
+                            <XAxis
+                              dataKey="x"
+                              label={
+                                <AxisLabel axisType="xAxis" width={600} height={300}>
+                                  {this.state.chartsArr.xaxis}
+                                </AxisLabel>
+                              }
+                            />
+                            <YAxis
+                              dataKey="y"
+                              label={
+                                <AxisLabel axisType="yAxis" width={600} height={300}>
+                                  {this.state.chartsArr.yaxis}
+                                </AxisLabel>
+                              }
+                            />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="y" fill="#000066" name="No. of Students" />
+                          </BarChart>
+                          </Col>
+                        </Row>
+                      </TabPane>
+                      <TabPane tabId="2">
                         <Row>
                           <Col sm="6">
                           <BarChart width={400} height={200} data={this.getCharts(0)}>
@@ -256,33 +315,67 @@ class AdministratorDashboard extends Component {
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="y" fill="#8884d8" />
+                            <Bar dataKey="y" fill="#000066" name="No. of Students" />
                           </BarChart>
                           </Col>
                         </Row>
                       </TabPane>
-                      <TabPane tabId="2">
-                      <Row>
-                        <Col sm="6">
-                          <Card body>
-                            <CardTitle>Special Title Treatment</CardTitle>
-                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                            <Button>Go somewhere</Button>
-                          </Card>
-                        </Col>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="3">
-                      <Row>
-                        <Col sm="6">
-                          <Card body>
-                            <CardTitle>Special Title Treatment</CardTitle>
-                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                            <Button>Go somewhere</Button>
-                          </Card>
-                        </Col>
-                      </Row>
-                    </TabPane>
+                      <TabPane tabId="3">
+                        <Row>
+                          <Col sm="6">
+                          <BarChart width={400} height={200} data={this.getCharts(2)}>
+                            <XAxis
+                              dataKey="x"
+                              label={
+                                <AxisLabel axisType="xAxis" width={600} height={300}>
+                                  {this.state.chartsArr.xaxis}
+                                </AxisLabel>
+                              }
+                            />
+                            <YAxis
+                              dataKey="y"
+                              label={
+                                <AxisLabel axisType="yAxis" width={600} height={300}>
+                                  {this.state.chartsArr.yaxis}
+                                </AxisLabel>
+                              }
+                            />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="y" fill="#000066" name="No. of Students" />
+                          </BarChart>
+                          </Col>
+                        </Row>
+                      </TabPane>
+                      <TabPane tabId="4">
+                        <Row>
+                          <Col sm="6">
+                          <BarChart width={400} height={200} data={this.getCharts(3)}>
+                            <XAxis
+                              dataKey="x"
+                              label={
+                                <AxisLabel axisType="xAxis" width={600} height={300}>
+                                  {this.state.chartsArr.xaxis}
+                                </AxisLabel>
+                              }
+                            />
+                            <YAxis
+                              dataKey="y"
+                              label={
+                                <AxisLabel axisType="yAxis" width={600} height={300}>
+                                  {this.state.chartsArr.yaxis}
+                                </AxisLabel>
+                              }
+                            />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="y" fill="#000066" name="No. of Students" />
+                          </BarChart>
+                          </Col>
+                        </Row>
+                      </TabPane>
                     </TabContent>
                   </Row>           
                 </CardBody>
@@ -293,7 +386,7 @@ class AdministratorDashboard extends Component {
               <Card>
                 <CardHeader>
                   <i className="fa fa-align-justify"></i> Activity Rate
-                  <div className="small text-muted">March 2018</div>
+                  <div className="small text-muted">{this.state.month} 2018</div>
                 </CardHeader>
                 <CardBody>
                   <Row>
@@ -322,6 +415,14 @@ class AdministratorDashboard extends Component {
                         Senior
                       </NavLink>
                     </NavItem>
+                    <NavItem>
+                      <NavLink
+                        className={classnames({ active: this.state.activeTab === '4' })}
+                        onClick={() => { this.toggle('4'); }}
+                      >
+                        Total
+                      </NavLink>
+                    </NavItem>
                   </Nav>
                   <TabContent activeTab={this.state.activeTab}>
                   <TabPane tabId="1">
@@ -347,6 +448,17 @@ class AdministratorDashboard extends Component {
                       </Row>
                     </TabPane>
                     <TabPane tabId="3">
+                      <Row>
+                        <Col sm="6">
+                          <Card body>
+                            <CardTitle>Special Title Treatment</CardTitle>
+                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                            <Button>Go somewhere</Button>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </TabPane>
+                    <TabPane tabId="4">
                       <Row>
                         <Col sm="6">
                           <Card body>

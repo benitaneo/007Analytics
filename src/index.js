@@ -17,6 +17,7 @@ import '../scss/core/_dropdown-menu-right.scss'
 import Full from './containers/Full/'
 import StudentFull from './containers/Full/student_Full'
 import AdministratorFull from './containers/Full/administrator_Full'
+import InstructorFull from './containers/Full/instructor_Full'
 import ForumFull from './containers/Full/forum_Full'
 
 // Views
@@ -38,6 +39,7 @@ ReactDOM.render((
       <Route path="/original" name="Login" component={Login} />
       <Route path="/student" name="StudentHome" component={StudentFull} />
       <Route path="/administrator" name="AdministratorHome" component={AdministratorFull} />
+      <Route path="/instructor" name="InstructorHome" component={InstructorFull} />
       <Route path="/forum" name="Forum" component={ForumFull} />
       <Route path="/dashboard" name="Home" component={Full} />
       
