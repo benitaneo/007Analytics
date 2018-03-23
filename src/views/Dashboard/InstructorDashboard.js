@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Bar, Line} from 'react-chartjs-2';
+import classnames from 'classnames';
+
+// react charts2 components
 import {
   Badge,
   Row,
@@ -14,313 +16,43 @@ import {
   CardBody,
   CardFooter,
   CardTitle,
+  CardText,
   Button,
   ButtonToolbar,
   ButtonGroup,
   ButtonDropdown,
   Label,
+  Nav,
+  NavItem,
+  NavLink,
   Input,
-  Table
+  Table,
+  TabContent,
+  TabPane
 } from 'reactstrap';
+
+// recharts components
+import {
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from "recharts";
+
+import firebase from '../../firebase';
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';
 const brandInfo = '#63c2de';
 const brandWarning = '#f8cb00';
 const brandDanger = '#f86c6b';
-
-// Card Chart 1
-const cardChartData1 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: brandPrimary,
-      borderColor: 'rgba(255,255,255,.55)',
-      data: [65, 59, 84, 84, 51, 55, 40]
-    }
-  ],
-};
-
-const cardChartOpts1 = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      gridLines: {
-        color: 'transparent',
-        zeroLineColor: 'transparent'
-      },
-      ticks: {
-        fontSize: 2,
-        fontColor: 'transparent',
-      }
-
-    }],
-    yAxes: [{
-      display: false,
-      ticks: {
-        display: false,
-        min: Math.min.apply(Math, cardChartData1.datasets[0].data) - 5,
-        max: Math.max.apply(Math, cardChartData1.datasets[0].data) + 5,
-      }
-    }],
-  },
-  elements: {
-    line: {
-      borderWidth: 1
-    },
-    point: {
-      radius: 4,
-      hitRadius: 10,
-      hoverRadius: 4,
-    },
-  }
-}
-
-// Card Chart 2
-const cardChartData2 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: brandInfo,
-      borderColor: 'rgba(255,255,255,.55)',
-      data: [1, 18, 9, 17, 34, 22, 11]
-    }
-  ],
-};
-
-const cardChartOpts2 = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      gridLines: {
-        color: 'transparent',
-        zeroLineColor: 'transparent'
-      },
-      ticks: {
-        fontSize: 2,
-        fontColor: 'transparent',
-      }
-
-    }],
-    yAxes: [{
-      display: false,
-      ticks: {
-        display: false,
-        min: Math.min.apply(Math, cardChartData2.datasets[0].data) - 5,
-        max: Math.max.apply(Math, cardChartData2.datasets[0].data) + 5,
-      }
-    }],
-  },
-  elements: {
-    line: {
-      tension: 0.00001,
-      borderWidth: 1
-    },
-    point: {
-      radius: 4,
-      hitRadius: 10,
-      hoverRadius: 4,
-    },
-  }
-}
-
-// Card Chart 3
-const cardChartData3 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: 'rgba(255,255,255,.2)',
-      borderColor: 'rgba(255,255,255,.55)',
-      data: [78, 81, 80, 45, 34, 12, 40]
-    }
-  ],
-};
-
-const cardChartOpts3 = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      display: false
-    }],
-    yAxes: [{
-      display: false
-    }],
-  },
-  elements: {
-    line: {
-      borderWidth: 2
-    },
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-    },
-  }
-}
-
-// Card Chart 4
-const cardChartData4 = {
-  labels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: 'rgba(255,255,255,.3)',
-      borderColor: 'transparent',
-      data: [78, 81, 80, 45, 34, 12, 40, 75, 34, 89, 32, 68, 54, 72, 18, 98]
-    }
-  ],
-};
-
-const cardChartOpts4 = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      display: false,
-      barPercentage: 0.6,
-    }],
-    yAxes: [{
-      display: false,
-    }]
-  }
-}
-
-// Social Box Chart
-const socialBoxData = [
-  {data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook'},
-  {data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter'},
-  {data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin'},
-  {data: [35, 23, 56, 22, 97, 23, 64], label: 'google'}
-];
-
-const makeSocialBoxData = (dataSetNo) => {
-  const dataset = socialBoxData[dataSetNo];
-  const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        backgroundColor: 'rgba(255,255,255,.1)',
-        borderColor: 'rgba(255,255,255,.55)',
-        pointHoverBackgroundColor: '#fff',
-        borderWidth: 2,
-        data: dataset.data,
-        label: dataset.label,
-      }
-    ]
-  };
-  return () => data;
-};
-
-const socialChartOpts = {
-  responsive: true,
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      display: false
-    }],
-    yAxes: [{
-      display: false
-    }]
-  },
-  elements: {
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3
-    }
-  }
-};
-
-// sparkline charts
-const sparkLineChartData = [
-  {
-    data: [35, 23, 56, 22, 97, 23, 64],
-    label: 'New Clients'
-  },
-  {
-    data: [65, 59, 84, 84, 51, 55, 40],
-    label: 'Recurring Clients'
-  },
-  {
-    data: [35, 23, 56, 22, 97, 23, 64],
-    label: 'Pageviews'
-  },
-  {
-    data: [65, 59, 84, 84, 51, 55, 40],
-    label: 'Organic'
-  },
-  {
-    data: [78, 81, 80, 45, 34, 12, 40],
-    label: 'CTR'
-  },
-  {
-    data: [1, 13, 9, 17, 34, 41, 38],
-    label: 'Bounce Rate'
-  }
-];
-
-const makeSparkLineData = (dataSetNo, variant) => {
-  const dataset = sparkLineChartData[dataSetNo];
-  const data = {
-    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    datasets: [
-      {
-        backgroundColor: 'transparent',
-        borderColor: variant ? variant : '#c2cfd6',
-        data: dataset.data,
-        label: dataset.label
-      }
-    ],
-  };
-  return () => data;
-};
-
-const sparklineChartOpts = {
-  responsive: true,
-  maintainAspectRatio: true,
-  scales: {
-    xAxes: [{
-      display: false,
-    }],
-    yAxes: [{
-      display: false,
-    }]
-  },
-  elements: {
-    line: {
-      borderWidth: 2
-    },
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3,
-    }
-  },
-  legend: {
-    display: false
-  }
-};
-
-// Main Chart
 
 // convert Hex to RGBA
 function convertHex(hex, opacity) {
@@ -333,146 +65,42 @@ function convertHex(hex, opacity) {
   return result;
 }
 
-//Random Numbers
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+const daysLeft = getDaysLeft();
+
+function getDaysLeft() {
+  var today = new Date();
+  var comps = new Date(2018, 2, 24);
+  var one_day = 1000*60*60*24;
+
+  var difference = Math.abs(comps.getTime() - today.getTime());
+  return Math.round(difference / one_day);
 }
 
-var elements = 27;
-var data1 = [];
-var data2 = [];
-var data3 = [];
-
-for (var i = 0; i <= elements; i++) {
-  data1.push(random(50, 200));
-  data2.push(random(80, 100));
-  data3.push(65);
-}
-
-var participationData = {
-  labels: ["Anglo-Chinese Primary School", "Wellington Primary School", "Other Primary School"],
-  datasets: [{
-  label: "Primary Participation Rate",
-  backgroundColor: 'rgb(255, 99, 132)',
-  borderColor: 'rgb(255, 99, 132)',
-  data: [20, 40, 30],
-  }]
-}
-
-var activeData = {
-  labels: ["Week 1", "Week 2", "Week 3"],
-  datasets: [{
-  label: "Primary Category Activity Rate",
-  backgroundColor: 'rgb(255, 99, 132)',
-  borderColor: 'rgb(255, 99, 132)',
-  data: [20, 40, 30, 2, 20, 30, 45],
-  }]
-}
-
-const participationChart = {
-  datasets: [
-    {
-      label: 'Participation Rate',
-      backgroundColor: convertHex(brandInfo, 10),
-      borderColor: brandInfo,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: participationData
-    }
-  ]
-}
-
-const mainChart = {
-  labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: convertHex(brandInfo, 10),
-      borderColor: brandInfo,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: data1
-    },
-    {
-      label: 'My Second dataset',
-      backgroundColor: 'transparent',
-      borderColor: brandSuccess,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: data2
-    },
-    {
-      label: 'My Third dataset',
-      backgroundColor: 'transparent',
-      borderColor: brandDanger,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 1,
-      borderDash: [8, 5],
-      data: data3
-    }
-  ]
-}
-
-const participationChartOpts = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      gridLines: {
-        drawOnChartArea: false,
-      }
-    }],
-    yAxes: [{
-      ticks: {
-        beginAtZero: true,
-        maxTicksLimit: 5,
-        stepSize: Math.ceil(100 / 5),
-        max: 100
-      }
-    }]
-  },
-  elements: {
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3,
-    }
-  }
-}
-
-const mainChartOpts = {
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [{
-      gridLines: {
-        drawOnChartArea: false,
-      }
-    }],
-    yAxes: [{
-      ticks: {
-        beginAtZero: true,
-        maxTicksLimit: 5,
-        stepSize: Math.ceil(250 / 5),
-        max: 250
-      }
-    }]
-  },
-  elements: {
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3,
-    }
-  }
-}
-
+const AxisLabel = ({
+  axisType,
+  x = 0,
+  y = 0,
+  width,
+  height,
+  stroke,
+  children
+}) => {
+  const isVert = axisType === "yAxis";
+  const cx = isVert ? x + 20 : x + width / 2;
+  const cy = isVert ? height / 2 + y : y + height;
+  const rot = isVert ? `270 ${cx} ${cy}` : 0;
+  return (
+    <text
+      x={cx}
+      y={cy}
+      transform={`rotate(${rot})`}
+      textAnchor="middle"
+      stroke={stroke}
+    >
+      {children}
+    </text>
+  );
+};
 
 class InstructorDashboard extends Component {
   constructor(props) {
@@ -480,262 +108,269 @@ class InstructorDashboard extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false
+      activeTab: '1',
+      chartsArr: [],
+      day: 0,
+      dropdownOpen: false,
+      mount: false
     };
   }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+  componentDidMount() {
+    const db = firebase.database()
+    db.ref('/newCharts').on('value', (snapshot) => {
+      //console.log(snapshot.val());
+      var charts = snapshot.val();
+      var newCharts = [];
+      console.log(charts);
+      for (var chart in charts) {
+        newCharts.push({
+          id: chart,
+          chartType: charts[chart].chartType,
+          data: charts[chart].data,
+          style: charts[chart].style,
+          title: charts[chart].title,
+          xaxis: charts[chart].xaxisLabel,
+          yaxis: charts[chart].yaxisLabel
+        });
+      }
+      this.setState({
+        chartsArr: newCharts,
+        day: daysLeft,
+        mount: true
+      });
     });
   }
 
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
+  }
+  
+  getCharts(i) {
+    return this.state.chartsArr[i].data;
+  }
 
   render() {
+    //console.log(this.state.chartsArr);
+    //console.log(this.state.chartsArr[0]);
+    if (this.state.mount === true) {
+      var wanted = this.state.chartsArr[0].data;
+      //console.log(this.state.chartsArr[0].data);
+      //console.log(this.state.chartsArr[0].data[0]);
+      //console.log(this.state.chartsArr[0].data[0].x);
+      return (
+        <div className="animated fadeIn">
 
-    return (
-      <div className="animated fadeIn">
-        <Row>
+          <Row>
+            <Col>
+              <Card>
+                <CardBody>
+                  <Row>
+                    <Col sm="5">
+                      <CardTitle className="mb-0">Statistics</CardTitle>
+                      <div className="small text-muted">March 2018</div>
+                    </Col>
+                  </Row>
+                </CardBody>
+                <CardFooter>
+                  <ul>
+                    <li className="d-none d-md-table-cell">
+                      <div className="text-muted">Total Number of Participating Students</div>
+                      <strong>189</strong>
+                    </li>
+                    <li>
+                      <div className="text-muted">Number of Students who are behind schedule</div>
+                      <strong>23</strong>
+                    </li>
+                    <li className="d-none d-md-table-cell">
+                      <div className="text-muted">Countdown to Competition</div>
+                      <strong>{this.state.day} Days Left (99%)</strong>
+                      <Progress className="progress-xs mt-2" color="danger" value="99"/>
+                    </li>
+                  </ul>
+                </CardFooter>
+              </Card>
+            </Col>
+          </Row>
 
-          <Col xs="12" sm="6" lg="4">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Primary Category
-              </CardHeader>
-              <CardBody>
-                <Table>
-                  <table className="responsive table-sm">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>School Name</th>
-                        <th>No. of Participants</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Anglo-Chinese Sch Primary</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Wellington Primary School</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>All Other Primary Schools</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="4">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Junior Category
-              </CardHeader>
-              <CardBody>
-                <Table>
-                  <table className="responsive table-sm">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>School Name</th>
-                        <th>No. of Participants</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Anglo-Chinese Sch Primary</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Wellington Primary School</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>All Other Primary Schools</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="4">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Senior Category
-              </CardHeader>
-              <CardBody>
-                <Table>
-                  <table className="responsive table-sm">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>School Name</th>
-                        <th>No. of Participants</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Anglo-Chinese Sch Primary</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Wellington Primary School</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>All Other Primary Schools</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col lg="6">
-            <Card>
-              <CardBody>
-                <Row>
-                  <Col sm="5">
-                    <CardTitle className="mb-0">Participation Rate</CardTitle>
-                    <div className="small text-muted">March 2018</div>
-                  </Col>
-                  <Col sm="7" className="d-none d-sm-inline-block">
-                    <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
-                      <ButtonGroup className="mr-3" data-toggle="buttons" aria-label="First group">
-                        <Label htmlFor="option1" className="btn btn-outline-secondary active">
-                          <Input type="radio" name="options" id="option1" defaultChecked/> Primary
-                        </Label>
-                        <Label htmlFor="option2" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option2"/> Junior
-                        </Label>
-                        <Label htmlFor="option3" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option3"/> Senior
-                        </Label>
-                      </ButtonGroup>
-                    </ButtonToolbar>
-                  </Col>
-                </Row>
-                <Bar data={participationData} width={100} height={50} />
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col lg="6">
-            <Card>
-              <CardBody>
-                <Row>
-                  <Col sm="5">
-                    <CardTitle className="mb-0">Activity Rate</CardTitle>
-                    <div className="small text-muted">March 2018</div>
-                  </Col>
-                  <Col sm="7" className="d-none d-sm-inline-block">
-                    <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
-                      <ButtonGroup className="mr-3" data-toggle="buttons" aria-label="First group">
-                        <Label htmlFor="option1" className="btn btn-outline-secondary active">
-                          <Input type="radio" name="options" id="option1" defaultChecked/> Primary
-                        </Label>
-                        <Label htmlFor="option2" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option2"/> Junior
-                        </Label>
-                        <Label htmlFor="option3" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option3"/> Senior
-                        </Label>
-                      </ButtonGroup>
-                    </ButtonToolbar>
-                  </Col>
-                </Row>
-                <Line data={activeData} width={100} height={50} />
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col>
-            <Card>
-              <CardBody>
-                <Row>
-                  <Col sm="5">
-                    <CardTitle className="mb-0">Traffic</CardTitle>
-                    <div className="small text-muted">November 2015</div>
-                  </Col>
-                  <Col sm="7" className="d-none d-sm-inline-block">
-                    <Button color="primary" className="float-right"><i className="icon-cloud-download"></i></Button>
-                    <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
-                      <ButtonGroup className="mr-3" data-toggle="buttons" aria-label="First group">
-                        <Label htmlFor="option1" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option1"/> Day
-                        </Label>
-                        <Label htmlFor="option2" className="btn btn-outline-secondary active">
-                          <Input type="radio" name="options" id="option2" defaultChecked/> Month
-                        </Label>
-                        <Label htmlFor="option3" className="btn btn-outline-secondary">
-                          <Input type="radio" name="options" id="option3"/> Year
-                        </Label>
-                      </ButtonGroup>
-                    </ButtonToolbar>
-                  </Col>
-                </Row>
-                <div className="chart-wrapper" style={{height: 300 + 'px', marginTop: 40 + 'px'}}>
-                  <Line data={mainChart} options={mainChartOpts} height={300}/>
-                </div>
-              </CardBody>
-              <CardFooter>
-                <ul>
-                  <li>
-                    <div className="text-muted">Visits</div>
-                    <strong>29.703 Users (40%)</strong>
-                    <Progress className="progress-xs mt-2" color="success" value="40"/>
-                  </li>
-                  <li className="d-none d-md-table-cell">
-                    <div className="text-muted">Unique</div>
-                    <strong>24.093 Users (20%)</strong>
-                    <Progress className="progress-xs mt-2" color="info" value="20"/>
-                  </li>
-                  <li>
-                    <div className="text-muted">Pageviews</div>
-                    <strong>78.706 Views (60%)</strong>
-                    <Progress className="progress-xs mt-2" color="warning" value="60"/>
-                  </li>
-                  <li className="d-none d-md-table-cell">
-                    <div className="text-muted">New Users</div>
-                    <strong>22.123 Users (80%)</strong>
-                    <Progress className="progress-xs mt-2" color="danger" value="80"/>
-                  </li>
-                  <li className="d-none d-md-table-cell">
-                    <div className="text-muted">Bounce Rate</div>
-                    <strong>Average 40.15%</strong>
-                    <Progress className="progress-xs mt-2" color="primary" value="40"/>
-                  </li>
-                </ul>
-              </CardFooter>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-    )
+          <Row>
+            <Col lg="6">
+              <Card>
+                <CardHeader>
+                  <i className="fa fa-align-justify"></i> Participation Rate
+                  <div className="small text-muted">March 2018</div>
+                </CardHeader>
+                <CardBody>
+                  <Row>
+                    <Nav tabs>
+                      <NavItem>
+                        <NavLink
+                          className={classnames({ active: this.state.activeTab === '1' })}
+                          onClick={() => { this.toggle('1'); }}
+                        >
+                          Primary
+                        </NavLink>
+                      </NavItem>
+                      <NavItem>
+                        <NavLink
+                          className={classnames({ active: this.state.activeTab === '2' })}
+                          onClick={() => { this.toggle('2'); }}
+                        >
+                          Junior
+                        </NavLink>
+                      </NavItem>
+                      <NavItem>
+                        <NavLink
+                          className={classnames({ active: this.state.activeTab === '3' })}
+                          onClick={() => { this.toggle('3'); }}
+                        >
+                          Senior
+                        </NavLink>
+                      </NavItem>
+                    </Nav>
+                    <TabContent activeTab={this.state.activeTab}>
+                      <TabPane tabId="1">
+                        <Row>
+                          <Col sm="6">
+                          <BarChart width={400} height={200} data={this.getCharts(0)}>
+                            <XAxis
+                              dataKey="x"
+                              label={
+                                <AxisLabel axisType="xAxis" width={600} height={300}>
+                                  {this.state.chartsArr.xaxis}
+                                </AxisLabel>
+                              }
+                            />
+                            <YAxis
+                              dataKey="y"
+                              label={
+                                <AxisLabel axisType="yAxis" width={600} height={300}>
+                                  {this.state.chartsArr.yaxis}
+                                </AxisLabel>
+                              }
+                            />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="y" fill="#8884d8" />
+                          </BarChart>
+                          </Col>
+                        </Row>
+                      </TabPane>
+                      <TabPane tabId="2">
+                      <Row>
+                        <Col sm="6">
+                          <Card body>
+                            <CardTitle>Special Title Treatment</CardTitle>
+                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                            <Button>Go somewhere</Button>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </TabPane>
+                    <TabPane tabId="3">
+                      <Row>
+                        <Col sm="6">
+                          <Card body>
+                            <CardTitle>Special Title Treatment</CardTitle>
+                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                            <Button>Go somewhere</Button>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </TabPane>
+                    </TabContent>
+                  </Row>           
+                </CardBody>
+              </Card>
+            </Col>
+  
+            <Col lg="6">
+              <Card>
+                <CardHeader>
+                  <i className="fa fa-align-justify"></i> Activity Rate
+                  <div className="small text-muted">March 2018</div>
+                </CardHeader>
+                <CardBody>
+                  <Row>
+                  <Nav tabs>
+                    <NavItem>
+                      <NavLink
+                        className={classnames({ active: this.state.activeTab === '1' })}
+                        onClick={() => { this.toggle('1'); }}
+                      >
+                        Primary
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        className={classnames({ active: this.state.activeTab === '2' })}
+                        onClick={() => { this.toggle('2'); }}
+                      >
+                        Junior
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        className={classnames({ active: this.state.activeTab === '3' })}
+                        onClick={() => { this.toggle('3'); }}
+                      >
+                        Senior
+                      </NavLink>
+                    </NavItem>
+                  </Nav>
+                  <TabContent activeTab={this.state.activeTab}>
+                  <TabPane tabId="1">
+                      <Row>
+                        <Col sm="6">
+                          <Card body>
+                            <CardTitle>Special Title Treatment</CardTitle>
+                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                            <Button>Go somewhere</Button>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </TabPane>
+                    <TabPane tabId="2">
+                      <Row>
+                        <Col sm="6">
+                          <Card body>
+                            <CardTitle>Special Title Treatment</CardTitle>
+                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                            <Button>Go somewhere</Button>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </TabPane>
+                    <TabPane tabId="3">
+                      <Row>
+                        <Col sm="6">
+                          <Card body>
+                            <CardTitle>Special Title Treatment</CardTitle>
+                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                            <Button>Go somewhere</Button>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </TabPane>
+                  </TabContent>
+                  </Row>
+                  <Row>
+                  </Row>
+  
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </div>
+      )
+    } else {
+      return null;
+    }
   }
 }
 
