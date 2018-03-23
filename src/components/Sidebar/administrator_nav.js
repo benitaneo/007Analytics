@@ -2,7 +2,7 @@ export default {
   items: [
     {
       name: 'Dashboard',
-      url: '/dashboard',
+      url: '/administratordashboard',
       icon: 'icon-speedometer',
       badge: {
         variant: 'info',
@@ -17,23 +17,6 @@ export default {
         attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
       },
       class: ''             // optional class names space delimited list for title item ex: "text-center"
-    },
-    {
-      name: 'Language Selection',
-      url: '/icons',
-      icon: 'icon-calculator',
-      children: [
-        {
-          name: 'JavaScript',
-          url: '/icons/font-awesome',
-          icon: 'icon-calculator',
-        },
-        {
-          name: 'Python',
-          url: '/icons/simple-line-icons',
-          icon: 'icon-star'
-        }
-      ]
     },
     {
       name: 'School Contacts',

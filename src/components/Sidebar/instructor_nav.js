@@ -2,7 +2,7 @@ export default {
   items: [
     {
       name: 'Dashboard',
-      url: '/studentdashboard',
+      url: '/instructordashboard',
       icon: 'icon-speedometer',
       badge: {
         variant: 'info',
@@ -19,30 +19,13 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Language Selection',
+      name: 'Students Information',
       url: '/icons',
-      icon: 'icon-calculator',
-      children: [
-        {
-          name: 'JavaScript',
-          url: '/icons/font-awesome',
-          icon: 'icon-calculator',
-        },
-        {
-          name: 'Python',
-          url: '/icons/simple-line-icons',
-          icon: 'icon-star'
-        }
-      ]
+      icon: 'icon-calculator'
     },
     {
-      name: 'CodeCombat Progress',
-      url: '/icons/simple-line-icons',
-      icon: 'icon-pie-chart'
-    },
-    {
-      name: 'Forum',
-      url: '/forum',
+      name: 'Administrator Contact',
+      url: '/admincontact',
       icon: 'icon-pie-chart'
     },
     {

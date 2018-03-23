@@ -19,6 +19,7 @@ import StudentFull from './containers/Full/student_Full'
 import AdministratorFull from './containers/Full/administrator_Full'
 import InstructorFull from './containers/Full/instructor_Full'
 import ForumFull from './containers/Full/forum_Full'
+import ContactFull from './containers/Full/contact_Full'
 
 // Views
 import Login from './views/Pages/Login/'
@@ -41,6 +42,7 @@ ReactDOM.render((
       <Route path="/administrator" name="AdministratorHome" component={AdministratorFull} />
       <Route path="/instructor" name="InstructorHome" component={InstructorFull} />
       <Route path="/forum" name="Forum" component={ForumFull} />
+      <Route path="/admincontact" name="AdminContact" component={ContactFull} />
       <Route path="/dashboard" name="Home" component={Full} />
       
       // <Route path="/home" name="Home" component={Full} sample={local_data}/>
