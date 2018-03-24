@@ -15,4 +15,7 @@ try {
     firebase.initializeApp(config);
 } catch (error) {}
 
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const ref = firebase.database().ref();
+export const firebaseAuth = firebase.auth;
 export default firebase;

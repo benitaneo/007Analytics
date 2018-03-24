@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch, Router, Redirect} from 'react-router-dom';
 import firebase from './firebase';
 import store from './store';
 // Styles
@@ -23,6 +23,7 @@ import ContactFull from './containers/Full/contact_Full'
 import StudentsInformationFull from './containers/Full/students_Information_Full'
 
 // Views
+import Landing from './views/Pages/Login/Landing'
 import Login from './views/Pages/Login/'
 import Register from './views/Pages/Register/'
 import Page404 from './views/Pages/Page404/'
@@ -46,10 +47,9 @@ ReactDOM.render((
       <Route path="/admincontact" name="AdminContact" component={ContactFull} />
       <Route path="/studentinfo" name="StudentInformationDashboard" component={StudentsInformationFull} />
       <Route path="/dashboard" name="Home" component={Full} />
-      
-      // <Route path="/home" name="Home" component={Full} sample={local_data}/>
-      <Route path="/" name="Home" component={Login} sample={local_data}/>
-      <Route path="/" name="Home" render={props => <Full local_data={local_data} {...props} />} />
+
+      <Route path="/landing" component={Login}/>
+      <Redirect from="/" to="/login"/>
     </Switch>
   </HashRouter>
   </div>
