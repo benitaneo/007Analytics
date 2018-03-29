@@ -102,6 +102,7 @@ class Login extends Component {
     fetch(yourUrl, { mode: "no-cors" }).then(function(response) {
       console.log("Fetched ", yourUrl);
     });
+    this.routePage();
   }
 /*
   toggle() {
@@ -119,11 +120,11 @@ class Login extends Component {
   }*/
 
   routePage() {
-    if (this.state.user == "administrator") {
+    if (this.state.value == 1) {
       window.location = "#/administrator"
-    } else if (this.state.user == "instructor") {
+    } else if (this.state.value == 2) {
       window.location = "#/instructor"
-    } else if (this.state.user == "student") {
+    } else if (this.state.value == 3) {
       window.location = "#/student"
     }
   }
