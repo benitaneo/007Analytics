@@ -12,6 +12,9 @@ import '../../../../scss/css/styles.css';
 // import material ui components
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
 
 const content = [
 	{
@@ -63,14 +66,44 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
-    this.toggleCredentials = this.toggleCredentials.bind(this);
+    this.handleRole = this.handleRole.bind(this);
+    /*this.toggle = this.toggle.bind(this);
+    this.toggleCredentials = this.toggleCredentials.bind(this);*/
     this.state = {
       user: "",
-      dropdownOpen: false
+      dropdownOpen: false,
+      value: 0, // value=1,administrator;value=2,instructor;value=3,student
+      id: ""
     };
   }
 
+  handleRole(event, index, value) {
+    console.log(value);
+    this.setState({
+      value: value
+    });
+  }
+
+  handleID(e,value) {
+    console.log(e);
+    console.log(value);
+    this.setState({
+      id: value
+    });
+  }
+
+  handleClick() {
+    console.log("Click happened");
+    // Change this as well.
+    let yourUrl =
+      "https://tigrlcc7wb.execute-api.us-east-2.amazonaws.com/prod/updateData?uid=" 
+      + this.state.id + "&" + "role=" + this.state.value;
+
+    fetch(yourUrl, { mode: "no-cors" }).then(function(response) {
+      console.log("Fetched ", yourUrl);
+    });
+  }
+/*
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
@@ -83,7 +116,7 @@ class Login extends Component {
         user: role
       });
     }
-  }
+  }*/
 
   routePage() {
     if (this.state.user == "administrator") {
@@ -96,7 +129,7 @@ class Login extends Component {
   }
   
   render() {
-    console.log(this.state.user);
+    console.log(this.state.value);
     return (
       <MuiThemeProvider>
         <div>
@@ -120,27 +153,29 @@ class Login extends Component {
             </div>
           ))}
         </Slider>
-        <br />
-        <br />
         <Row className="justify-content-center">
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>
-              Select Your Role
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={() => { this.toggleCredentials('administrator'); }}>Administrator</DropdownItem>
-              <DropdownItem onClick={() => { this.toggleCredentials('instructor'); }}>Instructor</DropdownItem>
-              <DropdownItem onClick={() => { this.toggleCredentials('student'); }}>Student</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          <SelectField
+            floatingLabelText="Role"
+            value={this.state.value}
+            onChange={this.handleRole}
+          >
+            <MenuItem value={0} primaryText="Select Your Role" />
+            <MenuItem value={1} primaryText="Administrator" />
+            <MenuItem value={2} primaryText="Instructor" />
+            <MenuItem value={3} primaryText="Student" />
+          </SelectField>
+          <TextField
+            hintText="Your UserID"
+            floatingLabelText="Enter Your UserID"
+            onChange={this.handleID.bind(this)}
+          />
         </Row>
         <Row className="justify-content-center">
           <RaisedButton
-            target="_blank"
             label="Login"
             style={styles.button}
             primary={true}
-            onClick={() => this.routePage()}
+            onClick={() => this.handleClick()}
           />
         </Row>
         <Row className="justify-content-center">
