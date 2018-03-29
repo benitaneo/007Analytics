@@ -32,6 +32,8 @@ class StudentInfoDashboard extends Component {
           name: students[student].studentName,
           photo: students[student].studentPhotoLink,
           school: students[student].studentSchool,
+          completed: students[student].studentCompleted,
+          active: students[student].studentLastActive
         });
       }
       this.setState({
@@ -49,17 +51,17 @@ class StudentInfoDashboard extends Component {
       console.log(this.state.studentsArr);
       return (
           <div>
-              <ReactTable data={this.state.studentsArr} filterable defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value} 
+              <ReactTable data={this.state.studentsArr} filterable  
                 columns={[
                   {
-                    Header: "Name",
+                    Header: "Student Name",
                     accessor: "name",
                     filterMethod: (filter, rows) =>
                       matchSorter(rows, filter.value, { keys: ["name"] }),
                     filterAll: true
                   },
                   {
-                    Header: "ID",
+                    Header: "Achievements App ID",
                     accessor: "id",
                     filterMethod: (filter, row) =>
                       row[filter.id].startsWith(filter.value) &&
@@ -67,11 +69,11 @@ class StudentInfoDashboard extends Component {
                   },
                   {
                     Header: "Number of Completed Levels",
-                    accessor: "id"
+                    accessor: "completed"
                   },
                   {
-                    Header: "Last Completed Date",
-                    accessor: "id"
+                    Header: "Last Active Date",
+                    accessor: "active"
                   }
                 ]}
                 defaultPageSize={10} className="-striped -highlight"

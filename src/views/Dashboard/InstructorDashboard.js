@@ -118,7 +118,7 @@ class InstructorDashboard extends Component {
 
   componentDidMount() {
     const db = firebase.database()
-    db.ref('/newCharts').on('value', (snapshot) => {
+    db.ref('/adminCharts').on('value', (snapshot) => {
       //console.log(snapshot.val());
       var charts = snapshot.val();
       var newCharts = [];
