@@ -94,13 +94,16 @@ class Login extends Component {
 
   handleClick() {
     console.log("Click happened");
+    console.log(this.state.value);
+    console.log(this.state.id);
     // Change this as well.
     let yourUrl =
-      "https://tigrlcc7wb.execute-api.us-east-2.amazonaws.com/prod/updateData?uid=" 
-      + this.state.id + "&" + "role=" + this.state.value;
+      "https://tigrlcc7wb.execute-api.us-east-2.amazonaws.com/prod/updateData?role=" 
+      + this.state.value + "&" + "uid=" + this.state.id;
 
     fetch(yourUrl, { mode: "no-cors" }).then(function(response) {
       console.log("Fetched ", yourUrl);
+      console.log(response);
     });
     this.routePage();
   }

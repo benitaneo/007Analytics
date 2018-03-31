@@ -51,6 +51,10 @@ import {
 import * as V from 'victory';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryCandlestick, VictoryLine } from 'victory';
 
+// highcharts component
+import StudentBoxPlot from '../Components/studentBoxPlot'
+import PredictionLinePlot from '../Components/predictionLinePlot'
+
 import firebase from '../../firebase';
 
 const AxisLabel = ({
@@ -78,14 +82,6 @@ const AxisLabel = ({
     </text>
   );
 };
-
-const brandPrimary = '#20a8d8';
-const brandSuccess = '#4dbd74';
-const brandInfo = '#63c2de';
-const brandWarning = '#f8cb00';
-const brandDanger = '#f86c6b';
-
-// Main Chart
 
 // convert Hex to RGBA
 function convertHex(hex, opacity) {
@@ -129,14 +125,6 @@ const candleStickData = [
   {x: new Date(2016, 5, 1), open: 10, close: 8, high: 15, low: 5}
 ]
 
-const lineData =[
-  { x: 1, y: 2 },
-  { x: 10, y: 3 },
-  { x: 20, y: 5 },
-  { x: 40, y: 4 },
-  { x: 42, y: 7 }
-]
-
 class StudentDashboard extends Component {
   constructor(props) {
     super(props);
@@ -144,10 +132,9 @@ class StudentDashboard extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: '1',
-      chartsArr: [],
       day: 0,
       dropdownOpen: false,
-      mount: false
+      mount: false,
     };
   }
 
@@ -159,39 +146,13 @@ class StudentDashboard extends Component {
     }
   }
 
-  componentDidMount() {
-    const db = firebase.database()
-    db.ref('/newCharts').on('value', (snapshot) => {
-      //console.log(snapshot.val());
-      var charts = snapshot.val();
-      var newCharts = [];
-      console.log(charts);
-      for (var chart in charts) {
-        newCharts.push({
-          id: chart,
-          chartType: charts[chart].chartType,
-          data: charts[chart].data,
-          style: charts[chart].style,
-          title: charts[chart].title,
-          xaxis: charts[chart].xaxisLabel,
-          yaxis: charts[chart].yaxisLabel
-        });
-      }
-      this.setState({
-        chartsArr: newCharts,
-        day: daysLeft,
-        mount: true
-      });
-    });
-  }
-
   getCharts(i) {
     return this.state.chartsArr[i].data;
   }
 
   render() {
     return (
-      <div className="animated fadeIn">
+      <div className="animated fadeIn" className="boxplot">
         <Row>
           <Col>
             <Card>
@@ -233,6 +194,33 @@ class StudentDashboard extends Component {
           <Col sm="6">
             <Card>
               <CardHeader>
+                <i className="fa fa-align-justify"></i> Time Prediction
+              </CardHeader>
+              <CardBody>
+                <div id="number">
+                  <PredictionLinePlot />
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col sm="6">
+            <Card>
+              <CardHeader>
+                <i className="fa fa-align-justify"></i> Percentile Ranking
+              </CardHeader>
+              <CardBody>
+                <div id="number">
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col sm="6">
+            <Card>
+              <CardHeader>
                 <i className="fa fa-align-justify"></i> Percentile Ranking
               </CardHeader>
               <CardBody>
@@ -242,23 +230,6 @@ class StudentDashboard extends Component {
                 <VictoryAxis label="Five-Number Summary" dependentAxis 
                   style={{axisLabel: {fontSize: 15, padding: 30}}}  />
                 <VictoryCandlestick candleColors={{ positive: "#00FA9A", negative: "#c43a31" }} data={candleStickData} />
-              </VictoryChart>
-              </CardBody>
-            </Card>
-          </Col>
-            
-          <Col sm="6">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Time Prediction for each CodeCombat level
-              </CardHeader>
-              <CardBody>
-              <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
-                <VictoryAxis label="Levels" tickValues={[10, 20, 30, 40]} 
-                  style={{axisLabel: {fontSize: 15, padding: 30}}} />
-                <VictoryAxis label="Duration(minutes)" dependentAxis 
-                  style={{axisLabel: {fontSize: 15, padding: 30}}} />
-                <VictoryLine data={lineData} />
               </VictoryChart>
               </CardBody>
             </Card>

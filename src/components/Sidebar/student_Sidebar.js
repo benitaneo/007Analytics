@@ -71,7 +71,6 @@ class StudentSidebar extends Component {
     // nav link
     const navLink = (item, key, classes) => {
       const url = item.url ? item.url : '';
-      console.log(url);
       return (
         <NavItem key={key} className={classes.item}>
           { isExternal(url) ?
