@@ -20,7 +20,7 @@ class StudentInfoDashboard extends Component {
 
   componentDidMount() {
     const db = firebase.database()
-    db.ref('/instructorInfo').on('value', (snapshot) => {
+    db.ref('/instructorInfo/studentTable').on('value', (snapshot) => {
       //console.log(snapshot.val());
       var students = snapshot.val();
       var allStudents = [];
