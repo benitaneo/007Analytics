@@ -14,7 +14,6 @@ import '../scss/style.scss'
 import '../scss/core/_dropdown-menu-right.scss'
 
 // Containers
-import Full from './containers/Full/'
 import StudentFull from './containers/Full/student_Full'
 import AdministratorFull from './containers/Full/administrator_Full'
 import InstructorFull from './containers/Full/instructor_Full'
@@ -23,7 +22,6 @@ import ContactFull from './containers/Full/contact_Full'
 import StudentsInformationFull from './containers/Full/students_Information_Full'
 
 // Views
-import Landing from './views/Pages/Login/Landing'
 import Login from './views/Pages/Login/'
 import Register from './views/Pages/Register/'
 import Page404 from './views/Pages/Page404/'
@@ -46,9 +44,7 @@ ReactDOM.render((
       <Route path="/forum" name="Forum" component={ForumFull} />
       <Route path="/admincontact" name="AdminContact" component={ContactFull} />
       <Route path="/studentinfo" name="StudentInformationDashboard" component={StudentsInformationFull} />
-      <Route path="/dashboard" name="Home" component={Full} />
 
-      <Route path="/landing" component={Login}/>
       <Redirect from="/" to="/login"/>
     </Switch>
   </HashRouter>

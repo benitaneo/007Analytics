@@ -7,7 +7,6 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import AdministratorDashboard from '../../views/Dashboard/AdministratorDashboard';
-import Charts from '../../views/Charts/';
 import Widgets from '../../views/Widgets/';
 
 // Components
@@ -41,7 +40,6 @@ class AdministratorFull extends Component {
             <Breadcrumb />
             <Container fluid>
               <Switch>
-                <Route path="/charts" name="Charts" children={props => <Charts local_data={this.state} {...props} />} />
                 <Route path="/administrator" name="AdministratorDashboard" component={AdministratorDashboard}/>
                 // <Route path="/dashboard" name="Dashboard" render={props => <Charts local_data={this.state} {...props} />} />
                 <Route path="/components/buttons" name="Buttons" component={Buttons}/>
@@ -55,7 +53,6 @@ class AdministratorFull extends Component {
                 <Route path="/icons/font-awesome" name="Font Awesome" component={FontAwesome}/>
                 <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons}/>
                 <Route path="/widgets" name="Widgets" component={Widgets}/>
-                <Route path="/charts_original" name="Charts" component={Charts} />
                 
                 
                 <Redirect from="/" to="/administrator"/>
