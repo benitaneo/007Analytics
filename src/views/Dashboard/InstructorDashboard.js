@@ -6,49 +6,23 @@ import {
   Badge,
   Row,
   Col,
-  Progress,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
   CardText,
-  Button,
-  ButtonToolbar,
-  ButtonGroup,
-  ButtonDropdown,
-  Label,
-  Nav,
-  NavItem,
-  NavLink,
-  Input,
-  Table,
-  TabContent,
-  TabPane
+  Progress
 } from 'reactstrap';
 
-// recharts components
-import {
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from "recharts";
+// import from antd
+//import { Tabs } from 'antd';
+//const TabPane = Tabs.TabPane;
 
 // import wanted components
 import SchoolPerformanceBarPlot from '../Components/InstructorStats/schoolPerformanceBarPlot';
 import StudentPerformanceBarPlot from '../Components/InstructorStats/studentPerformanceBarPlot';
+import YoutubeLinePlot1 from '../Components/InstructorStats/youtubeVideoStats1'
 import firebase from '../../firebase';
 
 const brandPrimary = '#20a8d8';
@@ -183,6 +157,21 @@ class InstructorDashboard extends Component {
                   </div>
                 </CardBody>
               </Card>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col sm="12">
+            <Card>
+              <CardHeader>
+                <i className="fa fa-align-justify"></i> Youtube Analytics
+              </CardHeader>
+              <CardBody>
+                    <div id="youtube1">
+                      <YoutubeLinePlot1 />
+                    </div>
+              </CardBody>
+            </Card>
             </Col>
           </Row>
         </div>
