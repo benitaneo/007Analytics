@@ -103,7 +103,7 @@ const daysLeft = getDaysLeft();
 
 function getDaysLeft() {
   var today = new Date();
-  var comps = new Date(2018, 2, 24);
+  var comps = new Date(2019, 2, 24);
   var one_day = 1000*60*60*24;
 
   var difference = Math.abs(comps.getTime() - today.getTime());
@@ -129,21 +129,16 @@ class StudentDashboard extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: '1',
       day: 0,
-      dropdownOpen: false,
       mount: false,
     };
   }
 
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
+  componentDidMount() {
+    this.setState({
+      day: getDaysLeft()
+    });
   }
 
   getCharts(i) {
@@ -168,7 +163,7 @@ class StudentDashboard extends Component {
                 <ul>
                   <li>
                     <div className="text-muted">Completed</div>
-                    <strong>29 Levels (14%)</strong>
+                    <strong>10 Levels</strong>
                     <Progress className="progress-xs mt-2" color="success" value="14"/>
                   </li>
                   <li className="d-none d-md-table-cell">
@@ -181,7 +176,7 @@ class StudentDashboard extends Component {
                   </li>
                   <li className="d-none d-md-table-cell">
                     <div className="text-muted">Countdown to Competition</div>
-                    <strong>{this.state.day} Days Left (99%)</strong>
+                    <strong>{this.state.day} Days Left</strong>
                     <Progress className="progress-xs mt-2" color="danger" value="99"/>
                   </li>
                 </ul>
