@@ -9,7 +9,6 @@ import Footer from '../../components/Footer/';
 import StudentDashboard from '../../views/Dashboard/StudentDashboard';
 import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
 import Forum from '../../views/Dashboard/Forum';
-import Charts from '../../views/Charts/';
 import Widgets from '../../views/Widgets/';
 
 // Components
@@ -46,7 +45,6 @@ class StudentFull extends Component {
             <Breadcrumb />
             <Container fluid>
               <Switch>
-                <Route path="/charts" name="Charts" children={props => <Charts local_data={this.state} {...props} />} />
                 <Route path="/student" name="StudentDashboard" component={StudentDashboard}/>
                 <Route path="/components/buttons" name="Buttons" component={Buttons}/>
                 <Route path="/components/cards" name="Cards" component={Cards}/>
@@ -59,8 +57,7 @@ class StudentFull extends Component {
                 <Route path="/components/tabs" name="Tabs" component={Tabs}/>
                 <Route path="/icons/font-awesome" name="Font Awesome" component={FontAwesome}/>
                 <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons}/>
-                <Route path="/widgets" name="Widgets" component={Widgets}/>
-                <Route path="/charts_original" name="Charts" component={Charts} />
+                <Route path="/widgets" name="Widgets" component={Widgets}/>s
                 
                 
                 <Redirect from="/" to="/student"/>
