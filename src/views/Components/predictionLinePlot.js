@@ -48,7 +48,6 @@ class PredictionLinePlot extends Component {
       
     render() {
         if (this.state.mount === true) {
-            console.log(this.timings);
         return(
         <div>
             <HighchartsChart>
@@ -61,7 +60,7 @@ class PredictionLinePlot extends Component {
 
                 <YAxis id="number">
                     <YAxis.Title>Time (Seconds)</YAxis.Title>
-                    <LineSeries id="performance" name="Performance" data={
+                    <LineSeries id="performance" name="Time Taken" data={
                         this.getTimings()                    
                         } />
                 </YAxis>
