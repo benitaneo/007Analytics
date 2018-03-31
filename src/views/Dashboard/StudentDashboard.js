@@ -205,7 +205,8 @@ class StudentDashboard extends Component {
                 <i className="fa fa-align-justify"></i> Percentile Ranking
               </CardHeader>
               <CardBody>
-                <div id="number">
+                <div id="boxplot">
+                  <StudentBoxPlot />
                 </div>
               </CardBody>
             </Card>
