@@ -46,6 +46,8 @@ import {
   Legend
 } from "recharts";
 
+// import wanted components
+import SignInLinePlot from '../Components/AdminStats/signinLinePlot'
 import firebase from '../../firebase';
 
 const brandPrimary = '#20a8d8';
@@ -82,7 +84,7 @@ const daysLeft = getDaysLeft();
 
 function getDaysLeft() {
   var today = new Date();
-  var comps = new Date(2018, 2, 24);
+  var comps = new Date(2019, 2, 24);
   var one_day = 1000*60*60*24;
 
   var difference = Math.abs(comps.getTime() - today.getTime());
@@ -178,311 +180,162 @@ class AdministratorDashboard extends Component {
   }
 
   render() {
-    //console.log(this.state.chartsArr);
-    //console.log(this.state.chartsArr[0]);
-    if (this.state.mount === true) {
-      var wanted = this.state.chartsArr[0].data;
-      //console.log(this.state.chartsArr[0].data);
-      //console.log(this.state.chartsArr[0].data[0]);
-      //console.log(this.state.chartsArr[0].data[0].x);
       return (
         <div className="animated fadeIn">
-
-          <Row>
-            <Col>
-              <Card>
-                <CardBody>
+        <Row>
+          <Col sm="12">
+          <Card>
+            <CardHeader>
+              <i className="fa fa-align-justify"></i> Participation Rate
+            </CardHeader>
+            <CardBody>
+              <Nav tabs>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '1' })}
+                    onClick={() => { this.toggle('1'); }}
+                  >
+                    Primary
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '2' })}
+                    onClick={() => { this.toggle('2'); }}
+                  >
+                    Junior
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '3' })}
+                    onClick={() => { this.toggle('3'); }}
+                  >
+                    Senior
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '4' })}
+                    onClick={() => { this.toggle('4'); }}
+                  >
+                    Overall
+                  </NavLink>
+                </NavItem>
+              </Nav>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="1">
                   <Row>
-                    <Col sm="5">
-                      <CardTitle className="mb-0">Statistics</CardTitle>
-                      <div className="small text-muted">{this.state.month} 2018</div>
+                    <Col>
+                    Video ID: -L8Gz-q54aVyOc3icUgO
                     </Col>
                   </Row>
-                </CardBody>
-                <CardFooter>
-                  <ul>
-                    <li className="d-none d-md-table-cell">
-                      <div className="text-muted">Total Number of Participating Schools</div>
-                      <strong>{this.getTotalSchoolsCount(3)}</strong>
-                    </li>
-                    <li>
-                      <div className="text-muted">Number of Schools currently in Talks with</div>
-                      <strong>17</strong>
-                    </li>
-                    <li className="d-none d-md-table-cell">
-                      <div className="text-muted">Countdown to Competition</div>
-                      <strong>{this.state.day} Days Left (99%)</strong>
-                      <Progress className="progress-xs mt-2" color="danger" value="99"/>
-                    </li>
-                  </ul>
-                </CardFooter>
-              </Card>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col lg="6">
-              <Card>
-                <CardHeader>
-                  <i className="fa fa-align-justify"></i> Participation Rate
-                  <div className="small text-muted">{this.state.month} 2018</div>
-                </CardHeader>
-                <CardBody>
+                </TabPane>
+                <TabPane tabId="2">
                   <Row>
-                    <Nav tabs>
-                      <NavItem>
-                        <NavLink
-                          className={classnames({ active: this.state.activeTab === '1' })}
-                          onClick={() => { this.toggle('1'); }}
-                        >
-                          Primary
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          className={classnames({ active: this.state.activeTab === '2' })}
-                          onClick={() => { this.toggle('2'); }}
-                        >
-                          Junior
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          className={classnames({ active: this.state.activeTab === '3' })}
-                          onClick={() => { this.toggle('3'); }}
-                        >
-                          Senior
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          className={classnames({ active: this.state.activeTab === '4' })}
-                          onClick={() => { this.toggle('4'); }}
-                        >
-                          Total
-                        </NavLink>
-                      </NavItem>
-                    </Nav>
-                    <TabContent activeTab={this.state.activeTab}>
-                      <TabPane tabId="1">
-                        <Row>
-                          <Col sm="6">
-                          <BarChart width={400} height={200} data={this.getCharts(1)} offset="10">
-                            <XAxis
-                              dataKey="x"
-                              label={
-                                <AxisLabel axisType="xAxis" width={600} height={300}>
-                                  {this.state.chartsArr.xaxis}
-                                </AxisLabel>
-                              }
-                            />
-                            <YAxis
-                              dataKey="y"
-                              label={
-                                <AxisLabel axisType="yAxis" width={600} height={300}>
-                                  {this.state.chartsArr.yaxis}
-                                </AxisLabel>
-                              }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="y" fill="#000066" name="No. of Students" />
-                          </BarChart>
-                          </Col>
-                        </Row>
-                      </TabPane>
-                      <TabPane tabId="2">
-                        <Row>
-                          <Col sm="6">
-                          <BarChart width={400} height={200} data={this.getCharts(0)} position="center">
-                            <XAxis
-                              dataKey="x"
-                              label={
-                                <AxisLabel axisType="xAxis" width={600} height={300}>
-                                  {this.state.chartsArr.xaxis}
-                                </AxisLabel>
-                              }
-                            />
-                            <YAxis
-                              dataKey="y"
-                              label={
-                                <AxisLabel axisType="yAxis" width={600} height={300}>
-                                  {this.state.chartsArr.yaxis}
-                                </AxisLabel>
-                              }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="y" fill="#000066" name="No. of Students" />
-                          </BarChart>
-                          </Col>
-                        </Row>
-                      </TabPane>
-                      <TabPane tabId="3">
-                        <Row>
-                          <Col sm="6">
-                          <BarChart width={400} height={200} data={this.getCharts(2)}>
-                            <XAxis
-                              dataKey="x"
-                              label={
-                                <AxisLabel axisType="xAxis" width={600} height={300}>
-                                  {this.state.chartsArr.xaxis}
-                                </AxisLabel>
-                              }
-                            />
-                            <YAxis
-                              dataKey="y"
-                              label={
-                                <AxisLabel axisType="yAxis" width={600} height={300}>
-                                  {this.state.chartsArr.yaxis}
-                                </AxisLabel>
-                              }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="y" fill="#000066" name="No. of Students" />
-                          </BarChart>
-                          </Col>
-                        </Row>
-                      </TabPane>
-                      <TabPane tabId="4">
-                        <Row>
-                          <Col sm="6">
-                          <BarChart width={400} height={200} data={this.getCharts(3)}>
-                            <XAxis
-                              dataKey="x"
-                              label={
-                                <AxisLabel axisType="xAxis" width={600} height={300}>
-                                  {this.state.chartsArr.xaxis}
-                                </AxisLabel>
-                              }
-                            />
-                            <YAxis
-                              dataKey="y"
-                              label={
-                                <AxisLabel axisType="yAxis" width={600} height={300}>
-                                  {this.state.chartsArr.yaxis}
-                                </AxisLabel>
-                              }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="y" fill="#000066" name="No. of Students" />
-                          </BarChart>
-                          </Col>
-                        </Row>
-                      </TabPane>
-                    </TabContent>
-                  </Row>           
-                </CardBody>
-              </Card>
-            </Col>
-  
-            <Col lg="6">
-              <Card>
-                <CardHeader>
-                  <i className="fa fa-align-justify"></i> Activity Rate
-                  <div className="small text-muted">{this.state.month} 2018</div>
-                </CardHeader>
-                <CardBody>
-                  <Row>
-                  <Nav tabs>
-                    <NavItem>
-                      <NavLink
-                        className={classnames({ active: this.state.activeTab === '1' })}
-                        onClick={() => { this.toggle('1'); }}
-                      >
-                        Primary
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={classnames({ active: this.state.activeTab === '2' })}
-                        onClick={() => { this.toggle('2'); }}
-                      >
-                        Junior
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={classnames({ active: this.state.activeTab === '3' })}
-                        onClick={() => { this.toggle('3'); }}
-                      >
-                        Senior
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={classnames({ active: this.state.activeTab === '4' })}
-                        onClick={() => { this.toggle('4'); }}
-                      >
-                        Total
-                      </NavLink>
-                    </NavItem>
-                  </Nav>
-                  <TabContent activeTab={this.state.activeTab}>
-                  <TabPane tabId="1">
-                      <Row>
-                        <Col sm="6">
-                          <Card body>
-                            <CardTitle>Special Title Treatment</CardTitle>
-                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                            <Button>Go somewhere</Button>
-                          </Card>
-                        </Col>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="2">
-                      <Row>
-                        <Col sm="6">
-                          <Card body>
-                            <CardTitle>Special Title Treatment</CardTitle>
-                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                            <Button>Go somewhere</Button>
-                          </Card>
-                        </Col>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="3">
-                      <Row>
-                        <Col sm="6">
-                          <Card body>
-                            <CardTitle>Special Title Treatment</CardTitle>
-                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                            <Button>Go somewhere</Button>
-                          </Card>
-                        </Col>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="4">
-                      <Row>
-                        <Col sm="6">
-                          <Card body>
-                            <CardTitle>Special Title Treatment</CardTitle>
-                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                            <Button>Go somewhere</Button>
-                          </Card>
-                        </Col>
-                      </Row>
-                    </TabPane>
-                  </TabContent>
+                    <Col>
+                    Video ID: -L8H-0i0w2y8TTccE6T2
+                    </Col>
                   </Row>
+                </TabPane>
+                <TabPane tabId="3">
                   <Row>
+                    <Col>
+                    Video ID: -L8H-we7JsrUikMrESh5
+                    </Col>
                   </Row>
-  
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      )
-    } else {
-      return null;
-    }
+                </TabPane>
+                <TabPane tabId="4">
+                  <Row>
+                    <Col>
+                    Video ID: -L8H0WhmBwqjY3FHlkv8
+                    </Col>
+                  </Row>
+                  <SignInLinePlot />
+                </TabPane>
+              </TabContent>
+            </CardBody>
+          </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm="12">
+          <Card>
+            <CardHeader>
+              <i className="fa fa-align-justify"></i> Activity Rate
+            </CardHeader>
+            <CardBody>
+              <Nav tabs>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '1' })}
+                    onClick={() => { this.toggle('1'); }}
+                  >
+                    Primary
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '2' })}
+                    onClick={() => { this.toggle('2'); }}
+                  >
+                    Junior
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '3' })}
+                    onClick={() => { this.toggle('3'); }}
+                  >
+                    Senior
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '4' })}
+                    onClick={() => { this.toggle('4'); }}
+                  >
+                    Overall
+                  </NavLink>
+                </NavItem>
+              </Nav>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="1">
+                  <Row>
+                    <Col>
+                    Video ID: -L8Gz-q54aVyOc3icUgO
+                    </Col>
+                  </Row>
+                </TabPane>
+                <TabPane tabId="2">
+                  <Row>
+                    <Col>
+                    Video ID: -L8H-0i0w2y8TTccE6T2
+                    </Col>
+                  </Row>
+                </TabPane>
+                <TabPane tabId="3">
+                  <Row>
+                    <Col>
+                    Video ID: -L8H-we7JsrUikMrESh5
+                    </Col>
+                  </Row>
+                </TabPane>
+                <TabPane tabId="4">
+                  <Row>
+                    <Col>
+                    Video ID: -L8H0WhmBwqjY3FHlkv8
+                    </Col>
+                  </Row>
+                  <SignInLinePlot />
+                </TabPane>
+              </TabContent>
+            </CardBody>
+          </Card>
+          </Col>
+        </Row>
+      </div>
+    )
   }
 }
 
