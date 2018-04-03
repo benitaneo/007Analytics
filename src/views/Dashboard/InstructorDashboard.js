@@ -65,6 +65,7 @@ class InstructorDashboard extends Component {
     };
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
   }
 
   toggle(tab) {

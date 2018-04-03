@@ -47,8 +47,18 @@ import {
 } from "recharts";
 
 // import wanted components
-import SignInLinePlot from '../Components/AdminStats/signinLinePlot'
+import SignInJuniorLinePlot from '../Components/AdminStats/signinJuniorLinePlot'
+import SignUpJuniorLinePlot from '../Components/AdminStats/signupJuniorLinePlot'
+import SignInSeniorLinePlot from '../Components/AdminStats/signinSeniorLinePlot'
+import SignUpSeniorLinePlot from '../Components/AdminStats/signupSeniorLinePlot'
+import SignInPrimaryLinePlot from '../Components/AdminStats/signinPrimaryLinePlot'
+import SignUpPrimaryLinePlot from '../Components/AdminStats/signupPrimaryLinePlot'
 import firebase from '../../firebase';
+
+// import material-ui
+import { MuiThemeProvider } from 'material-ui/styles';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';
@@ -124,7 +134,9 @@ class AdministratorDashboard extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: '1',
-      chartsArr: [],
+      primarySchools: [],
+      juniorSchools: [],
+      seniorSchools: [],
       day: 0,
       dropdownOpen: false,
       month: 0,
@@ -133,25 +145,27 @@ class AdministratorDashboard extends Component {
   }
 
   componentDidMount() {
-    const db = firebase.database()
-    db.ref('/adminCharts').on('value', (snapshot) => {
-      var charts = snapshot.val();
-      console.log(charts);
-      var newCharts = [];
-      console.log(charts);
-      for (var chart in charts) {
-        newCharts.push({
-          id: chart,
-          chartType: charts[chart].chartType,
-          data: charts[chart].data,
-          style: charts[chart].style,
-          title: charts[chart].title,
-          xaxis: charts[chart].xaxisLabel,
-          yaxis: charts[chart].yaxisLabel
-        });
+    const db = firebase.database();
+    db.ref('/cohorts/all_schools').on('value', (snapshot) => {
+      var schools = snapshot.val();
+      console.log(schools);
+      var allSchools = [];
+      for (var cat in schools) {
+        if (cat == 'junior') {
+          for (var sch in schools[cat]) {
+            this.state.juniorSchools.push(schools[cat][sch]);
+          }
+        } else if (cat == 'primary') {
+          for (var sch in schools[cat]) {
+            this.state.primarySchools.push(schools[cat][sch]);
+          }
+        } else if (cat == 'senior') {
+          for (var sch in schools[cat]) {
+            this.state.seniorSchools.push(schools[cat][sch]);
+          }
+        }
       }
       this.setState({
-        chartsArr: newCharts,
         day: daysLeft,
         month: currentMonth,
         mount: true
@@ -180,162 +194,96 @@ class AdministratorDashboard extends Component {
   }
 
   render() {
+    if (this.state.mount === true) {
       return (
+        <MuiThemeProvider>
         <div className="animated fadeIn">
         <Row>
-          <Col sm="12">
+          <h1><Badge color="primary">Senior</Badge></h1>
+        </Row>
+        <Row>
+          <Col sm="6">
           <Card>
             <CardHeader>
               <i className="fa fa-align-justify"></i> Participation Rate
             </CardHeader>
             <CardBody>
-              <Nav tabs>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ active: this.state.activeTab === '1' })}
-                    onClick={() => { this.toggle('1'); }}
-                  >
-                    Primary
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ active: this.state.activeTab === '2' })}
-                    onClick={() => { this.toggle('2'); }}
-                  >
-                    Junior
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ active: this.state.activeTab === '3' })}
-                    onClick={() => { this.toggle('3'); }}
-                  >
-                    Senior
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ active: this.state.activeTab === '4' })}
-                    onClick={() => { this.toggle('4'); }}
-                  >
-                    Overall
-                  </NavLink>
-                </NavItem>
-              </Nav>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="1">
-                  <Row>
-                    <Col>
-                    Video ID: -L8Gz-q54aVyOc3icUgO
-                    </Col>
-                  </Row>
-                </TabPane>
-                <TabPane tabId="2">
-                  <Row>
-                    <Col>
-                    Video ID: -L8H-0i0w2y8TTccE6T2
-                    </Col>
-                  </Row>
-                </TabPane>
-                <TabPane tabId="3">
-                  <Row>
-                    <Col>
-                    Video ID: -L8H-we7JsrUikMrESh5
-                    </Col>
-                  </Row>
-                </TabPane>
-                <TabPane tabId="4">
-                  <Row>
-                    <Col>
-                    Video ID: -L8H0WhmBwqjY3FHlkv8
-                    </Col>
-                  </Row>
-                  <SignInLinePlot />
-                </TabPane>
-              </TabContent>
+             <SignInSeniorLinePlot />
             </CardBody>
           </Card>
           </Col>
-        </Row>
-        <Row>
-          <Col sm="12">
+
+          <Col sm="6">
           <Card>
             <CardHeader>
               <i className="fa fa-align-justify"></i> Activity Rate
             </CardHeader>
             <CardBody>
-              <Nav tabs>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ active: this.state.activeTab === '1' })}
-                    onClick={() => { this.toggle('1'); }}
-                  >
-                    Primary
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ active: this.state.activeTab === '2' })}
-                    onClick={() => { this.toggle('2'); }}
-                  >
-                    Junior
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ active: this.state.activeTab === '3' })}
-                    onClick={() => { this.toggle('3'); }}
-                  >
-                    Senior
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={classnames({ active: this.state.activeTab === '4' })}
-                    onClick={() => { this.toggle('4'); }}
-                  >
-                    Overall
-                  </NavLink>
-                </NavItem>
-              </Nav>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="1">
-                  <Row>
-                    <Col>
-                    Video ID: -L8Gz-q54aVyOc3icUgO
-                    </Col>
-                  </Row>
-                </TabPane>
-                <TabPane tabId="2">
-                  <Row>
-                    <Col>
-                    Video ID: -L8H-0i0w2y8TTccE6T2
-                    </Col>
-                  </Row>
-                </TabPane>
-                <TabPane tabId="3">
-                  <Row>
-                    <Col>
-                    Video ID: -L8H-we7JsrUikMrESh5
-                    </Col>
-                  </Row>
-                </TabPane>
-                <TabPane tabId="4">
-                  <Row>
-                    <Col>
-                    Video ID: -L8H0WhmBwqjY3FHlkv8
-                    </Col>
-                  </Row>
-                  <SignInLinePlot />
-                </TabPane>
-              </TabContent>
+              <SignUpSeniorLinePlot />
+            </CardBody>
+          </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <h1><Badge color="primary">Junior</Badge></h1>
+        </Row>  
+        <Row>
+          <Col sm="6">
+          <Card>
+            <CardHeader>
+              <i className="fa fa-align-justify"></i> Participation Rate
+            </CardHeader>
+            <CardBody>
+              <SignInJuniorLinePlot />
+            </CardBody>
+          </Card>
+          </Col>
+
+          <Col sm="6">
+          <Card>
+            <CardHeader>
+              <i className="fa fa-align-justify"></i> Activity Rate
+            </CardHeader>
+            <CardBody>
+              <SignUpJuniorLinePlot />
+            </CardBody>
+          </Card>
+          </Col>
+        </Row>
+        
+        <Row>
+          <h1><Badge color="primary">Primary</Badge></h1>
+        </Row>
+        <Row>
+          <Col sm="6">
+          <Card>
+            <CardHeader>
+              <i className="fa fa-align-justify"></i> Participation Rate
+            </CardHeader>
+            <CardBody>
+              <SignInPrimaryLinePlot />
+            </CardBody>
+          </Card>
+          </Col>
+
+          <Col sm="6">
+          <Card>
+            <CardHeader>
+              <i className="fa fa-align-justify"></i> Activity Rate
+            </CardHeader>
+            <CardBody>
+              <SignUpPrimaryLinePlot />
             </CardBody>
           </Card>
           </Col>
         </Row>
       </div>
-    )
+      </MuiThemeProvider>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
