@@ -138,6 +138,7 @@ class StudentDashboard extends Component {
     this.state = {
       day: 0,
       mount: false,
+      predictedData: [],
       flaggedArr: [],
       staticArr: []
     };
@@ -174,11 +175,19 @@ class StudentDashboard extends Component {
         });
       }
       this.setState({
-        staticArr: newStats,
+        staticArr: newStats
+      });
+    });
+    db.ref('/studentInfo/predictedTimings').on('value', (snapshot) => {
+      var predicted = snapshot.val();
+      var newStats = [];
+      newStats.push(predicted['levelName'], predicted['levelNumber'], predicted['predictedTime']);
+      this.setState({
+        predictedData: newStats,
         mount: true,
         day: getDaysLeft()
       });
-    });
+    })
   }
 
   render() {
@@ -217,6 +226,19 @@ class StudentDashboard extends Component {
                       <strong>{this.state.day} Days Left</strong>
                       <Progress className="progress-xs mt-2" color="danger" value="99"/>
                     </li>
+                  </ul>
+                </CardFooter>
+                
+                <CardFooter>
+                  <ul>
+                  <li>
+                    <div className="text-muted">Next Level</div>
+                    <strong>{this.state.predictedData[0]}</strong>
+                  </li>
+                  <li>
+                    <div className="text-muted">Predicted Time Required</div>
+                    <strong>{this.state.predictedData[2]} seconds</strong>
+                  </li>
                   </ul>
                 </CardFooter>
               </Card>
