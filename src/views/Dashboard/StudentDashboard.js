@@ -286,6 +286,7 @@ class StudentDashboard extends Component {
                 />
             </Col>
           </Row>
+          <br />
 
           <Row>
             <Col sm="6">
