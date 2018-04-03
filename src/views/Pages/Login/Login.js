@@ -107,20 +107,6 @@ class Login extends Component {
     });
     this.routePage();
   }
-/*
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
-
-  toggleCredentials(role) {
-    if (this.state.user !== role) {
-      this.setState({
-        user: role
-      });
-    }
-  }*/
 
   routePage() {
     if (this.state.value == 1) {

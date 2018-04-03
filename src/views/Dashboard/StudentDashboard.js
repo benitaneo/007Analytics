@@ -52,8 +52,9 @@ import * as V from 'victory';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryCandlestick, VictoryLine } from 'victory';
 
 // highcharts component
-import StudentBoxPlot from '../Components/studentBoxPlot'
-import PredictionLinePlot from '../Components/predictionLinePlot'
+import StudentBoxPlot from '../Components/StudentStats/studentBoxPlot'
+import PredictionLinePlot from '../Components/StudentStats/predictionLinePlot'
+import StudentProgressLinePlot from '../Components/StudentStats/studentProgressLinePlot'
 
 import firebase from '../../firebase';
 
@@ -132,199 +133,244 @@ class StudentDashboard extends Component {
     this.state = {
       day: 0,
       mount: false,
+      completedArr: [],
+      staticArr: []
     };
   }
 
   componentDidMount() {
-    console.log(this.props);
-    this.setState({
-      day: getDaysLeft()
+    const db = firebase.database();
+    db.ref('/studentInfo/completedLevelStats').on('value', (snapshot) => {
+      var weeks = snapshot.val();
+      var newStats = [];
+      console.log(weeks);
+      for (var stat in weeks) {
+      newStats.push({
+          week: weeks[stat]['week'],
+          cohortCompleted: weeks[stat]['cohortCompleted'],
+          personalCompleted: weeks[stat]['personalCompleted']
+      });
+      }
+      this.setState({
+      completedArr: newStats,
+      });
+    });
+    db.ref('/studentInfo/staticInfo').on('value', (snapshot) => {
+      console.log("got here 2")
+      var staticInfo = snapshot.val();
+      var newStats = []
+      for (var stat in staticInfo) {
+        newStats.push({
+          currentLevel: staticInfo[stat]['Current level'],
+          cohortAverage: staticInfo[stat]['Cohort average'],
+          percentile: staticInfo[stat]['Percentile in cohort']
+        });
+      }
+      this.setState({
+        staticArr: newStats,
+        mount: true,
+        day: getDaysLeft()
+      });
     });
   }
 
-  getCharts(i) {
-    return this.state.chartsArr[i].data;
-  }
-
   render() {
-    return (
-      <div className="animated fadeIn" className="boxplot">
-        <Row>
-          <Col>
+    if (this.state.mount === true) {
+      console.log(this.state.staticArr);
+      return (
+        <div className="animated fadeIn" className="boxplot">
+          <Row>
+            <Col>
+              <Card>
+                <CardBody>
+                  <Row>
+                    <Col sm="5">
+                      <CardTitle className="mb-0">Statistics</CardTitle>
+                      <div className="small text-muted">March 2018</div>
+                    </Col>
+                  </Row>
+                </CardBody>
+                <CardFooter>
+                  <ul>
+                    <li>
+                      <div className="text-muted">Completed</div>
+                      <strong>{this.state.staticArr[0]['currentLevel']} Levels</strong>
+                      <Progress className="progress-xs mt-2" color="success" value="14"/>
+                    </li>
+                    <li className="d-none d-md-table-cell">
+                      <div className="text-muted">Cohort Average Completed</div>
+                      <strong>{Math.round(this.state.staticArr[0]['cohortAverage'])} Levels</strong>
+                    </li>
+                    <li>
+                      <div className="text-muted">Percentile (Completed Levels)</div>
+                      <strong>{Math.round(this.state.staticArr[0]['percentile'])} %</strong>
+                    </li>
+                    <li className="d-none d-md-table-cell">
+                      <div className="text-muted">Countdown to Competition</div>
+                      <strong>{this.state.day} Days Left</strong>
+                      <Progress className="progress-xs mt-2" color="danger" value="99"/>
+                    </li>
+                  </ul>
+                </CardFooter>
+              </Card>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col sm="6">
+              <Card>
+                <CardHeader>
+                  <i className="fa fa-align-justify"></i> Time Performance
+                </CardHeader>
+                <CardBody>
+                  <div id="number">
+                    <PredictionLinePlot />
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+
+            <Col sm="6">
+              <Card>
+                <CardHeader>
+                  <i className="fa fa-align-justify"></i> Weekly Progression
+                </CardHeader>
+                <CardBody>
+                  <div id="completed">
+                    <StudentProgressLinePlot />
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col sm="6">
+              <Card>
+                <CardHeader>
+                  <i className="fa fa-align-justify"></i> Percentile Ranking
+                </CardHeader>
+                <CardBody>
+                <VictoryChart domainPadding={20} scale={{ x: "time" }} theme={VictoryTheme.material}>
+                  <VictoryAxis label="Levels" tickFormat={(t) => `${(t.getMonth() * 10) - 9}-${t.getMonth() * 10}`} 
+                    style={{axisLabel: {fontSize: 15, padding: 30}}} />
+                  <VictoryAxis label="Five-Number Summary" dependentAxis 
+                    style={{axisLabel: {fontSize: 15, padding: 30}}}  />
+                  <VictoryCandlestick candleColors={{ positive: "#00FA9A", negative: "#c43a31" }} data={candleStickData} />
+                </VictoryChart>
+                </CardBody>
+              </Card>
+            </Col>
+
+            <Col sm="6">
+              <Card>
+                <CardHeader>
+                  <i className="fa fa-align-justify"></i> Percentile Ranking
+                </CardHeader>
+                <CardBody>
+                  <div id="boxplot">
+                    <StudentBoxPlot />
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          
+          <Row>
+            <Col>
             <Card>
+            <CardHeader>
+              <i className="fa fa-align-justify"></i> Top Selected Tech Articles for the Week
+            </CardHeader>
               <CardBody>
-                <Row>
-                  <Col sm="5">
-                    <CardTitle className="mb-0">Statistics</CardTitle>
-                    <div className="small text-muted">March 2018</div>
-                  </Col>
-                </Row>
+              <Row>
+                <Col xs="12" sm="6" lg="4">
+                  <h2>JavaScript</h2>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs="12" sm="6" lg="4">
+                  <Card>
+                    <CardImg src="../img/javascript/js_image1.jpg" alt="Card image cap" />
+                    <CardBody style={{height: 245+"px"}}>
+                      <CardTitle>🎼webpack 4: released today!!✨</CardTitle>
+                      <CardText>Codename: Legato 🎶</CardText>
+                      <Button href="https://medium.com/webpack/webpack-4-released-today-6cdb994702d4?source=topic_page---8------0----------------">Read Article</Button>
+                    </CardBody>
+                  </Card>
+                </Col>
+
+                <Col xs="12" sm="6" lg="4">
+                  <Card>
+                    <CardImg src="../img/javascript/js_image2.jpg" alt="Card image cap" />
+                    <CardBody style={{height: 245+"px"}}>
+                      <CardTitle>Elegant patterns in modern JavaScript: RORO</CardTitle>
+                      <CardText>I wrote my first few lines of JavaScript not long after the language was invented. If you told me at the time that I would one day be …</CardText>
+                      <Button href="https://medium.freecodecamp.org/elegant-patterns-in-modern-javascript-roro-be01e7669cbd?source=topic_page---8------1----------------">Read Article</Button>
+                    </CardBody>
+                  </Card>
+                </Col>
+
+                <Col xs="12" sm="6" lg="4">
+                  <Card>
+                    <CardImg src="../img/javascript/js_image3.jpg" alt="Card image cap" />
+                    <CardBody style={{height: 245+"px"}}>
+                      <CardTitle>Straightforward code splitting with React and webpack</CardTitle>
+                      <CardText>Everything seemed perfect until your app size increased too fast …</CardText>
+                      <Button href="https://medium.freecodecamp.org/straightforward-code-splitting-with-react-and-webpack-4b94c28f6c3f?source=topic_page---8------0----------------">Read Article</Button>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col xs="12" sm="6" lg="4">
+                  <h2>Latest Technology</h2>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs="12" sm="6" lg="4">
+                  <Card>
+                    <CardImg src="../img/tech/tech_image1.jpg" alt="Card image cap" />
+                    <CardBody style={{height: 245+"px"}}>
+                      <CardTitle>It’s Time to Leave San Francisco</CardTitle>
+                      <CardText>That’s it. The Kevin Roose article in the New York Times did it for you. It’s time to leave San Francisco. It’s time to leave Silicon…</CardText>
+                      <Button href="https://thebolditalic.com/its-time-to-leave-san-francisco-2a5a74f42433?source=topic_page---8------0----------------">Read Article</Button>
+                    </CardBody>
+                  </Card>
+                </Col>
+
+                <Col xs="12" sm="6" lg="4">
+                  <Card>
+                    <CardImg src="../img/tech/tech_image2.jpg" alt="Card image cap" />
+                    <CardBody style={{height: 245+"px"}}>
+                      <CardTitle>Enacting the nation’s strongest net neutrality protections in California</CardTitle>
+                      <CardText>An open internet is essential to maintaining our democracy, growing our economy, protecting consumers, and preserving critical health…</CardText>
+                      <Button href="https://medium.com/@Scott_Wiener/enacting-the-nations-strongest-net-neutrality-protections-in-california-bdee6bb9b3c1?source=topic_page---8------1----------------">Read Article</Button>
+                    </CardBody>
+                  </Card>
+                </Col>
+
+                <Col xs="12" sm="6" lg="4">
+                  <Card>
+                    <CardImg src="../img/tech/tech_image3.jpg" alt="Card image cap" />
+                    <CardBody style={{height: 245+"px"}}>
+                      <CardTitle>Can Bots Help Us Deal with Grief?</CardTitle>
+                      <CardText>How simulations can bring our loved ones back to life</CardText>
+                      <Button href="https://medium.com/s/when-robots-rule-the-world/can-bots-help-us-deal-with-grief-3de488cae96?source=topic_page---8------3----------------">Read Article</Button>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </Row>
               </CardBody>
-              <CardFooter>
-                <ul>
-                  <li>
-                    <div className="text-muted">Completed</div>
-                    <strong>10 Levels</strong>
-                    <Progress className="progress-xs mt-2" color="success" value="14"/>
-                  </li>
-                  <li className="d-none d-md-table-cell">
-                    <div className="text-muted">Total Time Spent</div>
-                    <strong>357 Mins</strong>
-                  </li>
-                  <li>
-                    <div className="text-muted">Favourite Language</div>
-                    <strong>Python</strong>
-                  </li>
-                  <li className="d-none d-md-table-cell">
-                    <div className="text-muted">Countdown to Competition</div>
-                    <strong>{this.state.day} Days Left</strong>
-                    <Progress className="progress-xs mt-2" color="danger" value="99"/>
-                  </li>
-                </ul>
-              </CardFooter>
             </Card>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col sm="6">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Time Prediction
-              </CardHeader>
-              <CardBody>
-                <div id="number">
-                  <PredictionLinePlot />
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col sm="6">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Percentile Ranking
-              </CardHeader>
-              <CardBody>
-                <div id="boxplot">
-                  <StudentBoxPlot />
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col sm="6">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Percentile Ranking
-              </CardHeader>
-              <CardBody>
-              <VictoryChart domainPadding={20} scale={{ x: "time" }} theme={VictoryTheme.material}>
-                <VictoryAxis label="Levels" tickFormat={(t) => `${(t.getMonth() * 10) - 9}-${t.getMonth() * 10}`} 
-                  style={{axisLabel: {fontSize: 15, padding: 30}}} />
-                <VictoryAxis label="Five-Number Summary" dependentAxis 
-                  style={{axisLabel: {fontSize: 15, padding: 30}}}  />
-                <VictoryCandlestick candleColors={{ positive: "#00FA9A", negative: "#c43a31" }} data={candleStickData} />
-              </VictoryChart>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-        
-        <Row>
-          <Col>
-          <Card>
-          <CardHeader>
-            <i className="fa fa-align-justify"></i> Top Selected Tech Articles for the Week
-          </CardHeader>
-            <CardBody>
-            <Row>
-              <Col xs="12" sm="6" lg="4">
-                <h2>JavaScript</h2>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs="12" sm="6" lg="4">
-                <Card>
-                  <CardImg src="../img/javascript/js_image1.jpg" alt="Card image cap" />
-                  <CardBody style={{height: 245+"px"}}>
-                    <CardTitle>🎼webpack 4: released today!!✨</CardTitle>
-                    <CardText>Codename: Legato 🎶</CardText>
-                    <Button href="https://medium.com/webpack/webpack-4-released-today-6cdb994702d4?source=topic_page---8------0----------------">Read Article</Button>
-                  </CardBody>
-                </Card>
-              </Col>
-
-              <Col xs="12" sm="6" lg="4">
-                <Card>
-                  <CardImg src="../img/javascript/js_image2.jpg" alt="Card image cap" />
-                  <CardBody style={{height: 245+"px"}}>
-                    <CardTitle>Elegant patterns in modern JavaScript: RORO</CardTitle>
-                    <CardText>I wrote my first few lines of JavaScript not long after the language was invented. If you told me at the time that I would one day be …</CardText>
-                    <Button href="https://medium.freecodecamp.org/elegant-patterns-in-modern-javascript-roro-be01e7669cbd?source=topic_page---8------1----------------">Read Article</Button>
-                  </CardBody>
-                </Card>
-              </Col>
-
-              <Col xs="12" sm="6" lg="4">
-                <Card>
-                  <CardImg src="../img/javascript/js_image3.jpg" alt="Card image cap" />
-                  <CardBody style={{height: 245+"px"}}>
-                    <CardTitle>Straightforward code splitting with React and webpack</CardTitle>
-                    <CardText>Everything seemed perfect until your app size increased too fast …</CardText>
-                    <Button href="https://medium.freecodecamp.org/straightforward-code-splitting-with-react-and-webpack-4b94c28f6c3f?source=topic_page---8------0----------------">Read Article</Button>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col xs="12" sm="6" lg="4">
-                <h2>Latest Technology</h2>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs="12" sm="6" lg="4">
-                <Card>
-                  <CardImg src="../img/tech/tech_image1.jpg" alt="Card image cap" />
-                  <CardBody style={{height: 245+"px"}}>
-                    <CardTitle>It’s Time to Leave San Francisco</CardTitle>
-                    <CardText>That’s it. The Kevin Roose article in the New York Times did it for you. It’s time to leave San Francisco. It’s time to leave Silicon…</CardText>
-                    <Button href="https://thebolditalic.com/its-time-to-leave-san-francisco-2a5a74f42433?source=topic_page---8------0----------------">Read Article</Button>
-                  </CardBody>
-                </Card>
-              </Col>
-
-              <Col xs="12" sm="6" lg="4">
-                <Card>
-                  <CardImg src="../img/tech/tech_image2.jpg" alt="Card image cap" />
-                  <CardBody style={{height: 245+"px"}}>
-                    <CardTitle>Enacting the nation’s strongest net neutrality protections in California</CardTitle>
-                    <CardText>An open internet is essential to maintaining our democracy, growing our economy, protecting consumers, and preserving critical health…</CardText>
-                    <Button href="https://medium.com/@Scott_Wiener/enacting-the-nations-strongest-net-neutrality-protections-in-california-bdee6bb9b3c1?source=topic_page---8------1----------------">Read Article</Button>
-                  </CardBody>
-                </Card>
-              </Col>
-
-              <Col xs="12" sm="6" lg="4">
-                <Card>
-                  <CardImg src="../img/tech/tech_image3.jpg" alt="Card image cap" />
-                  <CardBody style={{height: 245+"px"}}>
-                    <CardTitle>Can Bots Help Us Deal with Grief?</CardTitle>
-                    <CardText>How simulations can bring our loved ones back to life</CardText>
-                    <Button href="https://medium.com/s/when-robots-rule-the-world/can-bots-help-us-deal-with-grief-3de488cae96?source=topic_page---8------3----------------">Read Article</Button>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            </CardBody>
-          </Card>
-          </Col>
-        </Row>
-      </div>
-    )
+            </Col>
+          </Row>
+        </div>
+      )
+    } else {
+      return null;
+    }
   }
 }
 
