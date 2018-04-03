@@ -136,6 +136,7 @@ class StudentDashboard extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.setState({
       day: getDaysLeft()
     });

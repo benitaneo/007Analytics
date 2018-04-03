@@ -1,18 +1,38 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import { createLogger } from "redux-logger";
+import thunk from 'redux-thunk';
+import rootReducer from "./reducers/root_reducer";
+import logger from 'redux-logger';
 
-const reducer = (state = {}, action) => {
-  switch(action.type) {
-  case 'SET_VAL':
-    return {
-      ...state,
-      val: action.payload
-      };
-                    
-// Handle other actions here
-default:
-return state;
+export const history = createHistory()
+
+const initialState = {}
+const enhancers = []
+const middleware = [
+  thunk,
+  routerMiddleware(history),
+  logger,
+]
+
+if (process.env.NODE_ENV === 'development') {
+  const devToolsExtension = window.devToolsExtension
+
+  if (typeof devToolsExtension === 'function') {
+    enhancers.push(devToolsExtension())
   }
-};
+}
 
-const store = createStore(reducer);
+const composedEnhancers = compose(
+  applyMiddleware(...middleware),
+  ...enhancers
+)
+
+const store = createStore(
+  rootReducer,
+  initialState,
+  composedEnhancers
+)
+
 export default store;

@@ -27,7 +27,6 @@ import Register from './views/Pages/Register/'
 import Page404 from './views/Pages/Page404/'
 import Page500 from './views/Pages/Page500/'
 
-var local_data = {}
 
 ReactDOM.render((
   <div>

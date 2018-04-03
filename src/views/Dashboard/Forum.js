@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Row, Col, Card, CardHeader, CardBody} from 'reactstrap';
 
-class Forum extends Component {
+class CodeCombatProgress extends Component {
   render() {
     return (
         <div>
@@ -11,4 +11,4 @@ class Forum extends Component {
   }
 }
 
-export default Forum;
+export default CodeCombatProgress;
