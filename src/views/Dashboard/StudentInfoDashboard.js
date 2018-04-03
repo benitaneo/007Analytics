@@ -51,33 +51,33 @@ class StudentInfoDashboard extends Component {
       console.log(this.state.studentsArr);
       return (
           <div>
-              <ReactTable data={this.state.studentsArr} filterable  
-                columns={[
-                  {
-                    Header: "Student Name",
-                    accessor: "name",
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["name"] }),
-                    filterAll: true
-                  },
-                  {
-                    Header: "Achievements App ID",
-                    accessor: "id",
-                    filterMethod: (filter, row) =>
-                      row[filter.id].startsWith(filter.value) &&
-                      row[filter.id].endsWith(filter.value)
-                  },
-                  {
-                    Header: "Number of Completed Levels",
-                    accessor: "completed"
-                  },
-                  {
-                    Header: "Last Active Date",
-                    accessor: "active"
-                  }
-                ]}
-                defaultPageSize={10} className="-striped -highlight"
-              />
+            <ReactTable data={this.state.studentsArr} filterable  
+              columns={[
+                {
+                  Header: "Student Name",
+                  accessor: "name",
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["name"] }),
+                  filterAll: true
+                },
+                {
+                  Header: "Achievements App ID",
+                  accessor: "id",
+                  filterMethod: (filter, row) =>
+                    row[filter.id].startsWith(filter.value) &&
+                    row[filter.id].endsWith(filter.value)
+                },
+                {
+                  Header: "Number of Completed Levels",
+                  accessor: "completed"
+                },
+                {
+                  Header: "Last Active Date",
+                  accessor: "active"
+                }
+              ]}
+              defaultPageSize={10} className="-striped -highlight"
+            />
           </div>
       )
     } else {

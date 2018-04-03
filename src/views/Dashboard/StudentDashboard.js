@@ -51,6 +51,11 @@ import {
 import * as V from 'victory';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryCandlestick, VictoryLine } from 'victory';
 
+// Import React Table
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+import matchSorter from 'match-sorter';
+
 // highcharts component
 import StudentBoxPlot from '../Components/StudentStats/studentBoxPlot'
 import PredictionLinePlot from '../Components/StudentStats/predictionLinePlot'
@@ -133,26 +138,28 @@ class StudentDashboard extends Component {
     this.state = {
       day: 0,
       mount: false,
-      completedArr: [],
+      flaggedArr: [],
       staticArr: []
     };
   }
 
   componentDidMount() {
     const db = firebase.database();
-    db.ref('/studentInfo/completedLevelStats').on('value', (snapshot) => {
-      var weeks = snapshot.val();
+    db.ref('/studentInfo/flaggedLevels').on('value', (snapshot) => {
+      var flagged = snapshot.val();
       var newStats = [];
-      console.log(weeks);
-      for (var stat in weeks) {
-      newStats.push({
-          week: weeks[stat]['week'],
-          cohortCompleted: weeks[stat]['cohortCompleted'],
-          personalCompleted: weeks[stat]['personalCompleted']
-      });
+      console.log(flagged);
+      for (var stat in flagged) {
+        newStats.push({
+          levelName: flagged[stat]['levelName'],
+          levelNumber: flagged[stat]['levelNumber'],
+          levelPercentile: flagged[stat]['levelPercentile'],
+          levelTopic: flagged[stat]['levelTopic'],
+          topicReadUp: "To be added"
+        });
       }
       this.setState({
-      completedArr: newStats,
+        flaggedArr: newStats,
       });
     });
     db.ref('/studentInfo/staticInfo').on('value', (snapshot) => {
@@ -163,7 +170,7 @@ class StudentDashboard extends Component {
         newStats.push({
           currentLevel: staticInfo[stat]['Current level'],
           cohortAverage: staticInfo[stat]['Cohort average'],
-          percentile: staticInfo[stat]['Percentile in cohort']
+          percentile: Math.round(staticInfo[stat]['Percentile in cohort'])
         });
       }
       this.setState({
@@ -241,6 +248,42 @@ class StudentDashboard extends Component {
                   </div>
                 </CardBody>
               </Card>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col sm="12">
+              <ReactTable data={this.state.flaggedArr}  
+                columns={[
+                  { Header: "Flagged Levels",
+                  columns: [
+                    {
+                      Header: "Level Name",
+                      accessor: "levelName",
+                      maxWidth: 200
+                    },
+                    {
+                      Header: "Level Number",
+                      accessor: "levelNumber",
+                      maxWidth: 100
+                    },
+                    {
+                      Header: "Percentile",
+                      accessor: "levelPercentile",
+                      maxWidth: 100
+                    },
+                    {
+                      Header: "Topic",
+                      accessor: "levelTopic"
+                    },
+                    {
+                      Header: "Self-Enrichment Link",
+                      accessor: "topicReadUp"
+                    }]
+                  }
+                ]}
+                defaultPageSize={5} className="-striped -highlight"
+                />
             </Col>
           </Row>
 
