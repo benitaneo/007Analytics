@@ -124,11 +124,11 @@ class Login extends Component {
 
   routePage() {
     if (this.state.value == 1) {
-      window.location = "#/administrator"
+      setTimeout(function(){window.location = "#/administrator"},5000);  
     } else if (this.state.value == 2) {
-      window.location = "#/instructor"
+      setTimeout(function(){window.location = "#/instructor"},5000);
     } else if (this.state.value == 3) {
-      window.location = "#/student"
+      setTimeout(function(){window.location = "#/student"},5000);
     }
   }
   

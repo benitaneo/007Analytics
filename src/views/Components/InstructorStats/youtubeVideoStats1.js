@@ -19,7 +19,7 @@ class YoutubeLinePlot1 extends Component {
       db.ref('/instructorInfo/videoPause/-L8Gz-q54aVyOc3icUgO').on('value', (snapshot) => {
           var intervals = snapshot.val();
           var newStats = [];
-          console.log(intervals);
+          //console.log(intervals);
           for (var stat in intervals) {
           newStats.push({
               interval: intervals[stat]['videoInterval'],

@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
+
+// Components
 import {Container} from 'reactstrap';
 import Header from '../../components/Header/';
 import InstructorSidebar from '../../components/Sidebar/instructor_Sidebar';
@@ -9,22 +12,6 @@ import Footer from '../../components/Footer/';
 import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
 import ContactDashboard from '../../views/Dashboard/ContactDashboard';
 import StudentInfoDashboard from '../../views/Dashboard/StudentInfoDashboard';
-import Widgets from '../../views/Widgets/';
-
-// Components
-import Buttons from '../../views/Components/Buttons/';
-import Cards from '../../views/Components/Cards/';
-import Forms from '../../views/Components/Forms/';
-import Modals from '../../views/Components/Modals/';
-import SocialButtons from '../../views/Components/SocialButtons/';
-import Switches from '../../views/Components/Switches/';
-import Tables from '../../views/Components/Tables/';
-import Tabs from '../../views/Components/Tabs/';
-
-// Icons
-import FontAwesome from '../../views/Icons/FontAwesome/';
-import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/';
-import * as firebase from 'firebase';
 
 class InstructorFull extends Component {
   constructor(props) {
@@ -32,7 +19,13 @@ class InstructorFull extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    console.log(this.props.data);
+    //this.props.getData();
+  }
+
   render() {
+    console.log(this.props);
     return (
       <div className="app">
         <Header />
@@ -45,19 +38,7 @@ class InstructorFull extends Component {
                 <Route path="/instructor" name="InstructorDashboard" component={InstructorDashboard}/>
                 <Route path="/admincontact" name="AdminContact" component={ContactDashboard}/>
                 <Route path="/studentinfo" name="StudentInfoDashboard" component={StudentInfoDashboard}/>
-                <Route path="/components/buttons" name="Buttons" component={Buttons}/>
-                <Route path="/components/cards" name="Cards" component={Cards}/>
-                <Route path="/components/forms" name="Forms" component={Forms}/>
-                <Route path="/components/modals" name="Modals" component={Modals}/>
-                <Route path="/components/social-buttons" name="Social Buttons" component={SocialButtons}/>
-                <Route path="/components/switches" name="Swithces" component={Switches}/>
-                <Route path="/components/tables" name="Tables" component={Tables}/>
-                <Route path="/components/tabs" name="Tabs" component={Tabs}/>
-                <Route path="/icons/font-awesome" name="Font Awesome" component={FontAwesome}/>
-                <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons}/>
-                <Route path="/widgets" name="Widgets" component={Widgets}/>
-                
-                
+                    
                 <Redirect from="/" to="/instructor"/>
               </Switch>
             </Container>
