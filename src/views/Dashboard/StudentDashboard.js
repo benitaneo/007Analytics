@@ -311,24 +311,7 @@ class StudentDashboard extends Component {
           <br />
 
           <Row>
-            <Col sm="6">
-              <Card>
-                <CardHeader>
-                  <i className="fa fa-align-justify"></i> Percentile Ranking
-                </CardHeader>
-                <CardBody>
-                <VictoryChart domainPadding={20} scale={{ x: "time" }} theme={VictoryTheme.material}>
-                  <VictoryAxis label="Levels" tickFormat={(t) => `${(t.getMonth() * 10) - 9}-${t.getMonth() * 10}`} 
-                    style={{axisLabel: {fontSize: 15, padding: 30}}} />
-                  <VictoryAxis label="Five-Number Summary" dependentAxis 
-                    style={{axisLabel: {fontSize: 15, padding: 30}}}  />
-                  <VictoryCandlestick candleColors={{ positive: "#00FA9A", negative: "#c43a31" }} data={candleStickData} />
-                </VictoryChart>
-                </CardBody>
-              </Card>
-            </Col>
-
-            <Col sm="6">
+            <Col sm="12">
               <Card>
                 <CardHeader>
                   <i className="fa fa-align-justify"></i> Percentile Ranking
