@@ -58,7 +58,7 @@ import matchSorter from 'match-sorter';
 
 // highcharts component
 import StudentBoxPlot from '../Components/StudentStats/studentBoxPlot'
-import PredictionLinePlot from '../Components/StudentStats/predictionLinePlot'
+import PercentileLinePlot from '../Components/StudentStats/percentileLinePlot'
 import StudentProgressLinePlot from '../Components/StudentStats/studentProgressLinePlot'
 
 import firebase from '../../firebase';
@@ -249,11 +249,11 @@ class StudentDashboard extends Component {
             <Col sm="6">
               <Card>
                 <CardHeader>
-                  <i className="fa fa-align-justify"></i> Time Performance
+                  <i className="fa fa-align-justify"></i> Percentile Ranking
                 </CardHeader>
                 <CardBody>
                   <div id="number">
-                    <PredictionLinePlot />
+                    <PercentileLinePlot />
                   </div>
                 </CardBody>
               </Card>
@@ -314,7 +314,7 @@ class StudentDashboard extends Component {
             <Col sm="12">
               <Card>
                 <CardHeader>
-                  <i className="fa fa-align-justify"></i> Percentile Ranking
+                  <i className="fa fa-align-justify"></i> Time Performance
                 </CardHeader>
                 <CardBody>
                   <div id="boxplot">

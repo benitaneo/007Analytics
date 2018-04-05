@@ -4,7 +4,7 @@ import Highcharts from 'highcharts';
 
 import firebase from 'firebase';
 
-class PredictionLinePlot extends Component {
+class PercentileLinePlot extends Component {
     constructor(props) {
       super(props);
   
@@ -52,15 +52,15 @@ class PredictionLinePlot extends Component {
         <div>
             <HighchartsChart>
                 <Chart />
-                <Title>Prediction on Time Taken for next Level</Title>
+                <Title>Percentile (Time Taken per level)</Title>
                 <Subtitle>Source: Achievements App</Subtitle>
                 <XAxis>
                     <XAxis.Title>Level</XAxis.Title>
                 </XAxis>
 
                 <YAxis id="number">
-                    <YAxis.Title>Time (Seconds)</YAxis.Title>
-                    <LineSeries id="performance" name="Time Taken" data={
+                    <YAxis.Title>Percentile</YAxis.Title>
+                    <LineSeries id="performance" name="Percentile" data={
                         this.getTimings()                    
                         } />
                 </YAxis>
@@ -73,4 +73,4 @@ class PredictionLinePlot extends Component {
     }
 }
 
-export default withHighcharts(PredictionLinePlot, Highcharts); // Injecting the Highcharts object
+export default withHighcharts(PercentileLinePlot, Highcharts); // Injecting the Highcharts object
