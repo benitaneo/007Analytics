@@ -32,25 +32,6 @@ import {
   TabPane
 } from 'reactstrap';
 
-// recharts components
-import {
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from "recharts";
-
-// victory charts components
-import * as V from 'victory';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryCandlestick, VictoryLine } from 'victory';
-
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -62,43 +43,6 @@ import PercentileLinePlot from '../Components/StudentStats/percentileLinePlot'
 import StudentProgressLinePlot from '../Components/StudentStats/studentProgressLinePlot'
 
 import firebase from '../../firebase';
-
-const AxisLabel = ({
-  axisType,
-  x = 0,
-  y = 0,
-  width,
-  height,
-  stroke,
-  children
-}) => {
-  const isVert = axisType === "yAxis";
-  const cx = isVert ? x + 20 : x + width / 2;
-  const cy = isVert ? height / 2 + y : y + height;
-  const rot = isVert ? `270 ${cx} ${cy}` : 0;
-  return (
-    <text
-      x={cx}
-      y={cy}
-      transform={`rotate(${rot})`}
-      textAnchor="middle"
-      stroke={stroke}
-    >
-      {children}
-    </text>
-  );
-};
-
-// convert Hex to RGBA
-function convertHex(hex, opacity) {
-  hex = hex.replace('#', '');
-  var r = parseInt(hex.substring(0, 2), 16);
-  var g = parseInt(hex.substring(2, 4), 16);
-  var b = parseInt(hex.substring(4, 6), 16);
-
-  var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')';
-  return result;
-}
 
 //Random Numbers
 function random(min, max) {
@@ -115,21 +59,6 @@ function getDaysLeft() {
   var difference = Math.abs(comps.getTime() - today.getTime());
   return Math.round(difference / one_day);
 }
-
-const data = [
-  {quarter: 1, earnings: 13000},
-  {quarter: 2, earnings: 16500},
-  {quarter: 3, earnings: 14250},
-  {quarter: 4, earnings: 19000}
-];
-
-const candleStickData = [
-  {x: new Date(2016, 1, 1), open: 5, close: 10, high: 15, low: 0},
-  {x: new Date(2016, 2, 1), open: 10, close: 15, high: 20, low: 5},
-  {x: new Date(2016, 3, 1), open: 15, close: 20, high: 22, low: 10},
-  {x: new Date(2016, 4, 1), open: 20, close: 10, high: 25, low: 7},
-  {x: new Date(2016, 5, 1), open: 10, close: 8, high: 15, low: 5}
-]
 
 class StudentDashboard extends Component {
   constructor(props) {
@@ -156,7 +85,7 @@ class StudentDashboard extends Component {
           levelNumber: flagged[stat]['levelNumber'],
           levelPercentile: flagged[stat]['levelPercentile'],
           levelTopic: flagged[stat]['levelTopic'],
-          topicReadUp: "To be added"
+          topicReadUp: flagged[stat]['enrichmentLink']['w3']
         });
       }
       this.setState({
@@ -198,7 +127,7 @@ class StudentDashboard extends Component {
           <Row>
             <Col>
               <Card>
-                <CardBody>
+                <CardBody style={{backgroundColor: '#06D3DF'}}>
                   <Row>
                     <Col sm="5">
                       <CardTitle className="mb-0">Statistics</CardTitle>
@@ -224,7 +153,7 @@ class StudentDashboard extends Component {
                     <li className="d-none d-md-table-cell">
                       <div className="text-muted">Countdown to Competition</div>
                       <strong>{this.state.day} Days Left</strong>
-                      <Progress className="progress-xs mt-2" color="danger" value="99"/>
+                      <Progress className="progress-xs mt-2" color="danger" value="2"/>
                     </li>
                   </ul>
                 </CardFooter>
