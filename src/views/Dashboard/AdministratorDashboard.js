@@ -202,7 +202,7 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col>
             <Card>
-              <CardBody style={{backgroundColor: '#06D3DF'}}>
+              <CardBody style={{backgroundColor: '#41BEB7'}}>
                 <Row>
                   <Col sm="5">
                     <CardTitle className="mb-0">Statistics</CardTitle>
@@ -242,7 +242,7 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="12">
           <Card>
-            <CardHeader style={{backgroundColor: '#06C59D'}}>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Cohort Student Count
             </CardHeader>
             <CardBody>
@@ -255,7 +255,7 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="12">
           <Card>
-            <CardHeader style={{backgroundColor: '#06C59D'}}>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Cohort Submissions Count
             </CardHeader>
             <CardBody>
@@ -268,7 +268,7 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="12">
           <Card>
-            <CardHeader style={{backgroundColor: '#06C59D'}}>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Cohort Submissions Count
             </CardHeader>
             <CardBody>
@@ -290,7 +290,7 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#06C59D'}}>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Activity Rate
             </CardHeader>
             <CardBody>
@@ -301,7 +301,7 @@ class AdministratorDashboard extends Component {
 
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#06C59D'}}>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Adoption Rate
             </CardHeader>
             <CardBody>
@@ -317,7 +317,7 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#06C59D'}}>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Activity Rate
             </CardHeader>
             <CardBody>
@@ -328,7 +328,7 @@ class AdministratorDashboard extends Component {
 
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#06C59D'}}>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Adoption Rate
             </CardHeader>
             <CardBody>
@@ -344,7 +344,7 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#06C59D'}}>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Activity Rate
             </CardHeader>
             <CardBody>
@@ -355,7 +355,7 @@ class AdministratorDashboard extends Component {
 
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#06C59D'}}>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Adoption Rate
             </CardHeader>
             <CardBody>
