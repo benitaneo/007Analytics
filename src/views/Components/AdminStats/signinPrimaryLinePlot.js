@@ -43,7 +43,7 @@ class SignInPrimaryLinePlot extends Component {
         const db = firebase.database();
         db.ref('/adminInfo/signInRate/2018 National Coding Championships - Primary').on('value', (snapshot) => {
             var primarySch = snapshot.val();
-            console.log(primarySch);
+            //console.log(primarySch);
             var primarySchs = [];
             for (var sch in primarySch) {
                 primarySchs.push(sch);

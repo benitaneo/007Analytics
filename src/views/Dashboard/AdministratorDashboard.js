@@ -54,6 +54,9 @@ import SignUpSeniorLinePlot from '../Components/AdminStats/signupSeniorLinePlot'
 import SignInPrimaryLinePlot from '../Components/AdminStats/signinPrimaryLinePlot'
 import SignUpPrimaryLinePlot from '../Components/AdminStats/signupPrimaryLinePlot'
 import CohortCountBarPlot from '../Components/AdminStats/cohortCountBarPlot'
+import WeeklySubmitsLinePlot from '../Components/AdminStats/weeklySubmitsLinePlot'
+import InstructorActivityLinePlot from '../Components/AdminStats/instructorActivityLinePlot'
+import InactiveSchoolsTable from '../Components/AdminStats/inactiveSchoolsTable'
 import firebase from '../../firebase';
 
 // import material-ui
@@ -240,7 +243,7 @@ class AdministratorDashboard extends Component {
           <Col sm="12">
           <Card>
             <CardHeader style={{backgroundColor: '#06C59D'}}>
-              <i className="fa fa-align-justify"></i> Cohort Count
+              <i className="fa fa-align-justify"></i> Cohort Student Count
             </CardHeader>
             <CardBody>
               <CohortCountBarPlot />
@@ -249,6 +252,38 @@ class AdministratorDashboard extends Component {
           </Col>
         </Row>
 
+        <Row>
+          <Col sm="12">
+          <Card>
+            <CardHeader style={{backgroundColor: '#06C59D'}}>
+              <i className="fa fa-align-justify"></i> Cohort Submissions Count
+            </CardHeader>
+            <CardBody>
+              <WeeklySubmitsLinePlot />
+            </CardBody>
+          </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col sm="12">
+          <Card>
+            <CardHeader style={{backgroundColor: '#06C59D'}}>
+              <i className="fa fa-align-justify"></i> Cohort Submissions Count
+            </CardHeader>
+            <CardBody>
+              <InstructorActivityLinePlot />
+            </CardBody>
+          </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col sm="12">
+            <InactiveSchoolsTable />
+          </Col>
+        </Row>
+        
         <Row>
           <h1><Badge color="primary">Senior</Badge></h1>
         </Row>

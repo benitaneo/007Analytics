@@ -43,7 +43,7 @@ class SignInSeniorLinePlot extends Component {
         const db = firebase.database();
         db.ref('/adminInfo/signInRate/2018 National Coding Championships - Senior').on('value', (snapshot) => {
             var seniorSch = snapshot.val();
-            console.log(seniorSch);
+            //console.log(seniorSch);
             var seniorSchs = [];
             for (var sch in seniorSch) {
                 seniorSchs.push(sch);
@@ -59,7 +59,7 @@ class SignInSeniorLinePlot extends Component {
         const db = firebase.database();
         db.ref('/adminInfo/signInRate/2018 National Coding Championships - Senior/'+value).on('value', (snapshot) => {
             var weeks = snapshot.val();
-            console.log(weeks);
+            //console.log(weeks);
             var allWeeks = [];
             var allCounts = [];
             for (var wk in weeks) {

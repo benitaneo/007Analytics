@@ -43,7 +43,7 @@ class SignUpPrimaryLinePlot extends Component {
         const db = firebase.database();
         db.ref('/adminInfo/signUpRate/2018 National Coding Championships - Primary').on('value', (snapshot) => {
             var primarySch = snapshot.val();
-            console.log(primarySch);
+            //console.log(primarySch);
             var primarySchs = [];
             for (var sch in primarySch) {
                 primarySchs.push(sch);
@@ -56,12 +56,11 @@ class SignUpPrimaryLinePlot extends Component {
     }
 
     handleSelection(value) {
-        console.log("got to selection!");
         const db = firebase.database();
-        console.log(value);
+        //console.log(value);
         db.ref('/adminInfo/signUpRate/2018 National Coding Championships - Primary/'+value).on('value', (snapshot) => {
             var weeks = snapshot.val();
-            console.log(weeks);
+            //console.log(weeks);
             var allWeeks = [];
             var allCounts = [];
             for (var wk in weeks) {
