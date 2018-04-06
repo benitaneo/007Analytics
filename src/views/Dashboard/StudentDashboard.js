@@ -128,7 +128,7 @@ class StudentDashboard extends Component {
           <Row>
             <Col>
               <Card>
-                <CardBody style={{backgroundColor: '#ffa07a'}}>
+                <CardBody style={{backgroundColor: '#41BEB7'}}>
                   <Row>
                     <Col sm="5">
                       <CardTitle className="mb-0">Statistics</CardTitle>
@@ -186,7 +186,7 @@ class StudentDashboard extends Component {
           <Row>
             <Col sm="6">
               <Card>
-                <CardHeader>
+                <CardHeader style={{backgroundColor: '#41BEB7'}}>
                   <i className="fa fa-align-justify"></i> Percentile Ranking
                 </CardHeader>
                 <CardBody>
@@ -199,7 +199,7 @@ class StudentDashboard extends Component {
 
             <Col sm="6">
               <Card>
-                <CardHeader>
+                <CardHeader style={{backgroundColor: '#41BEB7'}}>
                   <i className="fa fa-align-justify"></i> Weekly Progression
                 </CardHeader>
                 <CardBody>
@@ -251,7 +251,7 @@ class StudentDashboard extends Component {
           <Row>
             <Col sm="12">
               <Card>
-                <CardHeader>
+                <CardHeader style={{backgroundColor: '#41BEB7'}}>
                   <i className="fa fa-align-justify"></i> Time Performance
                 </CardHeader>
                 <CardBody>
@@ -266,7 +266,7 @@ class StudentDashboard extends Component {
           <Row>
             <Col>
             <Card>
-            <CardHeader>
+            <CardHeader style={{backgroundColor: '#41BEB7'}}>
               <i className="fa fa-align-justify"></i> Top Selected Tech Articles for the Week
             </CardHeader>
               <CardBody>

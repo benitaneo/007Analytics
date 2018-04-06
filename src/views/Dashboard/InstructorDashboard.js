@@ -37,6 +37,7 @@ import YoutubeLinePlot2 from '../Components/InstructorStats/youtubeVideoStats2'
 import YoutubeLinePlot3 from '../Components/InstructorStats/youtubeVideoStats3'
 import YoutubeLinePlot4 from '../Components/InstructorStats/youtubeVideoStats4'
 import YoutubeLinePlot5 from '../Components/InstructorStats/youtubeVideoStats5'
+import DifficultLevelsTable from '../Components/InstructorStats/topThreeFailedLevelsTable'
 import firebase from '../../firebase';
 import { MuiThemeProvider } from 'material-ui/styles';
 
@@ -156,7 +157,7 @@ class InstructorDashboard extends Component {
           <Row>
             <Col>
               <Card>
-                <CardBody style={{backgroundColor: '#06D3DF'}}>
+                <CardBody style={{backgroundColor: '#41BEB7'}}>
                   <Row>
                     <Col sm="5">
                       <CardTitle className="mb-0">Statistics</CardTitle>
@@ -184,7 +185,7 @@ class InstructorDashboard extends Component {
           <Row>
             <Col sm="6">
               <Card>
-                <CardHeader>
+                <CardHeader style={{backgroundColor: '#41BEB7'}}>
                   <i className="fa fa-align-justify"></i> School Performance
                 </CardHeader>
                 <CardBody>
@@ -197,7 +198,7 @@ class InstructorDashboard extends Component {
 
             <Col sm="6">
               <Card>
-                <CardHeader>
+                <CardHeader style={{backgroundColor: '#41BEB7'}}>
                   <i className="fa fa-align-justify"></i> Student Performance
                 </CardHeader>
                 <CardBody>
@@ -210,9 +211,15 @@ class InstructorDashboard extends Component {
           </Row>
 
           <Row>
+            <Col sm="12">
+              <DifficultLevelsTable />
+            </Col>
+          </Row>
+
+          <Row>
           <Col sm="6">
             <Card>
-              <CardHeader>
+              <CardHeader style={{backgroundColor: '#41BEB7'}}>
                 <i className="fa fa-align-justify"></i> Youtube Analytics
               </CardHeader>
               <CardBody>
