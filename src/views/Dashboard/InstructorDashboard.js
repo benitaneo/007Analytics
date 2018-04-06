@@ -156,7 +156,7 @@ class InstructorDashboard extends Component {
           <Row>
             <Col>
               <Card>
-                <CardBody>
+                <CardBody style={{backgroundColor: '#06D3DF'}}>
                   <Row>
                     <Col sm="5">
                       <CardTitle className="mb-0">Statistics</CardTitle>
@@ -170,14 +170,10 @@ class InstructorDashboard extends Component {
                       <div className="text-muted">Total Number of Participating Students</div>
                       <strong>189</strong>
                     </li>
-                    <li>
-                      <div className="text-muted">Number of Students who are behind schedule</div>
-                      <strong>23</strong>
-                    </li>
                     <li className="d-none d-md-table-cell">
                       <div className="text-muted">Countdown to Competition</div>
                       <strong>{this.state.day} Days Left</strong>
-                      <Progress className="progress-xs mt-2" color="danger" value="99"/>
+                      <Progress className="progress-xs mt-2" color="danger" value="2"/>
                     </li>
                   </ul>
                 </CardFooter>

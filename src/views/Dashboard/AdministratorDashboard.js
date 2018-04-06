@@ -53,6 +53,7 @@ import SignInSeniorLinePlot from '../Components/AdminStats/signinSeniorLinePlot'
 import SignUpSeniorLinePlot from '../Components/AdminStats/signupSeniorLinePlot'
 import SignInPrimaryLinePlot from '../Components/AdminStats/signinPrimaryLinePlot'
 import SignUpPrimaryLinePlot from '../Components/AdminStats/signupPrimaryLinePlot'
+import CohortCountBarPlot from '../Components/AdminStats/cohortCountBarPlot'
 import firebase from '../../firebase';
 
 // import material-ui
@@ -65,17 +66,6 @@ const brandSuccess = '#4dbd74';
 const brandInfo = '#63c2de';
 const brandWarning = '#f8cb00';
 const brandDanger = '#f86c6b';
-
-// convert Hex to RGBA
-function convertHex(hex, opacity) {
-  hex = hex.replace('#', '');
-  var r = parseInt(hex.substring(0, 2), 16);
-  var g = parseInt(hex.substring(2, 4), 16);
-  var b = parseInt(hex.substring(4, 6), 16);
-
-  var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')';
-  return result;
-}
 
 // Dynamically update month label
 const month_names = ["January", "February", "March", "April", "May", "June",
@@ -101,32 +91,6 @@ function getDaysLeft() {
   return Math.round(difference / one_day);
 }
 
-const AxisLabel = ({
-  axisType,
-  x = 0,
-  y = 0,
-  width,
-  height,
-  stroke,
-  children
-}) => {
-  const isVert = axisType === "yAxis";
-  const cx = isVert ? x + 20 : x + width / 2;
-  const cy = isVert ? height / 2 + y : y + height;
-  const rot = isVert ? `270 ${cx} ${cy}` : 0;
-  return (
-    <text
-      x={cx}
-      y={cy}
-      transform={`rotate(${rot})`}
-      textAnchor="middle"
-      stroke={stroke}
-    >
-      {children}
-    </text>
-  );
-};
-
 class AdministratorDashboard extends Component {
   constructor(props) {
     super(props);
@@ -134,6 +98,10 @@ class AdministratorDashboard extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: '1',
+      totalSchoolCount: 0,
+      totalPrimarySchoolCount: 0,
+      totalJuniorSchoolCount: 0,
+      totalSeniorSchoolCount: 0,
       primarySchools: [],
       juniorSchools: [],
       seniorSchools: [],
@@ -146,30 +114,60 @@ class AdministratorDashboard extends Component {
 
   componentDidMount() {
     const db = firebase.database();
-    db.ref('/cohorts/all_schools').on('value', (snapshot) => {
-      var schools = snapshot.val();
-      console.log(schools);
-      var allSchools = [];
-      for (var cat in schools) {
-        if (cat == 'junior') {
-          for (var sch in schools[cat]) {
-            this.state.juniorSchools.push(schools[cat][sch]);
-          }
-        } else if (cat == 'primary') {
-          for (var sch in schools[cat]) {
-            this.state.primarySchools.push(schools[cat][sch]);
-          }
-        } else if (cat == 'senior') {
-          for (var sch in schools[cat]) {
-            this.state.seniorSchools.push(schools[cat][sch]);
-          }
-        }
+    db.ref('/adminInfo/staticInfo').on('value', (snapshot) => {
+      var statics = snapshot.val();
+      console.log(statics);
+      this.setState({
+        totalPrimarySchoolCount: statics['primaryCount'],
+        totalJuniorSchoolCount: statics['juniorCount'],
+        totalSeniorSchoolCount: statics['seniorCount'],
+        totalSchoolCount: statics['totalCount']
+      })
+    })
+    db.ref('/adminInfo/studentsPerSchool/2018 National Coding Championships - Primary').on('value', (snapshot) => {
+      var primary = snapshot.val();
+      console.log(primary);
+      var primaryschs = [];
+      for (var sch in primary) {
+        primaryschs.push({
+          schoolName: primary[sch]['schoolName'],
+          studentCount: primary[sch]['studentCount']
+        })
       }
       this.setState({
+        primarySchools: primaryschs
+      })
+    })
+    db.ref('/adminInfo/studentsPerSchool/2018 National Coding Championships - Junior').on('value', (snapshot) => {
+      var junior = snapshot.val();
+      console.log(junior);
+      var juniorschs = [];
+      for (var sch in junior) {
+        juniorschs.push({
+          schoolName: junior[sch]['schoolName'],
+          studentCount: junior[sch]['studentCount']
+        })
+      }
+      this.setState({
+        juniorSchools: juniorschs
+      })
+    })
+    db.ref('/adminInfo/studentsPerSchool/2018 National Coding Championships - Senior').on('value', (snapshot) => {
+      var senior = snapshot.val();
+      console.log(senior);
+      var seniorschs = [];
+      for (var sch in senior) {
+        seniorschs.push({
+          schoolName: senior[sch]['schoolName'],
+          studentCount: senior[sch]['studentCount']
+        })
+      }
+      this.setState({
+        seniorSchools: seniorschs,
         day: daysLeft,
         month: currentMonth,
         mount: true
-      });
+      })
     });
   }
 
@@ -199,13 +197,66 @@ class AdministratorDashboard extends Component {
         <MuiThemeProvider>
         <div className="animated fadeIn">
         <Row>
+          <Col>
+            <Card>
+              <CardBody style={{backgroundColor: '#06D3DF'}}>
+                <Row>
+                  <Col sm="5">
+                    <CardTitle className="mb-0">Statistics</CardTitle>
+                    <div className="small text-muted">April 2018</div>
+                  </Col>
+                </Row>
+              </CardBody>
+              <CardFooter>
+                <ul>
+                  <li>
+                    <div className="text-muted">Total</div>
+                    <strong>{this.state.totalSchoolCount} Schools</strong>
+                  </li>
+                  <li className="d-none d-md-table-cell">
+                    <div className="text-muted">Primary</div>
+                    <strong>{this.state.totalPrimarySchoolCount} Schools</strong>
+                  </li>
+                  <li>
+                    <div className="text-muted">Junior</div>
+                    <strong>{this.state.totalJuniorSchoolCount} Schools</strong>
+                  </li>
+                  <li>
+                    <div className="text-muted">Senior</div>
+                    <strong>{this.state.totalSeniorSchoolCount} Schools</strong>
+                  </li>
+                  <li className="d-none d-md-table-cell">
+                    <div className="text-muted">Countdown to Competition</div>
+                    <strong>{this.state.day} Days Left</strong>
+                    <Progress className="progress-xs mt-2" color="danger" value="2"/>
+                  </li>
+                </ul>
+              </CardFooter>
+            </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col sm="12">
+          <Card>
+            <CardHeader style={{backgroundColor: '#06C59D'}}>
+              <i className="fa fa-align-justify"></i> Cohort Count
+            </CardHeader>
+            <CardBody>
+              <CohortCountBarPlot />
+            </CardBody>
+          </Card>
+          </Col>
+        </Row>
+
+        <Row>
           <h1><Badge color="primary">Senior</Badge></h1>
         </Row>
         <Row>
           <Col sm="6">
           <Card>
-            <CardHeader>
-              <i className="fa fa-align-justify"></i> Participation Rate
+            <CardHeader style={{backgroundColor: '#06C59D'}}>
+              <i className="fa fa-align-justify"></i> Activity Rate
             </CardHeader>
             <CardBody>
              <SignInSeniorLinePlot />
@@ -215,8 +266,8 @@ class AdministratorDashboard extends Component {
 
           <Col sm="6">
           <Card>
-            <CardHeader>
-              <i className="fa fa-align-justify"></i> Activity Rate
+            <CardHeader style={{backgroundColor: '#06C59D'}}>
+              <i className="fa fa-align-justify"></i> Adoption Rate
             </CardHeader>
             <CardBody>
               <SignUpSeniorLinePlot />
@@ -231,8 +282,8 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="6">
           <Card>
-            <CardHeader>
-              <i className="fa fa-align-justify"></i> Participation Rate
+            <CardHeader style={{backgroundColor: '#06C59D'}}>
+              <i className="fa fa-align-justify"></i> Activity Rate
             </CardHeader>
             <CardBody>
               <SignInJuniorLinePlot />
@@ -242,8 +293,8 @@ class AdministratorDashboard extends Component {
 
           <Col sm="6">
           <Card>
-            <CardHeader>
-              <i className="fa fa-align-justify"></i> Activity Rate
+            <CardHeader style={{backgroundColor: '#06C59D'}}>
+              <i className="fa fa-align-justify"></i> Adoption Rate
             </CardHeader>
             <CardBody>
               <SignUpJuniorLinePlot />
@@ -258,8 +309,8 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="6">
           <Card>
-            <CardHeader>
-              <i className="fa fa-align-justify"></i> Participation Rate
+            <CardHeader style={{backgroundColor: '#06C59D'}}>
+              <i className="fa fa-align-justify"></i> Activity Rate
             </CardHeader>
             <CardBody>
               <SignInPrimaryLinePlot />
@@ -269,8 +320,8 @@ class AdministratorDashboard extends Component {
 
           <Col sm="6">
           <Card>
-            <CardHeader>
-              <i className="fa fa-align-justify"></i> Activity Rate
+            <CardHeader style={{backgroundColor: '#06C59D'}}>
+              <i className="fa fa-align-justify"></i> Adoption Rate
             </CardHeader>
             <CardBody>
               <SignUpPrimaryLinePlot />
