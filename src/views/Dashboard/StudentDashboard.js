@@ -128,7 +128,7 @@ class StudentDashboard extends Component {
           <Row>
             <Col>
               <Card>
-                <CardBody style={{backgroundColor: '#06D3DF'}}>
+                <CardBody style={{backgroundColor: '#ffa07a'}}>
                   <Row>
                     <Col sm="5">
                       <CardTitle className="mb-0">Statistics</CardTitle>
