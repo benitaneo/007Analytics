@@ -100,7 +100,8 @@ class StudentDashboard extends Component {
         newStats.push({
           currentLevel: staticInfo[stat]['Current level'],
           cohortAverage: staticInfo[stat]['Cohort average'],
-          percentile: Math.round(staticInfo[stat]['Percentile in cohort'])
+          percentile: Math.round(staticInfo[stat]['Percentile in cohort']),
+          unwatchedVideo: staticInfo[stat]['Unwatched Video']
         });
       }
       this.setState({
@@ -167,6 +168,14 @@ class StudentDashboard extends Component {
                   <li>
                     <div className="text-muted">Predicted Time Required</div>
                     <strong>{this.state.predictedData[2]} seconds</strong>
+                  </li>
+                  </ul>
+                </CardFooter>
+                <CardFooter>
+                  <ul>
+                  <li>
+                    <div className="text-muted">Video Assignments</div>
+                    <strong>{this.state.staticArr[0]['unwatchedVideo']}</strong>
                   </li>
                   </ul>
                 </CardFooter>
