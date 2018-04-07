@@ -1,5 +1,5 @@
 import ActionTypes from '../constants/action_types';
-import firebase from 'firebase';
+//import firebase from 'firebase';
 
 // change according to your firebase project
 const config = {

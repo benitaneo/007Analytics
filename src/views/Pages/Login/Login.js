@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, CardGroup, Card, CardBody, CardImg, Button, Input, InputGroup, InputGroupAddon, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import firebase from '../../../firebase';
 import Footer from '../../../components/Footer';
 
 // import slider dependencies

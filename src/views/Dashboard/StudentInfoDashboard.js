@@ -44,11 +44,7 @@ class StudentInfoDashboard extends Component {
   }
 
   render() {
-    console.log("here");
-    console.log(this.state.studentsArr);
     if (this.state.mount === true) {
-      console.log("got here");
-      console.log(this.state.studentsArr);
       return (
           <div>
             <ReactTable data={this.state.studentsArr} filterable  
