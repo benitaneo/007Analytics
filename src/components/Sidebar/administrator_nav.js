@@ -20,7 +20,7 @@ export default {
     },
     {
       name: 'School Contacts',
-      url: '/charts',
+      url: '/instructorcontact',
       icon: 'icon-pie-chart'
     },
     {

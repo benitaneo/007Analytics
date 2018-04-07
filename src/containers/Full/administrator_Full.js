@@ -8,6 +8,8 @@ import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import AdministratorDashboard from '../../views/Dashboard/AdministratorDashboard';
 
+import InstructorContacts from '../../views/Dashboard/InstructorContacts';
+
 class AdministratorFull extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +27,7 @@ class AdministratorFull extends Component {
             <Container fluid>
               <Switch>
                 <Route path="/administrator" name="AdministratorDashboard" component={AdministratorDashboard}/>
+                <Route path="/instructorcontact" name="Contacts" component={InstructorContacts}/> 
                 
                 <Redirect from="/" to="/administrator"/>
               </Switch>

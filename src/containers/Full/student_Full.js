@@ -8,7 +8,6 @@ import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import StudentDashboard from '../../views/Dashboard/StudentDashboard';
 import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
-import CodeCombatProgress from '../../views/Dashboard/Forum';
 
 // Icons
 import FontAwesome from '../../views/Icons/FontAwesome/';
@@ -34,8 +33,7 @@ class StudentFull extends Component {
             <Breadcrumb />
             <Container fluid>
               <Switch>
-                <Route path="/student" name="StudentDashboard" component={StudentDashboard}/>
-                <Route path="/forum" name="Forum" component={CodeCombatProgress}/>    
+                <Route path="/student" name="StudentDashboard" component={StudentDashboard}/>  
                 
                 <Redirect from="/" to="/student"/>
               </Switch>

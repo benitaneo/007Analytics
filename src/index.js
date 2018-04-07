@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter, Route, Switch, Router, Redirect} from 'react-router-dom';
-import firebase from './firebase';
+//import firebase from './firebase';
 import store from './store';
 // Styles
 // Import Font Awesome Icons Set
@@ -17,7 +17,7 @@ import '../scss/core/_dropdown-menu-right.scss'
 import StudentFull from './containers/Full/student_Full'
 import AdministratorFull from './containers/Full/administrator_Full'
 import InstructorFull from './containers/Full/instructor_Full'
-import ForumFull from './containers/Full/forum_Full'
+import InstructorContactsFull from './containers/Full/instructorContacts_Full'
 import ContactFull from './containers/Full/contact_Full'
 import StudentsInformationFull from './containers/Full/students_Information_Full'
 
@@ -40,7 +40,7 @@ ReactDOM.render((
       <Route path="/student" name="StudentHome" component={StudentFull} />
       <Route path="/administrator" name="AdministratorHome" component={AdministratorFull} />
       <Route path="/instructor" name="InstructorHome" component={InstructorFull} />
-      <Route path="/forum" name="Forum" component={ForumFull} />
+      <Route path="/instructorcontact" name="InstructorContacts" component={InstructorContactsFull} />
       <Route path="/admincontact" name="AdminContact" component={ContactFull} />
       <Route path="/studentinfo" name="StudentInformationDashboard" component={StudentsInformationFull} />
 
