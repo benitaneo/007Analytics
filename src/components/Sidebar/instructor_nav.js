@@ -23,11 +23,11 @@ export default {
       url: '/studentinfo',
       icon: 'icon-calculator'
     },
-    {
+    /*{
       name: 'Administrator Contact',
       url: '/admincontact',
       icon: 'icon-pie-chart'
-    },
+    },*/
     {
       divider: true
     },

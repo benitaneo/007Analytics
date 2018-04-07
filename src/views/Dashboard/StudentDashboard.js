@@ -128,11 +128,11 @@ class StudentDashboard extends Component {
           <Row>
             <Col>
               <Card>
-                <CardBody style={{backgroundColor: '#41BEB7'}}>
+                <CardBody style={{backgroundColor: '#2e3192'}}>
                   <Row>
                     <Col sm="5">
-                      <CardTitle className="mb-0">Statistics</CardTitle>
-                      <div className="small text-muted">March 2018</div>
+                      <CardTitle className="mb-0" style={{color: '#ffffff'}}>Statistics</CardTitle>
+                      <div className="small" style={{color: '#ffffff'}}>April 2018</div>
                     </Col>
                   </Row>
                 </CardBody>
@@ -186,8 +186,8 @@ class StudentDashboard extends Component {
           <Row>
             <Col sm="6">
               <Card>
-                <CardHeader style={{backgroundColor: '#41BEB7'}}>
-                  <i className="fa fa-align-justify"></i> Percentile Ranking
+                <CardHeader style={{backgroundColor: '#2188bc'}}>
+                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Percentile Ranking</i>
                 </CardHeader>
                 <CardBody>
                   <div id="number">
@@ -199,8 +199,8 @@ class StudentDashboard extends Component {
 
             <Col sm="6">
               <Card>
-                <CardHeader style={{backgroundColor: '#41BEB7'}}>
-                  <i className="fa fa-align-justify"></i> Weekly Progression
+                <CardHeader style={{backgroundColor: '#2188bc'}}>
+                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Weekly Progression</i>
                 </CardHeader>
                 <CardBody>
                   <div id="completed">
@@ -251,8 +251,8 @@ class StudentDashboard extends Component {
           <Row>
             <Col sm="12">
               <Card>
-                <CardHeader style={{backgroundColor: '#41BEB7'}}>
-                  <i className="fa fa-align-justify"></i> Time Performance
+                <CardHeader style={{backgroundColor: '#2188bc'}}>
+                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Time Performance</i>
                 </CardHeader>
                 <CardBody>
                   <div id="boxplot">
@@ -266,8 +266,8 @@ class StudentDashboard extends Component {
           <Row>
             <Col>
             <Card>
-            <CardHeader style={{backgroundColor: '#41BEB7'}}>
-              <i className="fa fa-align-justify"></i> Top Selected Tech Articles for the Week
+            <CardHeader style={{backgroundColor: '#2188bc'}}>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Top Selected Tech Articles for the Week</i> 
             </CardHeader>
               <CardBody>
               <Row>
