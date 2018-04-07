@@ -76,7 +76,7 @@ class StudentBoxPlot extends Component {
               <XAxis.Title>Level</XAxis.Title>
           </XAxis>
 
-          <YAxis id="boxplot" min="0" max="3500" tickInterval="500" scrollbar="enabled">
+          <YAxis id="boxplot" min="0" max="1200" tickInterval="200" scrollbar="enabled">
             <YAxis.Title>Percentile</YAxis.Title>
             <BoxPlotSeries label="Time Taken" data={this.getBoxPlotValues()} />
             <LineSeries name="Personal Timing" data={this.getPersonalTiming()} />
