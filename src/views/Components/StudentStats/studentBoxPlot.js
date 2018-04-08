@@ -77,7 +77,7 @@ class StudentBoxPlot extends Component {
           </XAxis>
 
           <YAxis id="boxplot" min="0" max="1200" tickInterval="200" scrollbar="enabled">
-            <YAxis.Title>Percentile</YAxis.Title>
+            <YAxis.Title>Time Taken (seconds)</YAxis.Title>
             <BoxPlotSeries label="Time Taken" data={this.getBoxPlotValues()} />
             <LineSeries name="Personal Timing" data={this.getPersonalTiming()} />
             <Tooltip />
