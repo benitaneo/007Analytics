@@ -187,7 +187,7 @@ class StudentDashboard extends Component {
             <Col sm="6">
               <Card>
                 <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Percentile Ranking</i>
+                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Percentile Ranking
                 </CardHeader>
                 <CardBody>
                   <div id="number">
@@ -200,7 +200,7 @@ class StudentDashboard extends Component {
             <Col sm="6">
               <Card>
                 <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Weekly Progression</i>
+                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Weekly Progression
                 </CardHeader>
                 <CardBody>
                   <div id="completed">
@@ -252,7 +252,7 @@ class StudentDashboard extends Component {
             <Col sm="12">
               <Card>
                 <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Time Performance</i>
+                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Time Performance
                 </CardHeader>
                 <CardBody>
                   <div id="boxplot">
@@ -267,7 +267,7 @@ class StudentDashboard extends Component {
             <Col>
             <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Top Selected Tech Articles for the Week</i> 
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i>  Top Selected Tech Articles for the Week
             </CardHeader>
               <CardBody>
               <Row>
@@ -280,9 +280,9 @@ class StudentDashboard extends Component {
                   <Card>
                     <CardImg src="../img/javascript/js_image1.jpg" alt="Card image cap" />
                     <CardBody style={{height: 245+"px"}}>
-                      <CardTitle>🎼webpack 4: released today!!✨</CardTitle>
-                      <CardText>Codename: Legato 🎶</CardText>
-                      <Button href="https://medium.com/webpack/webpack-4-released-today-6cdb994702d4?source=topic_page---8------0----------------">Read Article</Button>
+                      <CardTitle>13 Noteworthy Points from Google’s JavaScript Style Guide</CardTitle>
+                      <CardText>For anyone who isn’t already familiar with it, Google puts out a style guide for writing JavaScript that lays out (what Google believes to…</CardText>
+                      <Button href="https://medium.freecodecamp.org/google-publishes-a-javascript-style-guide-here-are-some-key-lessons-1810b8ad050b?source=topic_page---8------0----------------">Read Article</Button>
                     </CardBody>
                   </Card>
                 </Col>
@@ -291,9 +291,9 @@ class StudentDashboard extends Component {
                   <Card>
                     <CardImg src="../img/javascript/js_image2.jpg" alt="Card image cap" />
                     <CardBody style={{height: 245+"px"}}>
-                      <CardTitle>Elegant patterns in modern JavaScript: RORO</CardTitle>
-                      <CardText>I wrote my first few lines of JavaScript not long after the language was invented. If you told me at the time that I would one day be …</CardText>
-                      <Button href="https://medium.freecodecamp.org/elegant-patterns-in-modern-javascript-roro-be01e7669cbd?source=topic_page---8------1----------------">Read Article</Button>
+                      <CardTitle>Here are examples of everything new in ECMAScript 2016, 2017, and 2018</CardTitle>
+                      <CardText>It’s hard to keep track of what’s new in JavaScript (ECMAScript). And it’s even harder to find useful code examples.</CardText>
+                      <Button href="https://medium.freecodecamp.org/here-are-examples-of-everything-new-in-ecmascript-2016-2017-and-2018-d52fa3b5a70e?source=topic_page---8------1----------------">Read Article</Button>
                     </CardBody>
                   </Card>
                 </Col>
@@ -302,9 +302,9 @@ class StudentDashboard extends Component {
                   <Card>
                     <CardImg src="../img/javascript/js_image3.jpg" alt="Card image cap" />
                     <CardBody style={{height: 245+"px"}}>
-                      <CardTitle>Straightforward code splitting with React and webpack</CardTitle>
-                      <CardText>Everything seemed perfect until your app size increased too fast …</CardText>
-                      <Button href="https://medium.freecodecamp.org/straightforward-code-splitting-with-react-and-webpack-4b94c28f6c3f?source=topic_page---8------0----------------">Read Article</Button>
+                      <CardTitle>Introducing the react-testing-library 🐐</CardTitle>
+                      <CardText>A simpler replacement for enzyme that encourages good testing practices.</CardText>
+                      <Button href="https://blog.kentcdodds.com/introducing-the-react-testing-library-e3a274307e65?source=topic_page---8------4----------------">Read Article</Button>
                     </CardBody>
                   </Card>
                 </Col>
@@ -331,9 +331,9 @@ class StudentDashboard extends Component {
                   <Card>
                     <CardImg src="../img/tech/tech_image2.jpg" alt="Card image cap" />
                     <CardBody style={{height: 245+"px"}}>
-                      <CardTitle>Enacting the nation’s strongest net neutrality protections in California</CardTitle>
-                      <CardText>An open internet is essential to maintaining our democracy, growing our economy, protecting consumers, and preserving critical health…</CardText>
-                      <Button href="https://medium.com/@Scott_Wiener/enacting-the-nations-strongest-net-neutrality-protections-in-california-bdee6bb9b3c1?source=topic_page---8------1----------------">Read Article</Button>
+                      <CardTitle>The Mistakes I Made As a Beginner Programmer</CardTitle>
+                      <CardText>Learn to identify them, make habits to avoid them.</CardText>
+                      <Button href="https://medium.com/@samerbuna/the-mistakes-i-made-as-a-beginner-programmer-ac8b3e54c312?source=topic_page---8------2----------------">Read Article</Button>
                     </CardBody>
                   </Card>
                 </Col>
@@ -342,9 +342,9 @@ class StudentDashboard extends Component {
                   <Card>
                     <CardImg src="../img/tech/tech_image3.jpg" alt="Card image cap" />
                     <CardBody style={{height: 245+"px"}}>
-                      <CardTitle>Can Bots Help Us Deal with Grief?</CardTitle>
-                      <CardText>How simulations can bring our loved ones back to life</CardText>
-                      <Button href="https://medium.com/s/when-robots-rule-the-world/can-bots-help-us-deal-with-grief-3de488cae96?source=topic_page---8------3----------------">Read Article</Button>
+                      <CardTitle>Exploring ARCore: Digging fundamentals of AR</CardTitle>
+                      <CardText>Augmented reality is picking up the heat nowadays. All the major companies such as Facebook, Apple, Microsoft, and Google are pushing their…</CardText>
+                      <Button href="https://medium.com/@kevalpatel2106/exploring-arcore-digging-fundamentals-of-ar-9250ea10c8fd?source=topic_page---8------1----------------">Read Article</Button>
                     </CardBody>
                   </Card>
                 </Col>

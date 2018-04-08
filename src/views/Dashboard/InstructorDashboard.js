@@ -225,7 +225,7 @@ class InstructorDashboard extends Component {
             <Col sm="6">
               <Card>
                 <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> School Performance</i>
+                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> School Performance
                 </CardHeader>
                 <CardBody>
                   <div id="number">
@@ -238,7 +238,7 @@ class InstructorDashboard extends Component {
             <Col sm="6">
               <Card>
                 <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Student Performance</i>
+                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Student Performance
                 </CardHeader>
                 <CardBody>
                   <div id="levels">
@@ -266,7 +266,7 @@ class InstructorDashboard extends Component {
             <Col sm="12">
               <Card>
               <CardHeader style={{backgroundColor: '#2188bc'}}>
-                <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Video Assignments Completion Status</i>
+                <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Video Assignments Completion Status
               </CardHeader>
               <CardBody>
                 <Row>
@@ -318,7 +318,7 @@ class InstructorDashboard extends Component {
           <Col sm="12">
             <Card>
               <CardHeader style={{backgroundColor: '#2188bc'}}>
-                <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Video Assignments Pause Timings Analytics</i>
+                <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Video Assignments Pause Timings Analytics
               </CardHeader>
               <CardBody>
                 <SelectField

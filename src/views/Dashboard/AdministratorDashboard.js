@@ -243,7 +243,7 @@ class AdministratorDashboard extends Component {
           <Col sm="12">
           <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Cohort Student Count</i>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Cohort Student Count
             </CardHeader>
             <CardBody>
               <CohortCountBarPlot />
@@ -256,7 +256,7 @@ class AdministratorDashboard extends Component {
           <Col sm="12">
           <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Cohort Submissions Count</i>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Cohort Submissions Count
             </CardHeader>
             <CardBody>
               <WeeklySubmitsLinePlot />
@@ -269,7 +269,7 @@ class AdministratorDashboard extends Component {
           <Col sm="12">
           <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Cohort Submissions Count</i>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Cohort Submissions Count
             </CardHeader>
             <CardBody>
               <InstructorActivityLinePlot />
@@ -291,7 +291,7 @@ class AdministratorDashboard extends Component {
           <Col sm="6">
           <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Activity Rate</i>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Activity Rate
             </CardHeader>
             <CardBody>
              <SignInSeniorLinePlot />
@@ -302,7 +302,7 @@ class AdministratorDashboard extends Component {
           <Col sm="6">
           <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Adoption Rate</i>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Adoption Rate
             </CardHeader>
             <CardBody>
               <SignUpSeniorLinePlot />
@@ -318,7 +318,7 @@ class AdministratorDashboard extends Component {
           <Col sm="6">
           <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Activity Rate</i>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Activity Rate
             </CardHeader>
             <CardBody>
               <SignInJuniorLinePlot />
@@ -329,7 +329,7 @@ class AdministratorDashboard extends Component {
           <Col sm="6">
           <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Adoption Rate</i>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Adoption Rate
             </CardHeader>
             <CardBody>
               <SignUpJuniorLinePlot />
@@ -345,7 +345,7 @@ class AdministratorDashboard extends Component {
           <Col sm="6">
           <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Activity Rate</i>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Activity Rate
             </CardHeader>
             <CardBody>
               <SignInPrimaryLinePlot />
@@ -356,7 +356,7 @@ class AdministratorDashboard extends Component {
           <Col sm="6">
           <Card>
             <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}> Adoption Rate</i>
+              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Adoption Rate
             </CardHeader>
             <CardBody>
               <SignUpPrimaryLinePlot />
