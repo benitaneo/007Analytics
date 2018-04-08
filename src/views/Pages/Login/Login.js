@@ -23,7 +23,7 @@ const content = [
 		button: 'Login',
 		image: 'https://i.imgur.com/ZXBtVw7.jpg',
 		user: '007Analytics',
-    userProfile: '../../../img/flags/Singapore.png'
+    userProfile: '../../../img/007analytics.jpg'
   },
   {
 		title: 'Learn Programming in a Fun manner',
@@ -40,8 +40,8 @@ const content = [
 		'An amazing tool for anyone who is getting started on Programming!',
 		button: 'Discover',
 		image: 'https://i.imgur.com/DCdBXcq.jpg',
-		user: 'Chris Boesch',
-		userProfile: '../../../img/avatars/3.jpg'
+		user: 'ALSET Team',
+		userProfile: '../../../img/flags/Singapore.png'
 	}
 ];
 

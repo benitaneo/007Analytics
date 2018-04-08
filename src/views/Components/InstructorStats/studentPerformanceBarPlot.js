@@ -62,7 +62,7 @@ class StudentPerformanceBarPlot extends Component {
           </XAxis>
 
           <YAxis id="levels">
-              <YAxis.Title>Number of Levels Completed</YAxis.Title>
+              <YAxis.Title>Number of Levels</YAxis.Title>
               <ColumnSeries id="performance" name="Levels Completed" data={
                   this.getStudentLevels()                    
                   } />
