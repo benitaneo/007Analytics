@@ -14,6 +14,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
+import { blue50, blueA100 } from 'material-ui/styles/colors'
 
 const content = [
 	{
@@ -45,9 +46,34 @@ const content = [
 	}
 ];
 
+const material_styles = {
+  errorStyle: {
+    color: blueA100
+  },
+  underlineStyle: {
+    borderColor: blueA100
+  },
+  floatingLabelStyle: {
+    color: blueA100
+  },
+  floatingLabelFocusStyle: {
+    color: blueA100
+  },
+  inputTextStyle: {
+    color: blueA100
+  },
+  hintTextStyle: {
+    color: blueA100
+  },
+  hintStyle: {
+    opaque: 100
+  }
+};
+
 const styles = {
   button: {
     margin: 10,
+    color: blue50
   },
   exampleImageInput: {
     cursor: 'pointer',
@@ -66,6 +92,7 @@ class Login extends Component {
     super(props);
 
     this.handleRole = this.handleRole.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
     /*this.toggle = this.toggle.bind(this);
     this.toggleCredentials = this.toggleCredentials.bind(this);*/
     this.state = {
@@ -79,7 +106,8 @@ class Login extends Component {
   handleRole(event, index, value) {
     console.log(value);
     this.setState({
-      value: value
+      value: value,
+      signup: 0
     });
   }
 
@@ -107,6 +135,10 @@ class Login extends Component {
     this.routePage();
   }
 
+  handleSignUp() {
+    window.location = 'https://codecombat.com';
+  }
+
   routePage() {
     if (this.state.value == 1) {
       setTimeout(function(){window.location = "#/administrator"},5000);  
@@ -121,7 +153,7 @@ class Login extends Component {
     console.log(this.state.value);
     return (
       <MuiThemeProvider>
-        <div>
+        <div className="login-bg">
         <Slider className="slider-wrapper" autoplay="1500">
           {content.map((item, index) => (
             <div
@@ -143,7 +175,10 @@ class Login extends Component {
           ))}
         </Slider>
         <Row className="justify-content-center">
+          <div className="landingbuttonfirst">
           <SelectField
+            underlineFocusStyle={material_styles.underlineStyle}
+            floatingLabelFocusStyle={material_styles.floatingLabelFocusStyle}
             floatingLabelText="Role"
             value={this.state.value}
             onChange={this.handleRole}
@@ -153,28 +188,22 @@ class Login extends Component {
             <MenuItem value={2} primaryText="Instructor" />
             <MenuItem value={3} primaryText="Student" />
           </SelectField>
+          </div>
           <TextField
+            underlineFocusStyle={material_styles.underlineStyle}
+            floatingLabelFocusStyle={material_styles.floatingLabelFocusStyle}
             hintText="Your UserID"
             floatingLabelText="Enter Your UserID"
             onChange={this.handleID.bind(this)}
           />
         </Row>
-        <Row className="justify-content-center">
-          <RaisedButton
-            label="Login"
-            style={styles.button}
-            primary={true}
-            onClick={() => this.handleClick()}
-          />
-        </Row>
-        <Row className="justify-content-center">
-          <RaisedButton
-            href="https://codecombat.com"
-            target="_blank"
-            label="Sign Up"
-            style={styles.button}
-            primary={true}
-          />
+        <Row className="justify-content-center landingbuttonrow">
+          <div className="landingbuttonfirst">
+            <div className="landingbutton" onClick={() => this.handleClick()}>Login</div>
+          </div>
+          <div className="landingbuttonsecond">
+          <div className="landingbutton" onClick={() => this.handleSignUp()}>Sign Up</div>
+          </div>
         </Row>
       </div>
       </MuiThemeProvider>
