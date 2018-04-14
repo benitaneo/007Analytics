@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Card, CardHeader, CardBody} from 'reactstrap';
 import firebase from '../../firebase'
-
-// Import React Table
-import ReactTable from "react-table";
-import "react-table/react-table.css";
-import matchSorter from 'match-sorter';
 
 // Import React-Bootstrap-Table
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
@@ -71,9 +65,27 @@ class InstructorContacts extends Component {
 
   render() {
     if (this.state.mount === true) {
+      const options = {
+        sizePerPageList: [ {
+          text: '5', value: 5
+        }, {
+          text: '10', value: 10
+        }, {
+          text: 'All', value: this.state.instructorsArr.length
+        }],
+        sizePerPage: 5,
+        paginationSize: 3,
+        prePage: 'Prev',
+        nextPage: 'Next',
+        firstPage: 'First',
+        lastPage: 'Last',
+        paginationPosition: 'top'
+      }
       return (
         <div>
-          <BootstrapTable data={this.state.instructorsArr} hover pagination search exportCSV csvFileName='schoolContacts.csv'>
+          <BootstrapTable data={this.state.instructorsArr} 
+          hover pagination search options={options} 
+          exportCSV csvFileName='schoolContacts.csv'>
             <TableHeaderColumn width="30%" thStyle={headerstyle} isKey dataField='instructorSchool' dataSort>School</TableHeaderColumn>
             <TableHeaderColumn width="20%" thStyle={headerstyle} dataField='instructorName'>Instructor Name</TableHeaderColumn>
             <TableHeaderColumn width="10%" thStyle={headerstyle} dataField='cohort' dataSort>Cohort</TableHeaderColumn>
