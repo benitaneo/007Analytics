@@ -18,11 +18,11 @@ class AdministratorFull extends Component {
 
   render() {
     return (
-      <div className="app">
+      <div className="app full-font">
         <Header />
         <div className="app-body">
           <AdministratorSidebar {...this.props}/>
-          <main className="main">
+          <main className="main full-body">
             <Breadcrumb />
             <Container fluid>
               <Switch>

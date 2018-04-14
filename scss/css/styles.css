@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body {
   font-family: 'Monserrat', sans-serif;
@@ -236,7 +237,7 @@ button:hover {
   }
 }
 
-/********************************************Login Page**************************************************/
+/***********************************************************Login Page********************************************************/
 .login-bg {
   /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.85)), url("../../public/img/phone.jpg"); */
   background-color: whitesmoke;
@@ -263,8 +264,8 @@ button:hover {
 	border:1px solid #84bbf3;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
+	color:black;
+	font-family:'Monserrat';
 	font-size:20px;
 	font-weight:bold;
 	padding:6px 18px;
@@ -296,4 +297,14 @@ button:hover {
 
 .landingbuttonsecond {
   padding-left: 10px;
+}
+
+/***********************************************************Full Pages********************************************************/
+.full-body {
+  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.85)), url("../../public/img/phone.jpg"); */
+  background-color: #F0F8FF;
+}
+
+.full-font {
+  font-family: 'Monserrat', sans-serif;
 }

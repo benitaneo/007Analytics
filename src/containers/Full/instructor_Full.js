@@ -31,7 +31,7 @@ class InstructorFull extends Component {
         <Header />
         <div className="app-body">
           <InstructorSidebar {...this.props}/>
-          <main className="main">
+          <main className="main full-body">
             <Breadcrumb />
             <Container fluid>
               <Switch>
