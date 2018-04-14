@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 body {
   font-family: 'Monserrat', sans-serif;
@@ -240,7 +241,7 @@ button:hover {
 /***********************************************************Login Page********************************************************/
 .login-bg {
   /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.85)), url("../../public/img/phone.jpg"); */
-  background-color: whitesmoke;
+  background-color: #F0F8FF;
   background-size: cover;
   width: 100%;
   overflow: hidden;
@@ -265,7 +266,7 @@ button:hover {
 	display:inline-block;
 	cursor:pointer;
 	color:black;
-	font-family:'Monserrat';
+	font-family:'Lato';
 	font-size:20px;
 	font-weight:bold;
 	padding:6px 18px;

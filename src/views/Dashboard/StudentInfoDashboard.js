@@ -6,6 +6,16 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import matchSorter from 'match-sorter';
 
+// Import React-Bootstrap-Table
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+
+const headerstyle = { 
+  backgroundColor: '#000000',
+  color: 'orange',
+  fontWeight: 'bold',
+  textAlign: 'center'
+}
+
 import firebase from '../../firebase';
 
 class StudentInfoDashboard extends Component {
@@ -45,36 +55,33 @@ class StudentInfoDashboard extends Component {
 
   render() {
     if (this.state.mount === true) {
+      const options = {
+        sizePerPageList: [ {
+          text: '5', value: 5
+        }, {
+          text: '10', value: 10
+        }, {
+          text: 'All', value: this.state.studentsArr.length
+        }],
+        sizePerPage: 5,
+        paginationSize: 3,
+        prePage: 'Prev',
+        nextPage: 'Next',
+        firstPage: 'First',
+        lastPage: 'Last',
+        paginationPosition: 'top'
+      }
       return (
-          <div>
-            <ReactTable data={this.state.studentsArr} filterable  
-              columns={[
-                {
-                  Header: "Student Name",
-                  accessor: "name",
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["name"] }),
-                  filterAll: true
-                },
-                {
-                  Header: "Achievements App ID",
-                  accessor: "id",
-                  filterMethod: (filter, row) =>
-                    row[filter.id].startsWith(filter.value) &&
-                    row[filter.id].endsWith(filter.value)
-                },
-                {
-                  Header: "Number of Completed Levels",
-                  accessor: "completed"
-                },
-                {
-                  Header: "Last Active Date",
-                  accessor: "active"
-                }
-              ]}
-              defaultPageSize={10} className="-striped -highlight"
-            />
-          </div>
+        <div>
+          <BootstrapTable data={this.state.studentsArr} 
+          hover pagination search options={options} 
+          exportCSV csvFileName='studentContacts.csv'>
+            <TableHeaderColumn width="20%" thStyle={headerstyle} isKey dataField='name' dataSort>Student Name</TableHeaderColumn>
+            <TableHeaderColumn width="40%" thStyle={headerstyle} dataField='id'>Achievements App ID</TableHeaderColumn>
+            <TableHeaderColumn width="20%" thStyle={headerstyle} dataField='completed' dataSort>No. of Completed Levels</TableHeaderColumn>
+            <TableHeaderColumn width="20%" thStyle={headerstyle} dataField='active' dataSort>Last Active Date</TableHeaderColumn>
+          </BootstrapTable>
+        </div>
       )
     } else {
       return null;
