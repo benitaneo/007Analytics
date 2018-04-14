@@ -7,6 +7,16 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import matchSorter from 'match-sorter';
 
+// Import React-Bootstrap-Table
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+
+const headerstyle = { 
+  backgroundColor: '#000000',
+  color: 'orange',
+  fontWeight: 'bold',
+  textAlign: 'center'
+}
+
 class InstructorContacts extends Component {
   constructor(props) {
     super(props);
@@ -62,42 +72,15 @@ class InstructorContacts extends Component {
   render() {
     if (this.state.mount === true) {
       return (
-          <div>
-            <ReactTable data={this.state.instructorsArr} filterable  
-              columns={[
-                {
-                  Header: "School",
-                  accessor: "instructorSchool",
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["instructorName"] }),
-                  filterAll: true
-                },
-                {
-                  Header: "Instructor Name",
-                  accessor: "instructorName",
-                  maxWidth: 150,
-                  filterMethod: (filter, row) =>
-                    row[filter.id].startsWith(filter.value) &&
-                    row[filter.id].endsWith(filter.value)
-                },
-                {
-                  Header: "Cohort",
-                  accessor: "cohort",
-                  maxWidth: 100
-                },
-                {
-                  Header: "Instructor Contact No.",
-                  accessor: "instructorContact",
-                  maxWidth: 150
-                },
-                {
-                  Header: "Instructor Email",
-                  accessor: "instructorEmail"
-                }
-              ]}
-              defaultPageSize={10} className="-striped -highlight"
-            />
-          </div>
+        <div>
+          <BootstrapTable data={this.state.instructorsArr} hover pagination search exportCSV csvFileName='schoolContacts.csv'>
+            <TableHeaderColumn width="30%" thStyle={headerstyle} isKey dataField='instructorSchool' dataSort>School</TableHeaderColumn>
+            <TableHeaderColumn width="20%" thStyle={headerstyle} dataField='instructorName'>Instructor Name</TableHeaderColumn>
+            <TableHeaderColumn width="10%" thStyle={headerstyle} dataField='cohort' dataSort>Cohort</TableHeaderColumn>
+            <TableHeaderColumn width="20%" thStyle={headerstyle} dataField='instructorContact'>Instructor Contact No.</TableHeaderColumn>
+            <TableHeaderColumn width="20%" thStyle={headerstyle} dataField='instructorEmail'>Instructor Email</TableHeaderColumn>
+          </BootstrapTable>
+        </div>
       )
     } else {
       return null;

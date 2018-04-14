@@ -199,10 +199,10 @@ class Login extends Component {
         </Row>
         <Row className="justify-content-center landingbuttonrow">
           <div className="landingbuttonfirst">
-            <div className="landingbutton" onClick={() => this.handleClick()}>Login</div>
+            <div className="landingbutton" onClick={() => this.handleClick()}>LOGIN</div>
           </div>
           <div className="landingbuttonsecond">
-          <div className="landingbutton" onClick={() => this.handleSignUp()}>Sign Up</div>
+          <div className="landingbutton" onClick={() => this.handleSignUp()}>SIGN UP</div>
           </div>
         </Row>
       </div>

@@ -29,7 +29,7 @@ class StudentFull extends Component {
         <Header />
         <div className="app-body">
           <StudentSidebar {...this.props}/>
-          <main className="main">
+          <main className="main full-body">
             <Breadcrumb />
             <Container fluid>
               <Switch>

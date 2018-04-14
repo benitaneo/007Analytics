@@ -28,7 +28,7 @@ class InstructorContactsFull extends Component {
         <Header />
         <div className="app-body">
           <AdministratorSidebar {...this.props}/>
-          <main className="main">
+          <main className="main full-body">
             <Breadcrumb />
             <Container fluid>
               <Switch>
