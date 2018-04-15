@@ -55,8 +55,8 @@ class SchoolPerformanceBarPlot extends Component {
     for (var sch = 0; sch < this.state.schoolArr.length; sch++ ) {
       levels.push(parseInt(this.state.schoolArr[sch]['levelsCompleted']));
     }
-    console.log("here at levels")
-    console.log(levels);
+    //console.log("here at levels")
+    //console.log(levels);
     return levels;
   }
 

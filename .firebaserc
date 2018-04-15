@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "dashboard-dev-8b843"
+    "default": "dashboard-dev-8b843",
+    "007Analytics": "analytics007-7d4bc"
   }
 }

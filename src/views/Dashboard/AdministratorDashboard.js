@@ -110,7 +110,7 @@ class AdministratorDashboard extends Component {
       seniorSchools: [],
       day: 0,
       dropdownOpen: false,
-      month: 0,
+      month: "",
       mount: false
     };
   }
@@ -206,7 +206,7 @@ class AdministratorDashboard extends Component {
                 <Row>
                   <Col sm="5">
                     <CardTitle className="mb-0">Statistics</CardTitle>
-                    <div className="small">April 2018</div>
+                    <div className="small">{this.state.month} 2018</div>
                   </Col>
                 </Row>
               </CardBody>

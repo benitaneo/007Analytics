@@ -322,3 +322,29 @@ button:hover {
 .cardfooter {
   background-color: #FFFFFF;
 }
+
+/******************************************************React-Table Styling*****************************************************/
+.ReactTable .rt-tr .action {
+	transition: all .2s ease;
+	text-align: center;
+	color: red;
+	transform: scale(0);
+}
+
+.ReactTable .rt-tr:hover .action {
+	transform: scale(1.3);
+}
+
+.ReactTable .rt-tr:hover .rt-td {
+	background: yellow;
+}
+
+.ReactTable .rt-thead {
+  font-weight: bold;
+  background: #2A93D5;
+}
+
+.ReactTable .rt {
+  font-weight: bold;
+  background: #2A93D5;
+}

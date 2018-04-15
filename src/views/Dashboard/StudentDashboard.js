@@ -44,11 +44,19 @@ import StudentProgressLinePlot from '../Components/StudentStats/studentProgressL
 
 import firebase from '../../firebase';
 
-//Random Numbers
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+// Dynamically update month label
+const month_names = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+const currentMonth = getMonth();
+
+function getMonth() {
+  var today = new Date();
+  return month_names[today.getMonth()];
 }
 
+// Dynamically update countdown to next Singapore Coding Competition
 const daysLeft = getDaysLeft();
 
 function getDaysLeft() {
@@ -66,6 +74,7 @@ class StudentDashboard extends Component {
 
     this.state = {
       day: 0,
+      month: "",
       mount: false,
       predictedData: [],
       flaggedArr: [],
@@ -114,6 +123,7 @@ class StudentDashboard extends Component {
       newStats.push(predicted['levelName'], predicted['levelNumber'], predicted['predictedTime']);
       this.setState({
         predictedData: newStats,
+        month: currentMonth,
         mount: true,
         day: getDaysLeft()
       });
@@ -128,11 +138,11 @@ class StudentDashboard extends Component {
           <Row>
             <Col>
               <Card>
-                <CardBody style={{backgroundColor: '#2e3192'}}>
+                <CardBody className="cardheader">
                   <Row>
                     <Col sm="5">
-                      <CardTitle className="mb-0" style={{color: '#ffffff'}}>Statistics</CardTitle>
-                      <div className="small" style={{color: '#ffffff'}}>April 2018</div>
+                      <CardTitle className="mb-0">Statistics</CardTitle>
+                      <div className="small">{this.state.month} 2018</div>
                     </Col>
                   </Row>
                 </CardBody>
@@ -186,8 +196,8 @@ class StudentDashboard extends Component {
           <Row>
             <Col sm="6">
               <Card>
-                <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Percentile Ranking
+                <CardHeader className="cardheader">
+                  <i className="fa fa-clone"></i> Percentile Ranking
                 </CardHeader>
                 <CardBody>
                   <div id="number">
@@ -199,8 +209,8 @@ class StudentDashboard extends Component {
 
             <Col sm="6">
               <Card>
-                <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Weekly Progression
+                <CardHeader className="cardheader">
+                  <i className="fa fa-clone"></i> Weekly Progression
                 </CardHeader>
                 <CardBody>
                   <div id="completed">
@@ -220,12 +230,12 @@ class StudentDashboard extends Component {
                     {
                       Header: "Level Name",
                       accessor: "levelName",
-                      maxWidth: 200
+                      maxWidth: 150
                     },
                     {
-                      Header: "Level Number",
+                      Header: "Level No.",
                       accessor: "levelNumber",
-                      maxWidth: 100
+                      maxWidth: 70
                     },
                     {
                       Header: "Percentile",
@@ -234,11 +244,13 @@ class StudentDashboard extends Component {
                     },
                     {
                       Header: "Topic",
-                      accessor: "levelTopic"
+                      accessor: "levelTopic",
+                      maxWidth: 330
                     },
                     {
                       Header: "Self-Enrichment Link",
-                      accessor: "topicReadUp"
+                      accessor: "topicReadUp",
+                      Cell: e => <a href={e.value}> {e.value}</a>
                     }]
                   }
                 ]}
@@ -251,8 +263,8 @@ class StudentDashboard extends Component {
           <Row>
             <Col sm="12">
               <Card>
-                <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Time Performance
+                <CardHeader className="cardheader">
+                  <i className="fa fa-clone"></i> Time Performance
                 </CardHeader>
                 <CardBody>
                   <div id="boxplot">
@@ -266,8 +278,8 @@ class StudentDashboard extends Component {
           <Row>
             <Col>
             <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i>  Top Selected Tech Articles for the Week
+            <CardHeader className="cardheader">
+              <i className="fa fa-clone"></i> Top Selected Tech Articles for the Week
             </CardHeader>
               <CardBody>
               <Row>

@@ -19,7 +19,7 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'CodeCombat Stats',
+      name: 'CodeCombat Statistics',
       url: '/student',
       icon: 'icon-pie-chart'
     },

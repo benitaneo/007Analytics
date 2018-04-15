@@ -131,6 +131,8 @@ class Login extends Component {
     fetch(yourUrl, { mode: "no-cors" }).then(function(response) {
       console.log("Fetched ", yourUrl);
       console.log(response);
+      console.log(response.body);
+      console.log(response.headers);
     });
     this.routePage();
   }
