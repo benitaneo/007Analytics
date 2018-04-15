@@ -3,7 +3,7 @@ export default {
     {
       name: 'Dashboard',
       url: '/student',
-      icon: 'icon-speedometer',
+      icon: 'fa fa-laptop',
       badge: {
         variant: 'info',
         text: 'HOME'
@@ -19,7 +19,7 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'CodeCombat Progress',
+      name: 'CodeCombat Stats',
       url: '/student',
       icon: 'icon-pie-chart'
     },

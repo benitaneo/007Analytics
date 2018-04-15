@@ -5,8 +5,21 @@ import Highcharts from 'highcharts';
 // material-ui components
 import { MuiThemeProvider } from 'material-ui/styles';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import { blue50, blueA100, cyan500, deepOrange700 } from 'material-ui/styles/colors'
 
 import firebase from 'firebase';
+
+var styles = {
+  default_tab:{
+    color: blue50,
+    backgroundColor: "#031528",
+    fontWeight: 400,
+    fontFamily: 'Dosis'
+  },
+  active_tab:{
+    color: deepOrange700,
+  }
+}
 
 class CohortCountBarPlot extends Component {
   constructor(props) {
@@ -88,9 +101,9 @@ class CohortCountBarPlot extends Component {
       <MuiThemeProvider>
       <div>
         <Tabs onChange={this.handleChange} value={this.state.value}>
-          <Tab label="Senior" value="Senior" />
-          <Tab label="Junior" value="Junior" />
-          <Tab label="Primary" value="Primary" />
+          <Tab style={styles.default_tab} label="Senior" value="Senior" />
+          <Tab style={styles.default_tab} label="Junior" value="Junior" />
+          <Tab style={styles.default_tab} label="Primary" value="Primary" />
         </Tabs>
         <HighchartsChart>
           <Chart />
@@ -101,8 +114,8 @@ class CohortCountBarPlot extends Component {
           </XAxis>
 
           <YAxis id="number">
-            <YAxis.Title>Count</YAxis.Title>
-              <ColumnSeries id="performance" name="Number of students" data={this.getSchoolsCount()} />
+            <YAxis.Title>Number of Students</YAxis.Title>
+              <ColumnSeries id="performance" name="Student Count" data={this.getSchoolsCount()} />
             <Tooltip />
           </YAxis>
         </HighchartsChart>

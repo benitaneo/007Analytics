@@ -32,7 +32,6 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/login" name="Login Page" component={Login}/>
-        <Route exact path="/register" render{...props => (<Register />)} />
         <Route exact path="/404" component={Page404}/>
         <Route exact path="/500" component={Page500}/>
         <Route exact path="/student" name="StudentHome" render{...props => StudentFull} />

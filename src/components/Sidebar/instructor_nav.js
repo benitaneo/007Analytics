@@ -3,7 +3,7 @@ export default {
     {
       name: 'Dashboard',
       url: '/instructor',
-      icon: 'icon-speedometer',
+      icon: 'fa fa-laptop',
       badge: {
         variant: 'info',
         text: 'HOME'
@@ -21,7 +21,7 @@ export default {
     {
       name: 'Students Information',
       url: '/studentinfo',
-      icon: 'icon-calculator'
+      icon: 'fa fa-address-book-o'
     },
     /*{
       name: 'Administrator Contact',

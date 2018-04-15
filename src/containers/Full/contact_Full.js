@@ -10,16 +10,6 @@ import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
 import ContactDashboard from '../../views/Dashboard/ContactDashboard';
 import Widgets from '../../views/Widgets/';
 
-// Components
-import Buttons from '../../views/Components/Buttons/';
-import Cards from '../../views/Components/Cards/';
-import Forms from '../../views/Components/Forms/';
-import Modals from '../../views/Components/Modals/';
-import SocialButtons from '../../views/Components/SocialButtons/';
-import Switches from '../../views/Components/Switches/';
-import Tables from '../../views/Components/Tables/';
-import Tabs from '../../views/Components/Tabs/';
-
 // Icons
 import FontAwesome from '../../views/Icons/FontAwesome/';
 import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/';
@@ -36,7 +26,7 @@ class ContactFull extends Component {
 
   render() {
     return (
-      <div className="app">
+      <div className="app full-font">
         <Header />
         <div className="app-body">
           <InstructorSidebar {...this.props}/>
