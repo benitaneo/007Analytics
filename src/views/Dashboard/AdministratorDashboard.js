@@ -202,15 +202,15 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col>
             <Card>
-              <CardBody style={{backgroundColor: '#2e3192'}}>
+              <CardBody className="cardheader">
                 <Row>
                   <Col sm="5">
-                    <CardTitle className="mb-0" style={{color: '#ffffff'}}>Statistics</CardTitle>
-                    <div className="small" style={{color: '#ffffff'}}>April 2018</div>
+                    <CardTitle className="mb-0">Statistics</CardTitle>
+                    <div className="small">April 2018</div>
                   </Col>
                 </Row>
               </CardBody>
-              <CardFooter>
+              <CardFooter className="cardfooter">
                 <ul>
                   <li>
                     <div className="text-muted">Total</div>
@@ -242,8 +242,8 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="12">
           <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Cohort Student Count
+            <CardHeader className="cardheader">
+              <i className="fa fa-clone"></i> Cohort Student Count
             </CardHeader>
             <CardBody>
               <CohortCountBarPlot />
@@ -255,8 +255,8 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="12">
           <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Cohort Submissions Count
+            <CardHeader className="cardheader">
+            <i className="fa fa-clone"></i> Cohort Submissions Count
             </CardHeader>
             <CardBody>
               <WeeklySubmitsLinePlot />
@@ -268,8 +268,8 @@ class AdministratorDashboard extends Component {
         <Row>
           <Col sm="12">
           <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Cohort Submissions Count
+            <CardHeader className="cardheader">
+              <i className="fa fa-clone"></i> Cohort Submissions Count
             </CardHeader>
             <CardBody>
               <InstructorActivityLinePlot />
@@ -285,13 +285,13 @@ class AdministratorDashboard extends Component {
         </Row>
         
         <Row>
-          <h1><Badge color="primary">Senior</Badge></h1>
-        </Row>
-        <Row>
+          <Col sm="12">
+            <h1><Badge color="primary">Senior</Badge></h1>
+          </Col>
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Activity Rate
+            <CardHeader className="cardheader">
+            <i className="fa fa-clone"></i> Activity Rate
             </CardHeader>
             <CardBody>
              <SignInSeniorLinePlot />
@@ -301,8 +301,8 @@ class AdministratorDashboard extends Component {
 
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Adoption Rate
+            <CardHeader className="cardheader">
+            <i className="fa fa-clone"></i> Adoption Rate
             </CardHeader>
             <CardBody>
               <SignUpSeniorLinePlot />
@@ -312,13 +312,13 @@ class AdministratorDashboard extends Component {
         </Row>
 
         <Row>
-          <h1><Badge color="primary">Junior</Badge></h1>
-        </Row>  
-        <Row>
+          <Col sm="12">
+            <h1><Badge color="primary">Junior</Badge></h1>
+          </Col>
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Activity Rate
+            <CardHeader className="cardheader">
+            <i className="fa fa-clone"></i> Activity Rate
             </CardHeader>
             <CardBody>
               <SignInJuniorLinePlot />
@@ -328,8 +328,8 @@ class AdministratorDashboard extends Component {
 
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Adoption Rate
+            <CardHeader className="cardheader">
+              <i className="fa fa-clone"></i> Adoption Rate
             </CardHeader>
             <CardBody>
               <SignUpJuniorLinePlot />
@@ -339,13 +339,13 @@ class AdministratorDashboard extends Component {
         </Row>
         
         <Row>
-          <h1><Badge color="primary">Primary</Badge></h1>
-        </Row>
-        <Row>
+          <Col sm="12">
+            <h1><Badge color="primary">Primary</Badge></h1>
+          </Col>
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Activity Rate
+            <CardHeader className="cardheader">
+              <i className="fa fa-clone"></i> Activity Rate
             </CardHeader>
             <CardBody>
               <SignInPrimaryLinePlot />
@@ -355,8 +355,8 @@ class AdministratorDashboard extends Component {
 
           <Col sm="6">
           <Card>
-            <CardHeader style={{backgroundColor: '#2188bc'}}>
-              <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Adoption Rate
+            <CardHeader className="cardheader">
+            <i className="fa fa-clone"></i> Adoption Rate
             </CardHeader>
             <CardBody>
               <SignUpPrimaryLinePlot />

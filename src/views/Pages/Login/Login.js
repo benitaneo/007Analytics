@@ -40,7 +40,7 @@ const content = [
 		description:
 		'An amazing tool for anyone who is getting started on Programming!',
 		button: 'Discover',
-		image: 'https://i.imgur.com/DCdBXcq.jpg',
+		image: '../../../img/phone.jpg',
 		user: 'ALSET Team',
 		userProfile: '../../../img/flags/Singapore.png'
 	}

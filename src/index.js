@@ -38,9 +38,9 @@ ReactDOM.render((
       <Route exact path="/500" name="Page 500" component={Page500}/>
       <Route path="/original" name="Login" component={Login} />
       <Route path="/student" name="StudentHome" component={StudentFull} />
-      <Route path="/administrator" name="AdministratorHome" component={AdministratorFull} />
+      <Route path="/administrator" component={AdministratorFull} />
       <Route path="/instructor" name="InstructorHome" component={InstructorFull} />
-      <Route path="/instructorcontact" name="InstructorContacts" component={InstructorContactsFull} />
+      <Route path="/instructorcontact" component={InstructorContactsFull} />
       <Route path="/admincontact" name="AdminContact" component={ContactFull} />
       <Route path="/studentinfo" name="StudentInformationDashboard" component={StudentsInformationFull} />
 

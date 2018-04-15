@@ -27,7 +27,7 @@ class InstructorFull extends Component {
   render() {
     console.log(this.props);
     return (
-      <div className="app">
+      <div className="app full-font">
         <Header />
         <div className="app-body">
           <InstructorSidebar {...this.props}/>
