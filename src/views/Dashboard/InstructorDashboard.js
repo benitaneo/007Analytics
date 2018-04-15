@@ -50,6 +50,19 @@ import WeakerStudentsTable from '../Components/InstructorStats/weakerStudentsTab
 import firebase from '../../firebase';
 import { MuiThemeProvider } from 'material-ui/styles';
 
+// Dynamically update month label
+const month_names = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+const currentMonth = getMonth();
+
+function getMonth() {
+  var today = new Date();
+  return month_names[today.getMonth()];
+}
+
+// Dynamically update countdown to next Singapore Coding Competition
 const daysLeft = getDaysLeft();
 
 function getDaysLeft() {
@@ -68,6 +81,7 @@ class InstructorDashboard extends Component {
     this.state = {
       activeTab: '1',
       day: 0,
+      month: "",
       mount: false,
       value: 1,
       performanceArr: [],
@@ -132,6 +146,7 @@ class InstructorDashboard extends Component {
         this.setState({
           students: allStudents,
           videos: allVideos,
+          month: currentMonth,
           mount: true,
           day: getDaysLeft()
         });
@@ -187,20 +202,20 @@ class InstructorDashboard extends Component {
 
   render() {
     if (this.state.mount === true) {
-      console.log(this.state.students);
-      console.log(this.state.videos);
-      console.log(this.state.videos[0]);
+      //console.log(this.state.students);
+      //console.log(this.state.videos);
+      //console.log(this.state.videos[0]);
       return (
         <MuiThemeProvider>
         <div className="animated fadeIn">
           <Row>
             <Col>
               <Card>
-                <CardBody style={{backgroundColor: '#2e3192'}}>
+                <CardBody className="cardheader">
                   <Row>
                     <Col sm="5">
-                      <CardTitle className="mb-0" style={{color: '#ffffff'}}>Statistics</CardTitle>
-                      <div className="small" style={{color: '#ffffff'}}>April 2018</div>
+                      <CardTitle className="mb-0">Statistics</CardTitle>
+                      <div className="small">{this.state.month} 2018</div>
                     </Col>
                   </Row>
                 </CardBody>
@@ -224,8 +239,8 @@ class InstructorDashboard extends Component {
           <Row>
             <Col sm="6">
               <Card>
-                <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> School Performance
+                <CardHeader className="cardheader">
+                  <i className="fa fa-clone"></i> School Performance
                 </CardHeader>
                 <CardBody>
                   <div id="number">
@@ -237,8 +252,8 @@ class InstructorDashboard extends Component {
 
             <Col sm="6">
               <Card>
-                <CardHeader style={{backgroundColor: '#2188bc'}}>
-                  <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Student Performance
+                <CardHeader className="cardheader">
+                  <i className="fa fa-clone"></i> Student Performance
                 </CardHeader>
                 <CardBody>
                   <div id="levels">
@@ -265,8 +280,8 @@ class InstructorDashboard extends Component {
           <Row>
             <Col sm="12">
               <Card>
-              <CardHeader style={{backgroundColor: '#2188bc'}}>
-                <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Video Assignments Completion Status
+              <CardHeader className="cardheader">
+                <i className="fa fa-clone"></i> Video Assignments Completion Status
               </CardHeader>
               <CardBody>
                 <Row>
@@ -317,8 +332,8 @@ class InstructorDashboard extends Component {
           <Row>
           <Col sm="12">
             <Card>
-              <CardHeader style={{backgroundColor: '#2188bc'}}>
-                <i className="fa fa-align-justify" style={{fontWeight: 'bold'}}></i> Video Assignments Pause Timings Analytics
+              <CardHeader className="cardheader">
+                <i className="fa fa-clone"></i> Video Assignments Pause Timings Analytics
               </CardHeader>
               <CardBody>
                 <SelectField
@@ -337,15 +352,15 @@ class InstructorDashboard extends Component {
 
                 <HighchartsChart>
                   <Chart />
-                  <Title>Number of pauses at every 10 seconds interval</Title>
+                  <Title>Pause Counts per 10 seconds interval</Title>
                   <Subtitle>Source: Achievements App</Subtitle>
                   <XAxis name="Time Interval" categories={this.getIntervals()}>
                       <XAxis.Title>Time Interval</XAxis.Title>
                   </XAxis>
 
                   <YAxis id="youtube1">
-                      <YAxis.Title>Counts</YAxis.Title>
-                      <LineSeries id="performance" name="Counts" data={
+                      <YAxis.Title>Number of Pauses</YAxis.Title>
+                      <LineSeries id="performance" name="Pause Counts" data={
                           this.getPauseCounts()                    
                           } />
                   </YAxis>
