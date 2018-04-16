@@ -20,7 +20,7 @@ def separatelogs(logs):
               1521388793831,
               1521993504702,
               1522598131232]
-  separated = [{},{},{},{},{},{}]
+  separated = [{},{},{},{},{},{},{}]
   for log in logs:
     if logs[log]['createdAt'] <= lastdate[0]:
       separated[0][log] = logs[log]
@@ -36,6 +36,8 @@ def separatelogs(logs):
       separated[5][log] = logs[log]
     elif logs[log]['createdAt'] <= lastdate[6]:
       separated[6][log] = logs[log]
+    elif logs[log]['createdAt'] <= lastdate[7]:
+      separated[7][log] = logs[log]
   return separated
 
 def convertschool(schoolid, file1):
