@@ -26,7 +26,7 @@ class Header extends Component {
     const db = firebase.database();
     db.ref('/userName').on('value', (snapshot) => {
       var username = snapshot.val();
-      console.log(username);
+      //console.log(username);
       this.setState({
         name: username['name'],
         mount: true

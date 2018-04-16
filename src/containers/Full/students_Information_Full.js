@@ -7,7 +7,6 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
-import ContactDashboard from '../../views/Dashboard/ContactDashboard';
 import StudentInfoDashboard from '../../views/Dashboard/StudentInfoDashboard';
 import Widgets from '../../views/Widgets/';
 

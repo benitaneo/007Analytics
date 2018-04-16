@@ -7,7 +7,6 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import AdministratorDashboard from '../../views/Dashboard/AdministratorDashboard';
-
 import InstructorContacts from '../../views/Dashboard/InstructorContacts';
 
 class AdministratorFull extends Component {

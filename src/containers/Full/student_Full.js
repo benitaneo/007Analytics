@@ -7,7 +7,7 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import StudentDashboard from '../../views/Dashboard/StudentDashboard';
-import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
+import StudentProgressDashboard from '../../views/Dashboard/StudentProgressDashboard';
 
 // Icons
 import FontAwesome from '../../views/Icons/FontAwesome/';
@@ -33,7 +33,8 @@ class StudentFull extends Component {
             <Breadcrumb />
             <Container fluid>
               <Switch>
-                <Route path="/student" name="StudentDashboard" component={StudentDashboard}/>  
+                <Route path="/student" name="StudentDashboard" component={StudentDashboard}/>
+                <Route path="/studentprogress" name="StudentProgressDashboard" component={StudentProgressDashboard}/>   
                 
                 <Redirect from="/" to="/student"/>
               </Switch>

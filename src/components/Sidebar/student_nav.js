@@ -20,7 +20,7 @@ export default {
     },
     {
       name: 'CodeCombat Statistics',
-      url: '/student',
+      url: '/studentprogress',
       icon: 'icon-pie-chart'
     },
     {
