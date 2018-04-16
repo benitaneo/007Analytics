@@ -84,6 +84,7 @@ class InstructorDashboard extends Component {
       month: "",
       mount: false,
       value: 1,
+      studentCount: 0,
       performanceArr: [],
       students: [],
       videos: []
@@ -145,12 +146,17 @@ class InstructorDashboard extends Component {
         }
         this.setState({
           students: allStudents,
-          videos: allVideos,
+          videos: allVideos
+        });
+      })
+      db.ref('/instructorInfo/studentCount').on('value', (snapshot) => {
+        var numstudents = snapshot.val();
+        this.setState({
           month: currentMonth,
+          studentCount: numstudents['count'],
           mount: true,
           day: getDaysLeft()
-        });
-        
+        })
       })
     }
   }
@@ -223,7 +229,7 @@ class InstructorDashboard extends Component {
                   <ul>
                     <li className="d-none d-md-table-cell">
                       <div className="text-muted">Total Number of Participating Students</div>
-                      <strong>189</strong>
+                      <strong>{this.state.studentCount}</strong>
                     </li>
                     <li className="d-none d-md-table-cell">
                       <div className="text-muted">Countdown to Competition</div>
