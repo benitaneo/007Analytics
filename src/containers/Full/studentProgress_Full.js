@@ -2,13 +2,12 @@ import React, {Component} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {Container} from 'reactstrap';
 import Header from '../../components/Header/';
-import InstructorSidebar from '../../components/Sidebar/instructor_Sidebar';
+import StudentSidebar from '../../components/Sidebar/student_Sidebar';
 import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
-import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
-import ContactDashboard from '../../views/Dashboard/ContactDashboard';
-import Widgets from '../../views/Widgets/';
+import StudentDashboard from '../../views/Dashboard/StudentDashboard';
+import StudentProgressDashboard from '../../views/Dashboard/StudentProgressDashboard';
 
 // Icons
 import FontAwesome from '../../views/Icons/FontAwesome/';
@@ -18,7 +17,7 @@ import * as firebase from 'firebase';
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet
 
-class ContactFull extends Component {
+class StudentProgressFull extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -29,15 +28,15 @@ class ContactFull extends Component {
       <div className="app full-font">
         <Header />
         <div className="app-body">
-          <InstructorSidebar {...this.props}/>
+          <StudentSidebar {...this.props}/>
           <main className="main full-body">
             <Breadcrumb />
             <Container fluid>
               <Switch>
-                <Route path="/instructor" name="InstructorDashboard" component={InstructorDashboard}/>
-                <Route path="/admincontact" name="ContactDashboard" component={ContactDashboard}/>
+                <Route path="/student" name="StudentDashboard" component={StudentDashboard}/>
+                <Route path="/studentprogress" name="StudentProgressDashboard" component={StudentProgressDashboard}/>
                 
-                <Redirect from="/" to="/admincontact"/>
+                <Redirect from="/" to="/student"/>
               </Switch>
             </Container>
           </main>
@@ -49,4 +48,4 @@ class ContactFull extends Component {
   }
 }
 
-export default ContactFull;
+export default StudentProgressFull;

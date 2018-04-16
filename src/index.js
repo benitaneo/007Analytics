@@ -18,8 +18,8 @@ import StudentFull from './containers/Full/student_Full'
 import AdministratorFull from './containers/Full/administrator_Full'
 import InstructorFull from './containers/Full/instructor_Full'
 import InstructorContactsFull from './containers/Full/instructorContacts_Full'
-import ContactFull from './containers/Full/contact_Full'
 import StudentsInformationFull from './containers/Full/students_Information_Full'
+import StudentProgressFull from './containers/Full/studentProgress_Full'
 
 // Views
 import Login from './views/Pages/Login/'
@@ -41,8 +41,8 @@ ReactDOM.render((
       <Route path="/administrator" component={AdministratorFull} />
       <Route path="/instructor" name="InstructorHome" component={InstructorFull} />
       <Route path="/instructorcontact" component={InstructorContactsFull} />
-      <Route path="/admincontact" name="AdminContact" component={ContactFull} />
       <Route path="/studentinfo" name="StudentInformationDashboard" component={StudentsInformationFull} />
+      <Route path="/studentprogress" name="StudentProgressDashboard" component={StudentProgressFull} />
 
       <Redirect from="/" to="/login"/>
     </Switch>

@@ -10,7 +10,6 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import InstructorDashboard from '../../views/Dashboard/InstructorDashboard';
-import ContactDashboard from '../../views/Dashboard/ContactDashboard';
 import StudentInfoDashboard from '../../views/Dashboard/StudentInfoDashboard';
 
 class InstructorFull extends Component {
@@ -36,7 +35,6 @@ class InstructorFull extends Component {
             <Container fluid>
               <Switch>
                 <Route path="/instructor" name="InstructorDashboard" component={InstructorDashboard}/>
-                <Route path="/admincontact" name="AdminContact" component={ContactDashboard}/>
                 <Route path="/studentinfo" name="StudentInfoDashboard" component={StudentInfoDashboard}/>
                     
                 <Redirect from="/" to="/instructor"/>
