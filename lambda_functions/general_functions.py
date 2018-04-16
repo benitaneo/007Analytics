@@ -1,5 +1,6 @@
 # In a lambda function, remember to use the botocore version of requests. 
 from botocore.vendored import requests
+#from bs4 import BeautifulSoup as BS
 import zipfile
 import json
 import time
@@ -300,3 +301,44 @@ def sort_all_students_by_sch(arr1,arr2):
         student_dict[sch].append(student)
         
   return student_dict
+
+# Getting name of user
+def returnName(userID, file1, file2, file3):
+  #file1,users.json;file2,cohortCourses.json;file3,cohorts.json
+  user_data = get_dict_from_file(file1) # get the studentsID and name
+  cohortCourses_data = get_dict_from_file(file2) # get the schoolID and name
+  cohorts_data = get_dict_from_file(file3) # get admin iD
+  for i in user_data.items():
+    if userID == i[0]:
+      return i[1]['displayName']
+  for i in cohortCourses_data.items():
+    for j in i[1].items():
+      if j[0] == userID:
+        return j[1]['name']
+  for i in cohorts_data.items():
+    if i[1]['owner'] == userID:
+      return i[1]['instructorName']
+
+# Getting latest articles
+def get_website_element(website):
+    r = requests.get(website)
+    data = BS(r.content, "lxml")
+    final_stash = []
+    all_articles = data.find_all("div", {"class": "u-flexColumn"})
+    for i in range(len(all_articles)):
+        weblink = all_articles[i].find('a')['href']
+        title = (all_articles[i].find('a').text).replace("\xa0", " ")
+        summary = all_articles[i].find("h4", {"class": "ui-summary"})
+        try:
+            if (summary.get_text() != None):
+                new = [title, weblink, summary.get_text()]
+                final_stash.append(new)
+                #print("This is the title of the article, \"{}\" it's respective link, {} , and a short summary, {}.".format(title, weblink, summary.get_text()))
+                #print()
+            else:
+                #print("This is the title of the article, \"{}\" and it's respective link, {}.".format(title, weblink))
+                print()
+        except:
+            print("pass")
+            #print()
+    return final_stash
