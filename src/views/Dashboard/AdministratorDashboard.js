@@ -269,7 +269,7 @@ class AdministratorDashboard extends Component {
           <Col sm="12">
           <Card>
             <CardHeader className="cardheader">
-              <i className="fa fa-clone"></i> Cohort Submissions Count
+              <i className="fa fa-clone"></i> Instructor Postings Count
             </CardHeader>
             <CardBody>
               <InstructorActivityLinePlot />

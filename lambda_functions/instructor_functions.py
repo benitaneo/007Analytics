@@ -13,6 +13,14 @@ from random import randint
 from general_functions import targetlevel, objectives, uidAndEmail, get_dict_from_file, percentile, flatten_cohortCourses, create_student_array, add_name_to_student, add_school_to_student, add_achievements_lastactive_to_student, add_cohort_id_to_student, sort_all_students_by_sch
 from student_functions import student_function2
 
+# Getting number of students in a school
+def numberOfStudentsInSchool(schoolID, file1):
+  cohortCourses_data = get_dict_from_file(file1)
+  for i in cohortCourses_data.items():
+    for j in i[1].items():
+      if j[0] == schoolID:
+        return j[1]['participants']
+
 # Getting dictionary of students belonging in the school with their names, in-game name and level
 def get_student_ingame_info(schoolid, file1, file2, file3):
   courseMember_data = get_dict_from_file(file1)
