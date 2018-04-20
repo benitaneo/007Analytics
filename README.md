@@ -4,12 +4,13 @@ This project provides real-time analytics for CodeCombat stakeholders.
 
 # Project Deliverables
 1. Link to 10-minute YouTube video presentation
+ - https://youtu.be/72aiTwrNs5A
 
-2. Link to slides covered in 10-minute overview video
+2. Additional Directions needed to use features
+ - https://docs.google.com/document/d/1Jjh139UG-zFf513NzNesmM0LjVFqaFDpPWm-LFmF2rI/edit#
 
-3. Additional Directions needed to use features
-
-4. Link to deployed Firebase application
+3. Link to deployed Firebase application
+ - https://analytics007-7d4bc.firebaseapp.com
 
 # Installation 
 
